@@ -3,6 +3,12 @@ Build your own Lisp
 
 http://buildyourownlisp.com
 
+Tamil translation
+-----------------
+
+The tamil translation are available under **org** folder
+
+
 About
 -----
 
