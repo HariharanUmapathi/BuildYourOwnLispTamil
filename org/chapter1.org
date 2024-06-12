@@ -24,15 +24,15 @@
 இந்தப் புத்தகம் சி கற்க விரும்பும் எல்லோருக்கும் அல்லது தங்கள் சொந்த நிரலாக்க மொழியை
 எவ்வாறு உருவாக்குவது என்று ஒருமுறையாவது யோசித்தவர்க்கு. இந்த புத்தகம் முதல்
 நிரலாக்க மொழி புத்தகமாக பொருந்தாது, ஆனால் குறைந்தபட்ச நிரலாக்க அனுபவம் உள்ள
-எவரும், எந்த நிரலாக்க மொழி பயன்படுத்திருத்தலும், புதிய மற்றும் சுவாரஸ்யமான ஒன்றை
+எவரும், எந்த நிரலாக்க மொழி பயன்படுத்திருத்தலும் அவர்கள் புதிய மற்றும் சுவாரஸ்யமான ஒன்றை
 உள்ளே காண்பிர்கள்.
 
+இந்த புத்தகம் முடிந்த வரை புதியவர்களுக்கு எளிமையாக
+எழுதப்பட்டுயுள்ளது. புதியவர்களை நான் மிகவும் வரவேற்கிறேன், ஏனென்றால் அவர்கள்
+அறிவதற்கு பல இருக்கிறது! ஆனால் புதியவர்களுக்கு இந்த புத்தகம் சவாலாக இருக்கலாம்.
+நாங்கள் பல புதிய கருத்துகளை உள்ளடக்கி, அடிப்படையில் இரண்டு புதிய நிரலாக்க
+மொழிகளை ஒரே நேரத்தில் கற்கலாம்.
 
-<p>I've tried to make this book as friendly as possible to
-beginners. I welcome beginners the most because they have so much to
-discover! But beginners may also find this book challenging. We will
-be covering many new concepts, and essentially learning two new
-programming languages at once.</p>
 
 <p>If you look for help you may find people are not patient with
 you. You may find that, rather than help, they take the time to
@@ -40,6 +40,8 @@ express how much <em>they</em> know about the subject. Experienced
 programmers might tell you that you are wrong. The subtext to their
 tone might be that you should stop now, rather than inflict your bad
 code on the world.</p>
+
+
 
 <p>After a couple of engagements like this you may decide that you are
 <em>not a programmer</em>, or <em>don't really like programming</em>,
