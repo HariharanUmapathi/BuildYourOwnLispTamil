@@ -33,15 +33,11 @@
 நாங்கள் பல புதிய கருத்துகளை உள்ளடக்கி, அடிப்படையில் இரண்டு புதிய நிரலாக்க
 மொழிகளை ஒரே நேரத்தில் கற்கலாம்.
 
-
-<p>If you look for help you may find people are not patient with
-you. You may find that, rather than help, they take the time to
-express how much <em>they</em> know about the subject. Experienced
-programmers might tell you that you are wrong. The subtext to their
-tone might be that you should stop now, rather than inflict your bad
-code on the world.</p>
-
-
+நீங்கள் உதவியைத் தேடினால், புரோகிராமர்கள் உங்களிடம் பொறுமையாக இல்லை என்பதைக்
+காணலாம். உதவிசெய்வதற்கு பதிலாக, அவர்களுக்கு அந்த தலைப்பைப் பற்றி எவ்வளவு
+அறிந்திருக்கிறார்கள் என்பதை வெளிப்படுத்து வார்கள்.அனுபவம் வாய்ந்த புரோகிராமர்கள்
+நீங்கள் செய்வது தவறு என்று சொல்லலாம்.அவர்கள் பேசும் விதம், உங்கள் மோசமான நிரலை
+உலகில் உண்டாக்கு வதை விட, நீங்கள் இப்போது நிறுத்த வேண்டும் என்று தோணலாம்.
 
 <p>After a couple of engagements like this you may decide that you are
 <em>not a programmer</em>, or <em>don't really like programming</em>,
