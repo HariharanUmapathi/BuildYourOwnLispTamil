@@ -1,41 +1,34 @@
 * அத்தியாயம் 2 - நிறுவுதல் (Installation)
 
 ** அமைப்பு
- சி இல் நிரலாக்கத்தை தொடங்குவதற்கு முன், நாம் ஒரு சில விஷயங்களை நிறுவ வேண்டும்,
-மற்றும் 
+ சி இல் நிரலாக்கத்தை தொடங்குவதற்கு முன், நாம் ஒரு சில விஷயங்களை நிறுவ
+ வேண்டும்,மற்றும் நமது பணிச்சூழல்(environment) அமைக்க வேண்டும் அதனால் நம்மக்கு
+ தேவையான அனைத்தும் பூர்த்தியாகிவிடும். முக்கியமாக நாம் இரண்டு விஷயங்களை நிறுவ
+ வேண்டும். ஒன்று உரைத்தொப்பி(Text editor) மற்றொன்று நிரல்மொழிமாற்றி(Compiler)
  
-<p>Before we can start programming in C we'll need to install a couple
-of things, and set up our environment so that we have everything we
-need. Because C is such a universal language this should hopefully be
-fairly simple. Essentially we need to install two main things. A
-<em>text editor</em> and a <em>compiler</em>.</p>
+** உரைத்தொகுப்பி (Text Editor)
 
+உரை திருத்தி என்பது நிரலாக்கத்திற்கு ஏற்ற வகையில் உரைக்கோப்புகளைத்(Text files)
+திருத்த உங்களை அனுமதிக்கும் ஒரு நிரலாகும்.
 
-<h2 id='text_editor'>Text Editor</h2> <hr/>
+லினக்ஸில், நான் பரிந்துரைக்கும் உரை திருத்தி ஜிஎடிட்(gedit). உங்கள் விநியோகத்துடன்
+வேறு எந்த அடிப்படை உரை திருத்தி நிறுவப்பட்டாலும் அது நன்றாக வேலை செய்யும்.
+நீங்கள் விம்(Vim) அல்லது இமேக்சு(Emacs) பயனராக இருந்தால், இவற்றைப் பயன்படுத்துவது
+நல்லது.  தயவுசெய்து IDE ஐப் பயன்படுத்த வேண்டாம்.இது போன்ற சிறிய திட்டத்திற்கு இது
+தேவையில்லை மற்றும் என்ன நடக்கிறது என்பதைப் புரிந்து கொள்ள உதவாது.
 
-<p>A text editor is a program that allows you to edit text files in a
-way suitable for programming.</p>
+மாக்(Mac) இல் டெஸ்ட் வரங்களேர்(TextWrangler) பயன்படுத்தம். உங்களுக்கு வேறு
+விருப்பம் இருந்தால் பரவாயில்லை, ஆனால் உரை திருத்துவதற்கு ஸ்கோடு(XCode) ஐப்
+பயன்படுத்த வேண்டாம். இது ஒரு சிறிய திட்டம் மற்றும் IDE ஐப் பயன்படுத்துவதால் என்ன
+நடக்கிறது என்பதைப் புரிந்துகொள்ள உங்களுக்கு உதவாது.
 
-<p>On <strong>Linux</strong> the text editor I recommend is <a
-href="http://projects.gnome.org/gedit/">gedit</a>. Whatever other
-basic text editor comes installed with your distribution will also
-work well. If you are a Vim or Emacs user these are fine to
-use. Please don't use an IDE. It isn't required for such a small
-project and won't help in understanding what is going on.</p>
+விண்டோஸில், நான் விரும்பும் உரை திருத்தி நோட்பேட்++ (Notepad++) அல்லது விஷுவல்
+ஸ்டுடியோவைப் கொடு (Visual studio code) ஆகும். உங்களுக்கு வேறு விருப்பம்
+இருந்தால் பரவாயில்லை. தயவு செய்து விஷுவல் ஸ்டுடியோவைப்(Visual studio)
+பயன்படுத்த வேண்டாம் அது சி நிரலாக்கத்திற்கு சரியான தேர்வு இல்லை. நீங்கள் அதைப்
+பயன்படுத்த முயற்சித்தால், நீங்கள் பல சிக்கல்களைச் சந்திக்க நேரிடும்.
 
-<p>On <strong>Mac</strong> a simple text editor that can be used is <a
-href="http://www.barebones.com/products/textwrangler/">TextWrangler</a>. If
-you have a different preference this is fine, but please don't use
-XCode for text editing. This is a small project and using an IDE won't
-help you understand what is going on.</p>
-
-<p>On <strong>Windows</strong> my text editor of choice is <a
-href="http://notepad-plus-plus.org/">Notepad++</a>. If you have
-another preference this is fine. Please <em>don't</em> use <em>Visual
-Studio</em> as it does not have proper support for C programming. If
-you attempt to use it you will run into many problems.</p>
-
-
+** நிரல்மொழிமாற்றி (Compiler)
 <h2 id='compiler'>Compiler</h2> <hr/>
 
 <p>The compiler is a program that transforms the C source code into a
@@ -79,7 +72,7 @@ changes to take effect. This will allow you to run a compiler from the
 command line <code>cmd.exe</code>. It will also install other programs
 which make <code>cmd.exe</code> act like a Unix command line.</p>
 
-
+*** நிரல்மொழிமாற்றி சோதித்தல் (Testing the compiler)
 <h3 id='testing_the_compiler'>Testing the Compiler</h3>
 
 <p>To test if your C compiler is installed correctly type the
@@ -140,7 +133,7 @@ string</em>. The second statement inside the function is <code>return
 return <code>0</code>. When a C program returns <code>0</code> this
 indicates there have been no errors running the program.</p>
 
-
+** மொழிமாற்றுதல்
 <h2 id='compilation'>Compilation</h2> <hr/>
 
 <p>Before we can run this program we need to compile it. This will
@@ -168,7 +161,7 @@ appear.</p>
 <p><strong>Congratulations!</strong> You've just compiled and run your
 first C program.</p>
 
-
+** பிழைகள் (Errors)
 <h2 id='errors'>Errors</h2> <hr/>
 
 <p>If there are some problems with your C program the compilation
@@ -222,7 +215,7 @@ proficient at it, so investigating it is highly
 recommended. Information on how to use it can be found <a
 href="http://www.cprogramming.com/debugging/valgrind.html">online</a>.</p>
 
-
+** ஆவணப்படுத்தல் (Documentation)
 <h2 id='documentation'>Documentation</h2> <hr/>
 
 <p>Through this book you may come across a function in some example
@@ -232,7 +225,7 @@ href="http://en.cppreference.com/w/c">online documentation</a> of the
 standard library. This will explain all the functions included in the
 standard library, what they do, and how to use them.</p>
 
-
+** குறிப்பு (Reference)
 <h2>Reference</h2> <hr/>
 
 <div class="alert alert-warning"> <p><strong>What is this section
@@ -250,6 +243,7 @@ lie.</p> </div>
 
 <references />
 
+** வெகுமதி மதிப்பெண் (Bonus Marks)
 <h2>Bonus Marks</h2> <hr/>
 
 <div class="alert alert-warning"> <p><strong>What is this section
