@@ -95,43 +95,40 @@ cmd.exe ஐ மறுதொடக்கம் செய்ய வேண்டி
 
 ** உலகத்திற்கு வணக்கம் (Hello world)
 
-<p>Now that your environment is set up, start by opening your text
-editor and inputting the following program. Create a directory where
-you are going to put your work for this book, and save this file as
-<code>hello_world.c</code>. This is your first C program!</p>
+இப்போது உங்கள் பணிச்சூழல் அமைத்து விட்டாச்சு, உங்கள் உரை திருத்தியைத் திறந்து
+பின்வரும் நிரலை உள்ளிடவும். இந்தப் புத்தகத்தை பின்பற்ற ஒரு கோப்புறை (Folder)
+உருவாக்கி அதை பணியப்படுத்தவும், அதில் நிரலை hello_world.c என்று கோப்பில்(File)
+சேமிக்கவும். இது உங்களின் முதல் சி நிரல்!
 
-<pre><code data-language='c'>#include &lt;stdio.h&gt;
+#+begin_src c
+  #include<stdio.h>
+  int main(int argc, char** argv)
+  {
+    puts("Hello world!");
+    return 0;
+  }
+#+end_src
 
-int main(int argc, char** argv) { puts("Hello, world!"); return 0;
-  }</code></pre>
+இது ஆரம்பத்தில் புரியாமல் இருக்கலாம். நான் அதை படிப்படியாக விளக்க முயற்சிப்பேன்.
 
-<!-- <div class='pull-right alert alert-warning' style="margin: 15px;
-text-align: center;"> <img src="/static/img/toast.png" alt="toast"/>
-<p><small>Toast &bull; A typical toast</small></p> </div> -->
+முதல் வரியில் நாம் தலைப்பு(Header) என்று அழைக்கப்படுவதை உள்ளடக்குகிறோம். இந்த
+அறிக்கையானது(Statement) stdio.h இருந்து செயல்பாடுகளைப் பயன்படுத்த
+அனுமதிக்கிறது, இது சி உடன் சேர்க்கப்படும் தரநிலை உள்ளீடு மற்றும்
+வெளியீட்டு(Standard input and output) நூலகம் ஆகும்.இந்த நூலகத்தின்
+செயல்பாடுகளில் ஒன்று, நிரலில் நீங்கள் பின்னர் பார்க்கும் புட்ஸ்(Puts) செயல்பாடு ஆகும்.
 
-<p>This may initially make very little sense. I'll try to explain it
-step by step.</p>
+அடுத்து நாம் முதன்மை(main) எனப்படும் ஒரு செயல்பாட்டை(function)
+அறிவிக்கிறோம். இந்த செயல்பாடு ஒரு int ஐ வெளியிடுவதாக அறிவிக்கப்படுகிறது,
+மேலும் argc எனப்படும் ஒரு int மற்றும் argv எனப்படும் char** ஐ உள்ளீடாக எடுத்துக்
+கொள்ளும். அனைத்து சி நிரல்களும் இந்த செயல்பாட்டைக் கொண்டிருக்க வேண்டும். அனைத்து
+நிரல்களும் இந்த செயல்பாட்டிலிருந்து இயங்கத் தொடங்குகின்றன.
 
-<p>In the first line we <em>include</em> what is called a
-<em>header</em>. This statement allows us to use the functions from
-<code>stdio.h</code>, the standard input and output library which
-comes included with C. One of the functions from this library is the
-<code>puts</code> function you see later on in the program.</p>
-
-<p>Next we <em>declare</em> a function called <code>main</code>. This
-function is declared to output an <code>int</code>, and take as input
-an <code>int</code> called <code>argc</code> and a <code>char**</code>
-called <code>argv</code>. All C programs must contain this
-function. All programs start running from this function.</p>
-
-<p>Inside <code>main</code> the <code>puts</code> function is
-<em>called</em> with the argument <code>"Hello, world!"</code>. This
-outputs the message <code>Hello, world!</code> to the command
-line. The function <code>puts</code> is short for <em>put
-string</em>. The second statement inside the function is <code>return
-0;</code>. This tells the <code>main</code> function to finish and
-return <code>0</code>. When a C program returns <code>0</code> this
-indicates there have been no errors running the program.</p>
+~முதன்மை~ உள்ளே "ஹலோ, வேர்ல்ட்!"(Hello World) என்ற வாதத்துடன்(Arguments)
+~புட்ஸ்(puts)~ செயல்பாடு அழைக்கப்படுகிறது.  இது ~Hello, world!~ என்ற செய்தியை
+கட்டளை வரிக்கு வெளியிடுகிறது. புட்ஸ் செயல்பாடு என்பது சாரத்தை(String) வெளியீடு என்று
+குறுகியது. செயல்பாட்டின் உள்ளே இருக்கும் இரண்டாவது அறிக்கை return 0;. இது
+முதன்மை செயல்பாட்டைக்கு 0 வழங்கி நிரலை முடிக்கச்சொல்கிறது. ஒரு சி நிரல் 0 ஐ
+வழங்கும் போது, ​​நிரலை இயக்குவதில் பிழைகள் எதுவும் இல்லை என்பதை இது குறிக்கிறது.
 
 ** மொழிமாற்றுதல்
 <h2 id='compilation'>Compilation</h2> <hr/>
