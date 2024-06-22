@@ -74,27 +74,26 @@ cmd.exe ஐ மறுதொடக்கம் செய்ய வேண்டி
 போல் செயல்பட வைக்கும் பிற நிரல்களையும் நிறுவும்.
 
 *** நிரல்மொழிமாற்றி சோதித்தல் (Testing the compiler)
-<h3 id='testing_the_compiler'>Testing the Compiler</h3>
+உங்கள் சி நிரல்மொழிமாற்றி சரியாக நிறுவப்பட்டுள்ளதா என்பதை சோதிக்க, கட்டளை
+வரியில்(Command line) பின்வருவனவற்றை உள்ளிடவும்.
 
-<p>To test if your C compiler is installed correctly type the
-following into the command line.</p>
+#+begin_src shell
+  cc --version
+#+end_src
 
-<pre><code>cc --version</code></pre>
+நிரல்மொழிமாற்றி பதிப்பைப்(Compiler Version) பற்றிய சில தகவல்கள் மீண்டும்
+எதிரொலித்தால், அது சரியாக நிறுவப்பட்டிருக்கிறது உங்களுக்கு அங்கீகரிக்கப்படாத
+அல்லது கண்டுபிடிக்கப்படாத கட்டளையைப்(unrecognised or not found command) பற்றி
+ஏதேனும் பிழைச் செய்தியைப் பெற்றால், நிரல்மொழிமாற்றி சரியாக நிறுவ
+படவில்லை. மாற்றங்கள் நடைமுறைக்கு வர நீங்கள் கட்டளை வரி அல்லது உங்கள் கணினியை
+மீள்தொடக்கம்(Restart) செய்ய வேண்டியிருக்கும்.
 
-<p>If you get some information about the compiler version echoed back
-then it should be installed correctly. You are ready to go! If you get
-any sort of error message about an unrecognised or not found command,
-then it is not ready. You may need to restart the command line or your
-computer for changes to take effect.</p>
+**** வெவ்வேறு நிரல்மொழிமாற்றி கட்டளைகள்.
+சில கணினிகளில் (விண்டோஸ் போன்றவை) நிரல்மொழிமாற்றி கட்டளைக்கு ~gcc~ போன்ற வேறு
+பெயர் இருக்கலாம். கணினியால் ~cc~ கட்டளையை கண்டுபிடிக்க முடியவில்லை என்றால் இதை
+முயற்சிக்கவும்.
 
-<div class="alert alert-warning"> <p><strong>Different compiler
-  commands.</strong></p>
-
-  <p>On some systems (such as Windows) the compiler command might have
-a different name such as <code>gcc</code>. Try this if the system
-cannot find the <code>cc</code> command.</p> </div>
-
-<h2 id='hello_world'>Hello World</h2> <hr/>
+** உலகத்திற்கு வணக்கம் (Hello world)
 
 <p>Now that your environment is set up, start by opening your text
 editor and inputting the following program. Create a directory where
