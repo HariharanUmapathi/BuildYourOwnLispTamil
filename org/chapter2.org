@@ -130,33 +130,32 @@ cmd.exe ஐ மறுதொடக்கம் செய்ய வேண்டி
 முதன்மை செயல்பாட்டைக்கு 0 வழங்கி நிரலை முடிக்கச்சொல்கிறது. ஒரு சி நிரல் 0 ஐ
 வழங்கும் போது, ​​நிரலை இயக்குவதில் பிழைகள் எதுவும் இல்லை என்பதை இது குறிக்கிறது.
 
-** மொழிமாற்றுதல்
-<h2 id='compilation'>Compilation</h2> <hr/>
+** நிரல்மொழிமாற்றுதல்(Compilation)
 
-<p>Before we can run this program we need to compile it. This will
-produce the actual <em>executable</em> we can run on our
-computer. Open up the command line and browse to the directory that
-<code>hello_world.c</code> is saved in. You can then compile your
-program using the following command.</p>
+இந்த நிரலை இயக்குவதற்கு முன், இதை நிரல்மொழிமாற்றுதல் செய்ய வேண்டும். இது நமது
+கணினியில் செயல்படுத்தக்கூடிய குறியீடாய்(Executable code) உருவாக்கும். கட்டளை
+வரியைத் திறந்து, hello_world.c என்று சேமிக்கப்பட்டுள்ள கோப்பகத்துக்கு(Folder)
+செல்லவும் . பின்வரும் கட்டளையைப் பயன்படுத்தி உங்கள் நிரலைத் நிரல்மொழிமாற்றலாம்.
 
-<pre><code>cc -std=c99 -Wall hello_world.c -o hello_world</code></pre>
+#+begin_src shell
+  cc -std=c99 -Wall hello_world.c -o hello_world
+#+end_src
 
-<p>This compiles the code in <code>hello_world.c</code>, reporting any
-warnings, and outputs the program to a new file called
-<code>hello_world</code>. We use the <code>-std=c99</code> flag to
-tell the compiler which <em>version</em> or <em>standard</em> of C we
-are programming with. This lets the compiler ensure our code is
-standardised, so that people with different operating systems or
-compilers will be able to use our code.</p>
+இது hello_world.c இல் உள்ள குறியீட்டைத் நிரல்மொழிமாற்றி, ஏதேனும்
+எச்சரிக்கை(Warnings) இருந்தால் புகாரளிக்கும் மற்றும் hello_world எனப்படும் புதிய
+கோப்பில் நிரலை வெளியிடுகிறது. நாம் சி(C) யை எந்த தரநிலை(Standard) அல்லது
+பாதிப்புடன் (version) நிரலாக்குகிறோம் என்பதை நிரல்மொழிமாற்றியிடம் சொல்ல
+-std=c99 என்ற கொடியைப் பயன்படுத்துகிறோம். இது எங்கள் குறியீடு
+தரநிலையாக்கப்பட்டுள்ளதை நிரல்மொழிமாற்றி உறுதிப்படுத்துகிறது, இதனால் வெவ்வேறு
+இயங்குதளங்கள் அல்லது நிரல்மொழிமாற்றிகள் உள்ளவர்கள் இந்த குறியீட்டைப் பயன்படுத்த
+முடியும்.
 
-<p>If successful you should see the output file in the current
-directory. This can be run by typing <code>./hello_world</code> (or
-just <code>hello_world</code> on Windows). If everything is correct
-you should see a friendly <code>Hello, world!</code> message
-appear.</p>
+வெற்றிகரமாக இருந்தால், தற்போதைய கோப்பகத்தில் வெளியீட்டு கோப்பைப்(Output file)
+பார்க்க வேண்டும். இதை ./hello_world (அல்லது விண்டோஸ் இல் hello_world) என
+தட்டச்சு செய்து இயக்கலாம். எல்லாம் சரியாக இருந்தால், நீங்கள் Hello, world! என்ற செய்தி
+தோன்றும்.
 
-<p><strong>Congratulations!</strong> You've just compiled and run your
-first C program.</p>
+வாழ்த்துகள்! நீங்கள் உங்கள் முதல் C நிரலை நிரல்மொழிமாற்றி இயக்கியுள்ளீர்கள்.
 
 ** பிழைகள் (Errors)
 <h2 id='errors'>Errors</h2> <hr/>
@@ -212,7 +211,7 @@ proficient at it, so investigating it is highly
 recommended. Information on how to use it can be found <a
 href="http://www.cprogramming.com/debugging/valgrind.html">online</a>.</p>
 
-** ஆவணப்படுத்தல் (Documentation)
+** ஆவணமாக்கம் (Documentation)
 <h2 id='documentation'>Documentation</h2> <hr/>
 
 <p>Through this book you may come across a function in some example
