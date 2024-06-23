@@ -158,60 +158,59 @@ cmd.exe ஐ மறுதொடக்கம் செய்ய வேண்டி
 வாழ்த்துகள்! நீங்கள் உங்கள் முதல் C நிரலை நிரல்மொழிமாற்றி இயக்கியுள்ளீர்கள்.
 
 ** பிழைகள் (Errors)
-<h2 id='errors'>Errors</h2> <hr/>
 
-<p>If there are some problems with your C program the compilation
-process may fail. These issues can range from simple syntax errors, to
-other complicated problems that are harder to understand.</p>
+உங்கள் சி நிரலில் சில சிக்கல்கள் இருந்தால், நிரல்மொழிமாற்றி செயல்முறை(Process)
+தோல்வியடையலாம். இந்தச் சிக்கல்கள் எளிமையான தொடரியல் பிழைகள்(Syntax errors) முதல்
+புரிந்து கொள்ள கடினமாக இருக்கும் சிக்கல்கள் வரை இருக்கலாம்.
 
-<p>Sometimes the error message from the compiler will make sense, but
-if you are having trouble understanding it try searching online for
-it. You should see if you can find a concise explanation of what it
-means, and work out how to correct it. Remember this: there are many
-people before you who have struggled with exactly the same
-problems.</p>
+சில சமயங்களில் நிரல்மொழிமாற்றில் இருந்து வரும் பிழைச் செய்தி அர்த்தமுள்ளதாக
+இருக்கும், ஆனால் அதைப் புரிந்துகொள்ள முடியவில்லை என்றால், அதை இணையத்தில் தேடி
+பார்க்கவும். பிழைச் செய்தி என்ன என்பதற்கான சுருக்கமான விளக்கத்தை உங்களால்
+கண்டுபிடிக்க முடியுமா என்பதைப் பார்க்கவும், அதை எவ்வாறு சரிசெய்வது என்பதைத்
+தெரிந்துகொள்ளவும். இதை நினைவில் வையுங்கள்: உங்களுக்கு முன்னால் இதே போன்ற
+பிரச்சனைகளுடன் போராடிய பலர் உள்ளனர்.
 
-<div class='pull-left alert alert-warning' style="margin: 15px;
-  text-align: center;"> <img src="/static/img/smash.png" alt="smash"
-  class="img-responsive" width="281px" height="220px"/> <p><small>Rage
-  &bull; A poor debugging technique</small></p> </div>
+சில நேரங்களில் ஒரு மூலத்திலிருந்து(Source file) பல நிரல்மொழிமாற்றி பிழைகள்
+ஏற்படும். எப்பொழுதும் நிரல்மொழிமாற்றி பிழைகளை முதலில் இருந்து கடைசி வரை
+பார்க்கவும்.
 
-<p>Sometimes there will be many compiler errors stemming from one
-source. Always go through compiler errors from first to last.</p>
+சில நேரங்களில் நிரல்மொழிமாற்றி ஒரு நிரலைத் நிரல்மொழிமாற்றலாம், ஆனால் நீங்கள் அதை
+இயக்கும்போது அது செயலிழக்கும்(Crash). இந்த சூழ்நிலையில் சி நிரல்களை
+பிழைத்திருத்தம் செய்வது கடினம். இது இந்தப் புத்தகத்தின் எல்லைக்கு அப்பாற்பட்ட ஒரு
+தாவல் அதனால் குறிப்பிடப்படவில்லை.
 
-<p>Sometimes the compiler will compile a program, but when you run it
-it will crash. Debugging C programs in this situation is hard. It can
-be an art far beyond the scope of this book.</p>
+நீங்கள் ஒரு தொடக்கநிலையாளராக(Beginner) இருந்தால், செயலிழக்கும் சி நிரலை
+பிழைத்திருத்துவதற்கான முதல் முயற்சி நிரல் இயங்கும் போது நிறைய தகவல்களை
+அச்சிட(Print) வேண்டும். இந்த முறையைப் பயன்படுத்தி, குறியீட்டின் எந்தப் பகுதி
+தவறானது மற்றும் ஏதேனும் தவறு நடந்தால், சரியாகத் தனிமைப்படுத்தி முயற்சிக்க
+வேண்டும். இது செயலார்ந்த(Active) பிழைத்திருத்த நுட்பமாகும்(Debugging). இதுதான்
+முக்கியமான விஷயம். ஒரு செயலை செயலற்ற(Passive) முறையில் கவனிப்பதை விட செயலில்
+ஈடுபட்டாள் அந்த செயல் வேகமாக முடியும்.
 
-<p>If you are a beginner, the first port of call for debugging a
-crashing C program would be to print out lots of information as the
-program is running. Using this method you should try to isolate
-exactly what part of the code is incorrect and what, if anything, is
-going wrong. It is a debugging technique which is
-<em>active</em>. This is the important thing. As long as you are doing
-<em>something</em>, and not just staring at the code, the process is
-less painful and the temptation to give up is lessened.</p>
+ஆர்வம் உள்ளவர்களுக்கு, உங்கள் சி நிரல்களை பிழைத்திருத்த gdb எனப்படும் நிரல்
+பயன்படுத்தப்படலாம். இது பயன்படுத்த கடினமாகவும் சிக்கலாகவும் இருக்கலாம், ஆனால் இது
+மிகவும் சக்தி வாய்ந்தது மற்றும் உங்களுக்கு மிகவும் மதிப்புமிக்க தகவலையும், என்ன
+தவறு, எங்கு நடந்தது என்பதையும் வழங்க முடியும். gdb ஐ எவ்வாறு பயன்படுத்துவது
+என்பது பற்றிய தகவல்களை இணையத்தில் காணலாம்.
 
-<p>For people feeling more confident a program called <code>gdb</code>
-can be used to debug your C programs. This can be difficult and
-complicated to use, but it is also very powerful and can give you
-extremely valuable information and what went wrong and
-where. Information on how to use <code>gdb</code> can be found <a
-href="http://web.archive.org/web/20140910051410/http://www.dirac.org/linux/gdb/">online</a>.</p>
+மாக் இல் OS X இன் சமீபத்திய பதிப்புகள் gdb உடன் வரவில்லை. அதற்கு பதிலாக நீங்கள்
+lldb ஐப் பயன்படுத்தலாம், இது பெரும்பாலும் அதே வேலையைச் செய்கிறது.
 
-<p>On <strong>Mac</strong> the most recent versions of OS X don't come
-with <code>gdb</code>. Instead you can use <code>lldb</code> which
-does largely the same job.</p>
-
-<p>On <strong>Linux</strong> or <strong>Mac</strong>
-<code>valgrind</code> can be used to aid the debugging of memory leaks
-and other more nasty errors. Valgrind is a tool that can save you
-hours, or even days, of debugging. It does not take much to get
-proficient at it, so investigating it is highly
-recommended. Information on how to use it can be found <a
-href="http://www.cprogramming.com/debugging/valgrind.html">online</a>.</p>
+லினக்ஸ் அல்லது மாக் இல் valgrind நினைவக கசிவுகள்(Memory Leaks) மற்றும் பிற
+மோசமான பிழைகள் பிழைத்திருத்தத்திற்கு உதவ பயன்படுகிறது. Valgrind என்பது
+பிழைத்திருத்தத்தில் பல மணிநேரம் அல்லது நாட்களைக் கூட சேமிக்கக்கூடிய ஒரு
+கருவியாகும். அதில் நிபுணத்துவம் பெறுவதற்கு அதிக நேரம் எடுக்காது, எனவே அதை
+மிகவும் பரிந்துரைக்கப்படுகிறது. அதை எவ்வாறு பயன்படுத்துவது என்பது பற்றிய
+தகவல்களை இணையத்தில் காணலாம்.
 
 ** ஆவணமாக்கம் (Documentation)
+
+இந்தப் புத்தகத்தின் மூலம் நீங்கள் அடையாளம் காணாத சில உதாரணக் குறியீட்டில் ஒரு
+செயல்பாட்டைக் காணலாம். அது என்ன செய்கிறது என்று நீங்கள் ஆச்சரியப்படலாம். இந்த
+விஷயத்தில், தரநிலை நூலகத்தின்(Standard library) இணையத்தில் ஆவணங்களை நீங்கள்
+பார்க்க வேண்டும். இது தரநிலை நூலகத்தில் உள்ள அனைத்து செயல்பாடுகளையும், அவை என்ன
+செய்கின்றன, அவற்றை எவ்வாறு பயன்படுத்துவது என்பதை விளக்கும்.
+
 <h2 id='documentation'>Documentation</h2> <hr/>
 
 <p>Through this book you may come across a function in some example
