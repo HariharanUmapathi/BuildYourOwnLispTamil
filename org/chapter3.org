@@ -16,24 +16,21 @@
 
 ** நிரல்கள்(Programs)
 
-<h2 id='programs'>Programs</h2> <hr/>
+சி இல் உள்ள நிரல் செயல்பாடு வரையறைகள்(Function declaration) மற்றும் கட்டமைப்பு
+வரையறைகளை(Structure declaration) மட்டுமே கொண்டுள்ளது.
 
-<p>A program in C consists of only <em>function definitions</em> and
-<em>structure definitions</em>.</p>
+எனவே ஒரு மூல கோப்பு(source file) என்பது செயல்பாடுகள் மற்றும் வகைகளின்(Types)
+பட்டியல். இந்தச் செயல்பாடுகள் ஒன்றையொன்று அல்லது தங்களைத் தாங்களே அழைக்கலாம், மேலும்
+அறிவிக்கப்பட்ட அல்லது மொழியில் உள்ளமைக்கப்பட்ட தரவு வகைகளைப்(Data Types)
+பயன்படுத்தலாம்.
 
-<p>Therefore a source file is simply a list of <em>functions</em> and
-<em>types</em>. These functions can call each other or themselves, and
-can use any data types that have been declared or are built into the
-language.</p>
+பிற நிரலகம்(Library) உள்ள செயல்பாடுகளை அழைக்க அல்லது அவற்றின் தரவு வகைகளைப்
+பயன்படுத்த முடியும். சி நிரலாக்கத்தில் சிக்கலான அடுக்குகள் இப்படித்தான்
+குவிக்கப்படுகின்றன.
 
-<p>It is possible to call functions in other libraries, or to use
-their data types. This is how layers of complexity are accumulated in
-C programming.</p>
-
-<p>As we saw in the previous chapter, the execution of a C program
-always starts in the function called <code>main</code>. From here it
-calls more and more functions, to perform all the actions it
-requires.</p>
+நாம் முந்தைய அத்தியாயத்தில் பார்த்தது போல், ஒரு சி நிரலின் செயல்படுத்தல் எப்போதும்
+முதன்மை(Main) எனப்படும் செயல்பாட்டில் இருந்து தொடங்குகிறது. இங்கிருந்து அது
+தேவையான அனைத்து செயல்களையும் செய்ய, மேலும் மேலும் செயல்பாடுகளை அழைக்கிறது.
 
 ** மாறிகள்(Variables)
 <h2 id='variables'>Variables</h2> <hr/>
