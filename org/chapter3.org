@@ -33,10 +33,20 @@
 தேவையான அனைத்து செயல்களையும் செய்ய, மேலும் மேலும் செயல்பாடுகளை அழைக்கிறது.
 
 ** மாறிகள்(Variables)
+
+
+
 <h2 id='variables'>Variables</h2> <hr/>
 
 <p>Functions in C consist of manipulating <em>variables</em>. These
 are items of data which we give a name to.</p>
+
+சி இல் உள்ள ஒவ்வொரு மாறிக்கும் ஒரு வெளிப்படையான வகை உள்ளது. இந்த வகைகள் நாமே
+அறிவிக்கப்பட்டவை அல்லது மொழியில் கட்டமைக்கப்பட்டவை. ஒரு புதிய மாறியை அதன் வகையின்
+பெயரை எழுதி, அதன் பெயரைத் தொடர்ந்து, விருப்பமாக = ஐப் பயன்படுத்தி சில
+மதிப்பிற்கு அமைப்பதன் மூலம் அறிவிக்கலாம். இந்த அறிவிப்பு ஒரு
+அறிக்கையாகும்(Statement), மேலும் சி இல் உள்ள அனைத்து அறிக்கைகளையும்
+அரைப்புள்ளியுடன்(;) முடிக்கிறோம்.
 
 <p>Every variable in C has an explicit <em>type</em>. These types are
 declared by ourselves or built into the language. We can declare a new
