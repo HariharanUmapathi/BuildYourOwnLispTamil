@@ -67,6 +67,15 @@ write the following...</p>
 <p>Here are some descriptions and examples of some of the built in
 types.</p>
 
+| தரவுவகை | விளக்கங்கள் | எடுத்துக்காட்டு                           |
+|---------+-----------+---------------------------------------|
+| void    |           |                                       |
+| char    |           | char last_initial = 'H';              |
+| int     |           | int age = 23;                         |
+| long    |           | long age_of_universe = 13798000000;   |
+| float   |           | float liters_per_pint = 0.568f;       |
+| double  |           | double speed_of_swallow = 0.01072896; |
+
 <table class="table"> <tr><td><code>void</code></td> <td>Empty
   Type</td> <td></td></tr> <tr><td><code>char</code></td> <td>Single
   Character/Byte</td> <td><code>char last_initial =
