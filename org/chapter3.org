@@ -34,12 +34,9 @@
 
 ** மாறிகள்(Variables)
 
-
-
-<h2 id='variables'>Variables</h2> <hr/>
-
-<p>Functions in C consist of manipulating <em>variables</em>. These
-are items of data which we give a name to.</p>
+சி இல் உள்ள செயல்பாடுகள் மாறிகளைக் கையாளுவதைக் கொண்டிருக்கும். இவை
+எண்கள்(Integer,Float), சரம்(String) போன்ற தரவு உருப்படிக்கு (data items) நாம்
+பெயர் சூட்டுவோம் .
 
 சி இல் உள்ள ஒவ்வொரு மாறிக்கும் ஒரு வெளிப்படையான வகை உள்ளது. இந்த வகைகள் நாமே
 அறிவிக்கப்பட்டவை அல்லது மொழியில் கட்டமைக்கப்பட்டவை. ஒரு புதிய மாறியை அதன் வகையின்
@@ -48,46 +45,29 @@ are items of data which we give a name to.</p>
 அறிக்கையாகும்(Statement), மேலும் சி இல் உள்ள அனைத்து அறிக்கைகளையும்
 அரைப்புள்ளியுடன்(;) முடிக்கிறோம்.
 
-<p>Every variable in C has an explicit <em>type</em>. These types are
-declared by ourselves or built into the language. We can declare a new
-variable by writing the name of its type, followed by its name, and
-optionally setting it to some value using <code>=</code>. This
-declaration is a <em>statement</em>, and we terminate all
-<em>statements</em> in C with a semicolon <code>;</code>.</p>
+ஒரு புதிய முழுஎண் ~count~ என்ற பெயர்யில் உருவாக்க, பின்வருவனவற்றை எழுதலாம்.
 
-<p>To create a new <code>int</code> called <code>count</code> we could
-write the following...</p>
+#+begin_src c
+  int count;
+#+end_src
 
-<pre><code data-language='c'>int count;</code></pre>
+அல்லது அதை அறிவித்து மதிப்பை வைக்க...
 
-<p>Or to declare it and set the value...</p>
+#+begin_src c
+  int count = 10;
+#+end_src
 
-<pre><code data-language='c'>int count = 10;</code></pre>
+சில உள்ளமைக்கப்பட்ட வகைகளின்(Builtin types) சில விளக்கங்களும் எடுத்துக்காட்டுகளும்
+இங்கே உள்ளன.
 
-<p>Here are some descriptions and examples of some of the built in
-types.</p>
-
-| தரவுவகை | விளக்கங்கள் | எடுத்துக்காட்டு                           |
-|---------+-----------+---------------------------------------|
-| void    |           |                                       |
-| char    |           | char last_initial = 'H';              |
-| int     |           | int age = 23;                         |
-| long    |           | long age_of_universe = 13798000000;   |
-| float   |           | float liters_per_pint = 0.568f;       |
-| double  |           | double speed_of_swallow = 0.01072896; |
-
-<table class="table"> <tr><td><code>void</code></td> <td>Empty
-  Type</td> <td></td></tr> <tr><td><code>char</code></td> <td>Single
-  Character/Byte</td> <td><code>char last_initial =
-  'H';</code></td></tr> <tr><td><code>int</code></td> <td>Integer</td>
-  <td><code>int age = 23;</code></td></tr>
-  <tr><td><code>long</code></td> <td>Integer that can hold larger
-  values</td><td><code>long age_of_universe =
-  13798000000;</code></td></tr> <tr><td><code>float</code></td>
-  <td>Decimal Number</td> <td><code>float liters_per_pint =
-  0.568f;</code></td></tr> <tr><td><code>double</code></td><td>Decimal
-  Number with more precision</td> <td><code>double speed_of_swallow =
-  0.01072896;</code></td></tr> </table>
+| தரவுவகை | விளக்கங்கள்                       | எடுத்துக்காட்டு                           |
+|---------+---------------------------------+---------------------------------------|
+| void    | வெற்று வகை                      |                                       |
+| char    | ஒற்றை எழுத்து/பைட்               | char last_initial = 'H';              |
+| int     | முழுஎண்                         | int age = 23;                         |
+| long    | பெரிய மதிப்புகளை கொண்ட முழுஎண் | long age_of_universe = 13798000000;   |
+| float   | தசம(Decimal) எண்                | float liters_per_pint = 0.568f;       |
+| double  | அதிக துல்லியத்துடன் தசம எண்       | double speed_of_swallow = 0.01072896; |
 
 ** செயல்பாடு அறிவிப்பு(Function Declarations)
 <h2 id='function_declarations'>Function Declarations</h2> <hr/>
