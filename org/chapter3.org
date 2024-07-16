@@ -105,32 +105,36 @@
 #+end_src
 
 ** கட்டமைப்பு அறிவிப்பு(Structure Declarations)
-<h2 id='structure_declarations'>Structure Declarations</h2> <hr/>
 
-<p>Structures are used to declare new <em>types</em>. Structures are
-several variables bundled together into a single package.</p>
+புதிய வகைகளை அறிவிக்க கட்டமைப்புகள் பயன்படுத்தப்படுகின்றன. கட்டமைப்புகள் என்பது
+ஒரு தொகுப்பில் ஒன்றாக இணைக்கப்பட்ட பல மாறிகள் ஆகும்.
 
-<p>We can use structure to represent more complex data types. For
-example to represent a point in 2D space we could create a structure
-called <code>point</code> that packs together two <code>float</code>
-(decimal) values called <code>x</code> and <code>y</code>. To declare
-structures we can use the <code>struct</code> keyword in conjunction
-with the <code>typedef</code> keyword. Our declaration would look like
-this.</p>
+மிகவும் சிக்கலான தரவு வகைகளைக் குறிக்க கட்டமைப்பைப்
+பயன்படுத்தலாம். எடுத்துக்காட்டாக, 2D இடத்தில் ஒரு புள்ளியைப் குறிக்க, x மற்றும் y
+எனப்படும் இரண்டு தசம(decimal) மதிப்புகளை ஒன்றாக இணைக்க point என்ற கட்டமைப்பை
+உருவாக்கலாம். கட்டமைப்புகளை அறிவிக்க நாம் struct என்னும் சிறப்புச்சொலை(Keyword)
+typedef சிறப்புச்சொல்லவுடன் இணைத்து பயன்படுத்தலாம்.நாம் அறிவிப்பு இப்படி இருக்கும்.
 
-<pre><code data-language='c'>typedef struct { float x; float y; }
-  point;</code></pre>
+#+begin_src c
+  typedef struct {
+    float x;
+    float y;
+  } point;
+#+end_src
 
-<p>We should place this definition above any functions that wish to
-use it. This type is no different to the built in types, and we can
-use it in all the same ways. To access an individual field we use a
-dot <code>.</code>, followed by the name of the field, such as
-<code>x</code>.</p>
+இந்த அறிவிப்பை பயன்படுத்த விரும்பும் எந்தவொரு செயல்பாடுகளுக்கும் மேலே வைக்க
+வேண்டும். இந்த வகை உள்ளமைக்கப்பட்ட வகைகளிலிருந்து வேறுபட்டது அல்ல, மேலும் நாம் அதை
+எல்லா வழிகளிலும் பயன்படுத்தலாம். ஒரு தனிப்பட்ட புலத்தை(கட்டமைப்பு உள்ள மாறியின்
+பெயர், ஆங்கிலத்தில் field) அணுக, நாம் ஒரு புள்ளியைப்(.) பயன்படுத்துகிறோம் அதைத்
+தொடர்ந்து புலத்தின்(எ.கா x) எழுத வேண்டும்.
 
-<pre><code data-language='c'>point p; p.x = 0.1; p.y = 10.0;
-
-float length = sqrt(p.x * p.x + p.y * p.y); </code></pre>
-
+#+begin_src c
+  point p;
+  p.x = 0.1;
+  p.y = 10.0;
+  
+  float length = sqrt(p.x * p.x + p.y * p.y);
+#+end_src
 
 ** சுட்டு(Pointers)
 
