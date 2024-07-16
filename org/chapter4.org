@@ -2,20 +2,29 @@
 
 <h1>An Interactive Prompt <small>&bull; Chapter 4</small></h1>
 
-** படி ,மதிப்பீடு, அச்சிடு (Read, Evaluate, Print) 
-<h2 id='read_evaluate_print'>Read, Evaluate, Print</h2> <hr/>
+** வாசிப்பு ,மதிப்பீடு, அச்சிடு (Read, Evaluate, Print)
 
-<div class='pull-right alert alert-warning' style="margin: 15px; text-align: center;">
-  <img src="/static/img/reptile.png" alt="reptile" class="img-responsive" width="187px" height="273px"/>
-  <p><small>Reptile &bull; Sort of like REPL</small></p>
-</div>
+நீங்கள் நிரலாக்க மொழியை உருவாக்கும்போது, ​​அதனுடன் தொடர்புகொள்வதற்கு சில வழிகள்
+தேவைப்படும். சி ஒரு நிரல்மொழிமாற்றியை பயன்படுத்துகிறது, அங்கு நீங்கள் நிரலை
+மாற்றி, அதை மீண்டும் நிரல்மொழிமாற்றி(recompile) இயக்கலாம். நாம் ஏதாவது சிறப்பாகச்
+செய்து, மாறும் மொழியுடன் தொடர்பு கொண்டால் நன்றாக இருக்கும். அதன்பிறகு பல
+நிபந்தனைகளின் கீழ் அதன் நடத்தையை மிக விரைவாகச் சோதிக்கிறோம். இதற்கு நாம்
+கலந்துரையாடல் தூண்டி என்று ஒன்றை உருவாக்கலாம்.
 
-<p>As we build our programming language we'll need some way to interact with it. C uses a compiler, where you can change the program, recompile and run it. It'd be good if we could do something better, and interact with the language dynamically. Then we test its behaviour under a number of conditions very quickly. For this we can build something called an <em>interactive prompt</em>.</p>
+இது சில உள்ளீட்டிற்கு பயனரைத் தூண்டும்(User prompts) ஒரு நிரலாகும், மேலும் இது
+வழங்கப்படும் போது, ​​சில செய்திகளுடன் மீண்டும் பதிலளிக்கும். இதைப் பயன்படுத்துவது
+நமது நிரலாக்க மொழியைச் சோதிப்பதற்கும் அது எவ்வாறு செயல்படுகிறது என்பதைப்
+பார்ப்பதற்கும் எளிதான வழியாகும். இந்த அமைப்பு REPL என்றும் அழைக்கப்படுகிறது, இது
+வாசிப்பு-மதிப்பீடு-அச்சு சுழற்சியைக்(Read Evaluate Print Loop)
+குறிக்கிறது. நிரலாக்க மொழியுடன் கலந்துரையாடுவதற்கு பொதுவாக இம்முறை
+பயன்படுத்தபடுகிறது, நீங்கள் பைத்தானைப் போன்ற நிரல்மொழி பயன்படுத்தியிருந்தால்
+அறிந்திருக்க வாய்ப்பு உண்டு.
 
-<p>This is a program that prompts the user for some input, and when supplied with it, replies back with some message. Using this will be the easiest way to test our programming language and see how it acts. This system is also called a <em>REPL</em>, which stands for <em>read</em>-<em>evaluate</em>-<em>print</em> <em>loop</em>. It is a common way of interacting with a programming language which you may have used before in languages such as <em>Python</em>.</p>
-
-<p>Before building a full <em>REPL</em> we'll start with something simpler. We are going to make a system that prompts the user, and echoes any input straight back. If we make this we can later extend it to parse the user input and evaluate it, as if it were an actual Lisp program.</p>
-
+முழு REPL ஐ உருவாக்குவதற்கு முன், எளிமையான ஒன்றைத் தொடங்குவோம். பயனரைத்
+துண்டில்(User prompts) எந்த உள்ளீட்டையும் அதை நேராக எதிரொலிக்கும்(echo) ஒரு
+அமைப்பை நாம் உருவாக்கப் போகிறோம். இதை நாம் உருவாக்கினால், பின்னர் பயனர் உள்ளீட்டைப்
+பாகுபடுத்துவதற்கும்(Parse), உண்மையான லிஸ்ப்(Lisp) நிரலைப் போல மதிப்பிடுவதற்கும்
+அதை நீட்டிக்கலாம்(Extend).
 
 ** ஒரு கலந்துரையாடல் தூண்டி (An Interactive Prompt)
 <h2 id='an_interactive_prompt'>An Interactive Prompt</h2> <hr/>
