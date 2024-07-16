@@ -226,7 +226,7 @@ x எனப்படும் ஒரு முழு எண்ணானது 10
 இருப்பதால் எண்ணுவதற்கு பெரும்பாலும் பயன்படுத்தப்படுகிறது.
 
 எடுத்துக்காட்டாக, 0 முதல் 9 வரை கணக்கிடும் சுழற்சியை எழுத, பின்வருவனவற்றை
-எழுதலாம். இந்த வழக்கில் ++ ஆபரேட்டர் i மாறியை அதிகரிக்கிறது.
+எழுதலாம். இந்த வழக்கில் ++ இயக்கி(Operator) i மாறியை அதிகரிக்கிறது.
 
 #+begin_src c
   for (int i = 0; i < 10; i++) {
@@ -235,41 +235,16 @@ x எனப்படும் ஒரு முழு எண்ணானது 10
 #+end_src
 
 ** வெகுமதி மதிப்பெண் (Bonus Marks)
-<h2>Bonus Marks</h2> <hr/>
-
-<div class="alert alert-warning"> <ul class="list-group"> <li
-  class="list-group-item">&rsaquo; Use a <code>for</code> loop to
-  print out <code>Hello World!</code> five times.</li> <li
-  class="list-group-item">&rsaquo; Use a <code>while</code> loop to
-  print out <code>Hello World!</code> five times.</li> <li
-  class="list-group-item">&rsaquo; Declare a function that outputs
-  <code>Hello World!</code> <code>n</code> number of times. Call this
-  from <code>main</code>.</li> <li class="list-group-item">&rsaquo;
-  What built in types are there other than the ones listed?</li> <li
-  class="list-group-item">&rsaquo; What other conditional operators
-  are there other than <em>greater than</em> <code>&gt;</code>, and
-  <em>less than</em> <code>&lt;</code>?</li> <li
-  class="list-group-item">&rsaquo; What other mathematical operators
-  are there other than <em>add</em> <code>+</code>, and
-  <em>subtract</em> <code>-</code>?</li> <li
-  class="list-group-item">&rsaquo; What is the <code>+=</code>
-  operator, and how does it work?</li> <li
-  class="list-group-item">&rsaquo; What is the <code>do</code> loop,
-  and how does it work?</li> <li class="list-group-item">&rsaquo; What
-  is the <code>switch</code> statement and how does it work?</li> <li
-  class="list-group-item">&rsaquo; What is the <code>break</code>
-  keyword and what does it do?</li> <li
-  class="list-group-item">&rsaquo; What is the <code>continue</code>
-  keyword and what does it do?</li> <li
-  class="list-group-item">&rsaquo; What does the <code>typedef</code>
-  keyword do exactly?</li> </ul> </div>
-
-<h2>Navigation</h2>
-
-
-<table class="table" style='table-layout: fixed;'> <tr> <td
-  class="text-left"><a href="chapter2_installation"><h4>&lsaquo;
-  Installation</h4></a></td> <td class="text-center"><a
-  href="contents"><h4>&bull; Contents &bull;</h4></a></td> <td
-  class="text-right"><a href="chapter4_interactive_prompt"><h4>An
-  Interactive Prompt &rsaquo;</h4></a></td> </tr> </table>
+- வரம்பு சுழற்சி(For loop) பயன்படுத்தி ஐந்து முறை 'Hello World' அச்சிடவும்.
+- வரை சுழற்சியை(While loop) பயன்படுத்தி ஐந்து முறை 'Hello world' அச்சிடவும்.
+- செயல்பாட்டை அறிவித்து அதன் மூலம் 'Hello world', n எண்ணிக்கையில் அச்சிடவும், இதை
+  முதன்மை செயல்பாட்டியில் இருந்து அழைக்கவும்.
+- பட்டியலிடப்பட்டவை தவிர வேறு என்ன உள்ளமைக்கப்பட்ட(Builtin) வகைகளில் கட்டமைக்கப்பட்டுள்ளது?
+- பெரியது(>) மற்றும் சிறியது(<)  தவிர வேறு என்ன நிபந்தனை இயக்கி(conditional operator) உள்ளன?
+- கூட்டல்(+) மற்றும் கழித்தல்(-) தவிர வேறு என்ன கணித இயக்கி(Mathematical operator) உள்ளன?
+- += இயக்கி என்றால் என்ன, அது எப்படி வேலை செய்கிறது?
+- செய் சுழற்சி(Do loop) என்றால் என்ன, அது எப்படி வேலை செய்கிறது?
+- தேர்ந்தெடு அறிக்கை(Switch statement) என்றால் என்ன, அது எப்படி வேலை செய்கிறது?
+- Break(நிறுத்து) சிறப்புச்சொல் என்றால் என்ன, அது என்ன செய்கிறது?
+- Continue(தொடர்) சிறப்புச்சொல் என்றால் என்ன, அது என்ன செய்கிறது?
+- Typedef சிறப்புச்சொல் சரியாக என்ன செய்கிறது?
