@@ -2,7 +2,7 @@
 
 <h1>An Interactive Prompt <small>&bull; Chapter 4</small></h1>
 
-
+** படி ,மதிப்பீடு, அச்சிடு (Read, Evaluate, Print) 
 <h2 id='read_evaluate_print'>Read, Evaluate, Print</h2> <hr/>
 
 <div class='pull-right alert alert-warning' style="margin: 15px; text-align: center;">
@@ -17,6 +17,7 @@
 <p>Before building a full <em>REPL</em> we'll start with something simpler. We are going to make a system that prompts the user, and echoes any input straight back. If we make this we can later extend it to parse the user input and evaluate it, as if it were an actual Lisp program.</p>
 
 
+** ஒரு கலந்துரையாடல் தூண்டி (An Interactive Prompt)
 <h2 id='an_interactive_prompt'>An Interactive Prompt</h2> <hr/>
 
 <p>For the basic setup we want to write a loop which repeatedly writes out a message, and then waits for some input. To get user input we can use a function called <code>fgets</code>, which reads any input up until a new line. We need somewhere to store this user input. For this we can declare a constantly sized input buffer.</p>
@@ -77,6 +78,7 @@ int main(int argc, char** argv) {
 </div>
 
 
+** நிரல்மொழிமாற்றுதல் (Compilation)
 <h2 id='compilation'>Compilation</h2> <hr/>
 
 <p>You can compile this with the same command as was used in the second chapter.</p>
@@ -96,7 +98,7 @@ lispy&gt; Stop being so rude!
 No you're a Stop being so rude!
 lispy&gt;</code></pre>
 
-
+** உள்ளீடு திருத்துதல் (Editing Input)
 <h2 id='editing_input'>Editing input</h2> <hr/>
 
 <p>If you're working on Linux or Mac you'll notice some weird behaviour when you use the arrow keys to attempt to edit your input.</p>
@@ -185,6 +187,7 @@ undefined reference to `add_history'
   <p>Some systems might have slight variations on how to install, include, and link to <code>editline</code>. For example on Arch linux the editline history header is <code>histedit.h</code>. If you are having trouble search online and see if you can find distribution specific instructions on how to install and use the <code>editline</code> library. If that fails search for instructions on the <code>readline</code> library. This is a drop-in replacement for editline. On Mac it can be installed using HomeBrew or MacPorts.</p>
 </div>
 
+** சி முன்செயலி (The C Preprocessor)
 
 <h2 id='the_c_preprocessor'>The C Preprocessor</h2> <hr/>
 
@@ -252,11 +255,12 @@ int main(int argc, char** argv) {
   return 0;
 }</code></pre>
 
-
+** குறிப்பு (Reference)
 <h2>Reference</h2> <hr/>
 
 <references />
 
+** வெகுமதி மதிப்பெண் (Bonus Marks)
 <h2>Bonus Marks</h2> <hr/>
 
 <div class="alert alert-warning">
@@ -272,14 +276,3 @@ int main(int argc, char** argv) {
   <li class="list-group-item">&rsaquo; If <code>_WIN32</code> is defined on windows, what is defined for Linux or Mac?</li>
 </ul>
 </div>
-
-
-<h2>Navigation</h2>
-
-<table class="table" style='table-layout: fixed;'>
-  <tr>
-    <td class="text-left"><a href="chapter3_basics"><h4>&lsaquo; Basics</h4></a></td>
-    <td class="text-center"><a href="contents"><h4>&bull; Contents &bull;</h4></a></td>
-    <td class="text-right"><a href="chapter5_languages"><h4>Languages &rsaquo;</h4></a></td>
-  </tr>
-</table>
