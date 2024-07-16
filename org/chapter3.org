@@ -195,38 +195,44 @@ x எனப்படும் ஒரு முழு எண்ணானது 10
 #+end_src
 
 ** சுழற்சி(Loops)
-<h2 id='loops'>Loops</h2> <hr/>
 
-<p>Loops allow for some code to be repeated until some condition
-becomes false, or some counter elapses.</p>
+சில நிபந்தனைகள் தவறானதாக மாறும் வரை அல்லது சில எண்ணி(counter) முடிவடையும்
+வரை சில குறியீட்டை மீண்டும் மீண்டும் செய்ய சுழற்சிகள் பயன்படுத்தப்படுகிறது.
 
-<p>There are two main loops in C. The first is a <code>while</code>
-loop. This loop repeatedly executes a block of code until some
-condition becomes false. It is written as <code>while</code> followed
-by some condition in parentheses, followed by the code to execute in
-curly brackets. For example a loop that counts downward from
-<code>10</code> to <code>1</code> could be written as follows.</p>
+சி இல் இரண்டு முக்கிய சுழற்சிகள் உள்ளன. முதலாவது வரை சுழற்சி(While loop). இந்த
+சுழற்சி சில நிபந்தனைகள் தவறானதாக மாறும் வரை குறியீட்டின் தொகுதியை(Code block)
+மீண்டும் மீண்டும் இயக்குகிறது. இந்த சுழற்சி அடைப்புக்குறிக்குள்(Parentheses) சில
+நிபந்தனைகளைத் தொடர்ந்து, சுருள் அடைப்புக்குறிக்குள்(Curly brackets)
+செயல்படுத்துவதற்கான குறியீடு எழுதப்படும். எடுத்துக்காட்டாக, 10 முதல் 1 வரை
+கீழ்நோக்கி எண்ணும் ஒரு சுழற்சியை பின்வருமாறு எழுதலாம்.
 
-<pre><code data-language='c'>int i = 10; while (i > 0) { puts("Loop
-Iteration"); i = i - 1; }</code></pre>
+#+begin_src c
+  int i = 10;
+  while (i > 0) {
+    puts("Loop Iteration");
+    i = i - 1;
+  }
+#+end_src
 
-<p>The second kind of loop is a <code>for</code> loop. Rather than a
-condition, this loop requires three expressions separated by
-semicolons <code>;</code>. These are an <em>initialiser</em>, a
-<em>condition</em> and an <em>incrementer</em>. The
-<em>initialiser</em> is performed before the loop starts. The
-<em>condition</em> is checked before each iteration of the loop. If it
-is false, the loop is exited. The <em>incrementer</em> is performed at
-the end of each iteration of the loop. These loops are often used for
-counting as they are more compact than the <code>while</code>
-loop.</p>
+இரண்டாவது வகையான சுழற்சி ஒரு வரம்பு சுழற்சி(For loop) ஆகும். ஒரு நிபந்தனைக்கு
+பதிலாக, இந்த சுழற்சிக்கு அரைப்புள்ளிகளால்(Semicolon - ;) பிரிக்கப்பட்ட மூன்று
+வெளிப்பாடுகள்(Expressions) தேவை. இவை ஒரு துவக்கி(Initializer), ஒரு
+நிபந்தனை(Decision statement) மற்றும் ஒரு அதிகரிப்பான் அல்லது
+குறைப்பான்(Increment/Decrement). சுழற்சி தொடங்கும் முன் துவக்கி
+செய்யப்படுகிறது. சுழற்சியின் ஒவ்வொரு மறு செய்கைக்கும்(Iteration) முன் நிபந்தனை
+சரிபார்க்கப்படுகிறது. அது தவறானதாக இருந்தால், சுழற்சி வெளியேறும். சுழற்சியின்
+ஒவ்வொரு மறு செய்கையின் முடிவிலும் அதிகரிப்பான் அல்லது குறைப்பான்
+செய்யப்படுகிறது. இந்த சுழற்சிகள் வரை சுழற்சியை(While loop) விட எளிதாக
+இருப்பதால் எண்ணுவதற்கு பெரும்பாலும் பயன்படுத்தப்படுகிறது.
 
-<p>For example to write a loop that counts up from <code>0</code> to
-<code>9</code> we might write the following. In this case the
-<code>++</code> operator increments the variable <code>i</code>.</p>
+எடுத்துக்காட்டாக, 0 முதல் 9 வரை கணக்கிடும் சுழற்சியை எழுத, பின்வருவனவற்றை
+எழுதலாம். இந்த வழக்கில் ++ ஆபரேட்டர் i மாறியை அதிகரிக்கிறது.
 
-<pre><code data-language='c'>for (int i = 0; i < 10; i++) { puts("Loop
-  Iteration"); }</code></pre>
+#+begin_src c
+  for (int i = 0; i < 10; i++) {
+    puts("Loop Iteration");
+  }
+#+end_src
 
 ** வெகுமதி மதிப்பெண் (Bonus Marks)
 <h2>Bonus Marks</h2> <hr/>
