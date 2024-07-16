@@ -164,34 +164,35 @@ char** argv ஐ ஏற்கனவே பார்த்தோம். இது 
 என்பதை நினைவில் கொள்ளுங்கள்.
 
 ** நிபந்தனைகள்(Conditionals)
-<h2 id='conditionals'>Conditionals</h2> <hr/>
 
-<p>Conditional statements let the program perform some code only if
-certain conditions are met.</p>
+நிபந்தனை அறிக்கைகள் சில நிபந்தனைகள் பூர்த்தி செய்யப்பட்டால் மட்டுமே நிரல் சில
+குறியீட்டை செயல்படுத்த அனுமதிக்கும்.
 
-<p>To perform code under some condition we use the <code>if</code>
-statement. This is written as <code>if</code> followed by some
-condition in parentheses, followed by the code to execute in curly
-brackets. An <code>if</code> statement can be followed by an optional
-<code>else</code> statement, followed by other statements in curly
-brackets. The code in these brackets will be performed in the case the
-conditional is false.</p>
+சில நிபந்தனைகளின் கீழ் குறியீட்டைச் செயல்படுத்த, if அறிக்கையைப்
+பயன்படுத்துகிறோம். இது if என எழுதப்பட்டதைத் தொடர்ந்து
+அடைப்புக்குறிக்குள்(Parentheses - ()) சில நிபந்தனைகள், அதைத் தொடர்ந்து சுருள்
+அடைப்புக்குறிக்குள்(Curly brackets) செயல்படுத்த குறியீடு. if அறிக்கையைத்
+தொடர்ந்து விருப்பம் இருந்தால் else அறிக்கை வரலாம். அதைத் தொடர்ந்து சுருள்
+அடைப்புக்குறிக்குள்(Curly brackets) மற்ற அறிக்கைகளும் இருக்கும். நிபந்தனை
+தவறானதாக இருந்தால், else அறிக்கையில் உள்ள குறியீடு செயல்படுத்தப்படும்.
 
-<p>We can test for multiple conditions using the logical operators
-<code>||</code> for <em>or</em>, and <code>&&</code> for
-<em>and</em>.</p>
+ஏரண வினைப்(Logical operation) பயன்படுத்தி பல நிபந்தனைகளை நாம் சோதிக்கலாம்,
+இதில் '||' என்றால் அல்லது, '&&' என்றால் மற்றும் என்று அர்த்தம்.
 
-<p>Inside a conditional statement's parentheses any value that is not
-<code>0</code> will evaluate to true. This is important to remember as
-many conditions use this to check things implicitly.</p>
+நிபந்தனை அறிக்கையின் அடைப்புக்குறிக்குள் பூஜ்ஜியம்(0) அல்லாத எந்த மதிப்பும் சரி என
+மதிப்பிடப்படும். விஷயங்களை மறைமுகமாகச் சரிபார்க்க பல நிபந்தனைகள் இதைப்
+பயன்படுத்துவதால் இதை நினைவில் கொள்வது அவசியம்.
 
-<p>If we wished to check if an <code>int</code> called <code>x</code>
-was greater than <code>10</code> and less than <code>100</code>, we
-would write the following.</p>
+x எனப்படும் ஒரு முழு எண்ணானது 10 ஐ விட அதிகமாகவும் 100 க்கு குறைவாகவும்
+உள்ளதா என சரிபார்க்க விரும்பினால், பின்வருவனவற்றை எழுதுவோம்.
 
-<pre><code data-language='c'>if (x > 10 && x < 100) { puts("x is
-  greater than 10 and less than 100!"); } else { puts("x is less than
-  11 or greater than 99!"); }</code></pre>
+#+begin_src c
+  if (x > 10 && x < 100) {
+    puts("x is greater than 10 and less than 100!");
+  } else {
+    puts("x is less than 11 or greater than 99!");
+  }
+#+end_src
 
 ** சுழற்சி(Loops)
 <h2 id='loops'>Loops</h2> <hr/>
