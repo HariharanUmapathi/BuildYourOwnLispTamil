@@ -70,7 +70,6 @@
 | double  | அதிக துல்லியத்துடன் தசம எண்       | double speed_of_swallow = 0.01072896; |
 
 ** செயல்பாடு அறிவிப்பு(Function Declarations)
-<h2 id='function_declarations'>Function Declarations</h2> <hr/>
 
 ஒரு செயல்பாடு என்பது மாறிகளைக் கையாளும் ஒரு கணக்கீடு ஆகும், மேலும்
 விருப்பத்திற்கு ஏற்றவாறு நிரலின் நிலையை மாற்றுகிறது. இது சில மாறிகளை
@@ -153,19 +152,16 @@ char** argv ஐ ஏற்கனவே பார்த்தோம். இது 
 
 
 ** சரம்(Strings)
-<h2 id='strings'>Strings</h2> <hr/>
+சி இல் சரங்கள் சுட்டிக்காட்டி வகை char* மூலம் குறிப்பிடப்படுகின்றன. அடிப்படையில்
+அவை எழுத்துக்களின் பட்டியலாக(list) சேமிக்கப்படுகின்றன, அதன் இறுதில் சிறப்பு
+எழுத்து பூஜ்ய முறிவு(Null terminator - \0) இருக்கும். சரங்கள் சி இன் சிக்கலான
+மற்றும் முக்கியமான பகுதியாகும், அடுத்த சில அத்தியாயங்களில் திறம்பட பயன்படுத்த
+கற்றுக்கொள்வோம்.
 
-<p>In C strings are represented by the pointer type
-<code>char*</code>. Under the hood they are stored as a list of
-characters, where the final character is a special character called
-the <em>null terminator</em>. Strings are a complicated and important
-part of C, which we'll learn to use effectively in the next few
-chapters.</p>
-
-<p>Strings can also be declared literally by putting text between
-quotation marks. We used this in the previous chapter with our string
-<code>"Hello, World!"</code>. For now, remember that if you see
-<code>char*</code>, you can read it as a <em>string</em>.</p>
+மேற்கோள் குறிகளுக்கு(Quotation marks) இடையில் உரையை(Text) வைப்பதன் மூலம்
+சரங்களை அறிவிக்கலாம். இதை முந்தைய அத்தியாயத்தில் "Hello, World!" என்ற சரத்துடன்
+பயன்படுத்தினோம். இப்போதைக்கு, char* ஐப் பார்த்தால், அதை ஒரு சரமாகப் படிக்கலாம்
+என்பதை நினைவில் கொள்ளுங்கள்.
 
 ** நிபந்தனைகள்(Conditionals)
 <h2 id='conditionals'>Conditionals</h2> <hr/>
@@ -197,7 +193,7 @@ would write the following.</p>
   greater than 10 and less than 100!"); } else { puts("x is less than
   11 or greater than 99!"); }</code></pre>
 
-** மடக்கி(Loops)
+** சுழற்சி(Loops)
 <h2 id='loops'>Loops</h2> <hr/>
 
 <p>Loops allow for some code to be repeated until some condition
