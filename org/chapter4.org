@@ -27,11 +27,55 @@
 அதை நீட்டிக்கலாம்(Extend).
 
 ** ஒரு கலந்துரையாடல் தூண்டி (An Interactive Prompt)
-<h2 id='an_interactive_prompt'>An Interactive Prompt</h2> <hr/>
 
-<p>For the basic setup we want to write a loop which repeatedly writes out a message, and then waits for some input. To get user input we can use a function called <code>fgets</code>, which reads any input up until a new line. We need somewhere to store this user input. For this we can declare a constantly sized input buffer.</p>
+அடிப்படையாக நாம் ஒரு சுழற்சியை(loop) எழுத வேண்டும், இது ஒரு தகவலை மீண்டும்
+மீண்டும் எழுதுகிறது, பின்னர் சில உள்ளீடுகளுக்காக(input)
+காத்திருக்கிறது. பயனர்(User) உள்ளீட்டைப் பெற, fgets எனப்படும் செயல்பாட்டைப்
+பயன்படுத்தலாம், இது ஒரு புதிய வரி(New line) வரை எந்த உள்ளீட்டையும்
+படிக்கும். இந்த பயனர் உள்ளீட்டைச் நாம் எங்காவது சேமிக்க வேண்டும். இதற்காக நாம்
+நிலையான அளவு(Constantly sized) உள்ளீட்டு இடையகத்தை(Input buffer)
+அறிவிக்கலாம்.
 
-<p>Once we have this user input stored we can then print it back to the user using a function called <code>printf</code>.</p>
+இந்த பயனர் உள்ளீடு சேமிக்கப்பட்டவுடன், printf எனப்படும் செயல்பாட்டைப்
+பயன்படுத்தி பயனருக்கு மீண்டும் அச்சிடலாம்.
+
+#+begin_src c
+  #include <stdio.h>
+
+  /* Declare a buffer for user input of size 2048 */
+  static char input[2048];
+  
+  int main(int argc, char** argv) {
+  
+    /* Print Version and Exit Information */
+    puts("Lispy Version 0.0.0.0.1");
+    puts("Press Ctrl+c to Exit\n");
+  
+    /* In a never ending loop */
+    while (1) {
+  
+      /* Output our prompt */
+      fputs("lispy> ", stdout);
+  
+      /* Read a line of user input of maximum size 2048 */
+      fgets(input, 2048, stdin);
+  
+      /* Echo input back to user */
+      printf("No you're a %s", input);
+    }
+  
+    return 0;
+  }
+#+end_src
+
+<p>For the basic setup we want to write a loop which repeatedly writes
+out a message, and then waits for some input. To get user input we can
+use a function called <code>fgets</code>, which reads any input up
+until a new line. We need somewhere to store this user input. For this
+we can declare a constantly sized input buffer.</p>
+
+<p>Once we have this user input stored we can then print it back to
+the user using a function called <code>printf</code>.</p>
 
 <pre><code data-language='c'>#include &lt;stdio.h&gt;
 
@@ -124,6 +168,7 @@ lispy> hel^[[D^[[C
 
 <p>If you're developing on Windows and just want to get going, feel free to skip to the end of this chapter as the next few sections may not be relevant.</p>
 
+*** Using Editline (Change to tamil)
 <h3>Using Editline</h3>
 
 <p>The library <code>editline</code> provides two functions we are going to use called <code>readline</code> and <code>add_history</code>. This first function, <code>readline</code> is used to read input from some prompt, while allowing for editing of that input. The second function <code>add_history</code> lets us record the history of inputs so that they can be retrieved with the up and down arrows.</p>
@@ -168,6 +213,7 @@ int main(int argc, char** argv) {
 
 <p>Unlike <code>fgets</code>, the <code>readline</code> function strips the trailing newline character from the input, so we need to add this to our <code>printf</code> function. We also need to delete the input given to us by the <code>readline</code> function using <code>free</code>. This is because unlike <code>fgets</code>, which writes to some existing buffer, the <code>readline</code> function allocates new memory when it is called. When to free memory is something we cover in depth in later chapters.</p>
 
+*** Compiling with Editline (translate to tamil)
 <h3>Compiling with Editline</h3>
 
 <p>If you try to compile this right away with the previous command you'll get an error. This is because you first need to install the <code>editline</code> library on your computer.</p>
