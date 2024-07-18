@@ -42,25 +42,25 @@
 #+begin_src c
   #include <stdio.h>
 
-  /* Declare a buffer for user input of size 2048 */
+  /* 2048 அளவு கொண்ட இடையகத்தை(Buffer) அல்லது அணி(Array), பயனர் உள்ளீட்டிற்காக அறிவிக்கவும் */
   static char input[2048];
   
   int main(int argc, char** argv) {
   
-    /* Print Version and Exit Information */
+    /* பதிப்பை(version) அச்சிட்டு(print) வெளியேறவும் */
     puts("Lispy Version 0.0.0.0.1");
     puts("Press Ctrl+c to Exit\n");
   
-    /* In a never ending loop */
+    /* முடிவில்லாத சுழற்சியில் */
     while (1) {
   
-      /* Output our prompt */
+      /* வெளியீட்டு தூண்டு (Output prompt) */
       fputs("lispy> ", stdout);
   
-      /* Read a line of user input of maximum size 2048 */
+      /* அதிகபட்சம் 2048 அளவு கொண்ட பயனர் உள்ளீட்டின் வரியைப் படிக்கவும் */
       fgets(input, 2048, stdin);
   
-      /* Echo input back to user */
+      /* பயனருக்கு உள்ளீட்டை மீண்டும் அச்சிடவும் */
       printf("No you're a %s", input);
     }
   
