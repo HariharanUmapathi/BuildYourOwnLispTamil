@@ -86,89 +86,64 @@ variable) உருவாக்குகிறது, மேலும் [2048] 
 சுழற்சியை(Infinite loop) எழுதுகிறோம். இதில் 1 என்று சுழற்சி அடைப்புக்குறிக்குள்
 எழுதிரிகிறோம் அது நிபந்தனை உண்மை என்று அர்த்தம். எனவே இந்த சுழற்சியில் உள்ள
 கட்டளைகள் எப்போதும் இயங்கும்.
-    
-<p>For the basic setup we want to write a loop which repeatedly writes
-out a message, and then waits for some input. To get user input we can
-use a function called <code>fgets</code>, which reads any input up
-until a new line. We need somewhere to store this user input. For this
-we can declare a constantly sized input buffer.</p>
 
-<p>Once we have this user input stored we can then print it back to
-the user using a function called <code>printf</code>.</p>
+நாம் தூண்டி வெளியிட, fputs செயல்பாட்டைப் பயன்படுத்துகிறோம். இது puts போல தான்
+ஆனால் சிறிய மாறுபாடு புதிய வரி எழுத்தைச் சேர்க்காது. கட்டளை
+வரியிலிருந்து(Command Prompt) பயனர் உள்ளீட்டைப் பெற fgets செயல்பாட்டைப்
+பயன்படுத்துகிறோம். இந்த இரண்டு செயல்பாடுகளுக்கும் சில கோப்புகளை(File) எழுத
+அல்லது படிக்க பயன்படுத்தப்படுகிறது. இதற்காக stdin மற்றும் stdout ஆகிய சிறப்பு
+மாறிகளை பயன்படுத்துகிறோம். இவை <stdio.h> இல் அறிவிக்கப்பட்டு உள்ளது,இது கட்டளை
+வரியில் இருந்து உள்ளீடு மற்றும் வெளியீட்டைக் குறிக்கும் சிறப்பு கோப்பு மாறிகள்
+ஆகும். இந்த மாறியை fgets செயல்பாடுகு அளபுருக(Parameter) கூடுதல் அது பயனர்
+உரையின் வரியை உள்ளிடுவதற்கு காத்திருக்கும், உள்ளீட்டு வந்தபின் அதை
+இடையகத்தில்(Buffer) புதிய வரி எழுத்துடன் சேர்த்து சேமிக்கும். fgets அதிக
+தரவுகளைப் படிக்காதபடி இருக்க, இடையக(Buffer) 2048 என்ற அளவையும் வழங்க வேண்டும்.
 
-<pre><code data-language='c'>#include &lt;stdio.h&gt;
+பயனருக்கு செய்தியை எதிரொலிக்க நாம் printf செயல்பாட்டைப் பயன்படுத்துகிறோம். இது
+பல கூறுகளைக்(elements) கொண்ட செய்திகளை அச்சிடுவதற்கான வழியை வழங்கும் ஒரு
+செயல்பாடாகும். கொடுக்கப்பட்ட சரத்தில் உள்ள மாதிரிக்கு(pattern)
+தருமதிப்பு(arguments) பொருந்துகிறது. எடுத்துக்காட்டாக, கொடுக்கப்பட்ட சரத்தில் %s
+மாதிரியைக் காணலாம். அதாவது, அடுத்ததாக எந்த தருமதிப்பு அனுப்பப்பட்டாலும், அது
+ஒரு சரமாக விளக்கப்படும்.
 
-/* Declare a buffer for user input of size 2048 */
-static char input[2048];
+இந்த வெவ்வேறு மாதிரிகள் பற்றிய கூடுதல் தகவலுக்கு, printf இல் உள்ள [[http://en.cppreference.com/w/c/io/printf][ஆவணங்களைப்]]
+பார்க்கவும்.
 
-int main(int argc, char** argv) {
-
-  /* Print Version and Exit Information */
-  puts("Lispy Version 0.0.0.0.1");
-  puts("Press Ctrl+c to Exit\n");
-
-  /* In a never ending loop */
-  while (1) {
-
-    /* Output our prompt */
-    fputs("lispy&gt; ", stdout);
-
-    /* Read a line of user input of maximum size 2048 */
-    fgets(input, 2048, stdin);
-
-    /* Echo input back to user */
-    printf("No you're a %s", input);
-  }
-
-  return 0;
-}</code></pre>
-
-<div class="alert alert-warning">
-  <p><strong>What is that text in light green?</strong></p>
-
-  <p>The above code contains <em>comments</em>. These are sections of the code between <code>/*</code> <code>*/</code> symbols, which are ignored by the compiler, but are used to inform the person reading what is going on. Take notice of them!</p>
-</div>
-
-<p>Let's go over this program in a little more depth.</p>
-
-<p>The line <code>static char input[2048];</code> declares a global array of 2048 characters. This is a reserved block of data we can access anywhere from our program. In it we are going to store the user input which is typed into the command line. The <code>static</code> keyword makes this variable local to this file, and the <code>[2048]</code> section is what declares the size.</p>
-
-<p>We write an infinite loop using <code>while (1)</code>. In a conditional block <code>1</code> always evaluates to true. Therefore commands inside this loop will run forever.</p>
-
-<p>To output our prompt we use the function <code>fputs</code>. This is a slight variation on <code>puts</code> which does not append a newline character. We use the <code>fgets</code> function for getting user input from the command line. Both of these functions require some file to write to, or read from. For this we supply the special variables <code>stdin</code> and <code>stdout</code>. These are declared in <code>&lt;stdio.h&gt;</code> and are special file variables representing input to, and output from, the command line. When passed this variable the <code>fgets</code> function will wait for a user to input a line of text, and when it has it will store it into the <code>input</code> buffer, including the newline character. So that <code>fgets</code> does not read in too much data we also must also supply the size of the buffer <code>2048</code>.</p>
-
-<p>To echo the message back to the user we use the function <code>printf</code>. This is a function that provides a way of printing messages consisting of several elements. It matches arguments to patterns in the given string. For example in our case we can see the <code>%s</code> pattern in the given string. This means that it will be replaced by whatever argument is passed in next, interpreted as a string.</p>
-
-<p>For more information on these different patterns please see the <a href="http://en.cppreference.com/w/c/io/printf">documentation</a> on <code>printf</code>.</p>
-
-<div class="alert alert-warning">
-  <p><strong>How am I meant to know about functions like <code>fgets</code> and <code>printf</code>?</strong></p>
-
-  <p>It isn't immediately obvious how to know about these standard functions, and when to use them. When faced with a problem it takes experience to know when it has been solved for you by library functions.</p>
-
-  <p>Luckily C has a very small standard library and almost all of it can be learnt in practice. If you want to do something that seems quite basic, or fundamental, it is worth looking at the <a href="http://en.cppreference.com/w/c">reference documentation</a> for the standard library and checking if there are any functions included that do what you want.</p>
-</div>
-
+- fgets மற்றும் printf போன்ற செயல்பாடுகளை பற்றி நான் எப்படி தெரிந்து கொள்ள வேண்டும்?
+  - இந்த நிலையான செயல்பாடுகளைப் பற்றி எப்படி அறிந்து கொள்வது, எப்போது அவற்றைப்
+    பயன்படுத்துவது என்பது உடனடியாகத் தெரியாது. ஒரு சிக்கலை எதிர்கொள்ளும் போது,
+    ​​நூலக செயல்பாடுகளால் அது ஏற்கனவே தீர்க்கப்பட்டது என்பதை அறிய அனுபவம் தேவை.
+  - அதிர்ஷ்டவசமாக சி ஒரு சிறிய நிலையான நூலகத்தைக் கொண்டுள்ளது மற்றும் கிட்டத்தட்ட
+    அனைத்தையும் நடைமுறையில் கற்றுக்கொள்ளலாம். நீங்கள் மிகவும் அடிப்படையான அல்லது
+    அடிப்படையானதாகத் தோன்றும் ஒன்றைச் செய்ய விரும்பினால், நிலையான நூலகத்திற்கான
+    குறிப்பு [[https://en.cppreference.com/w/c][ஆவணங்களைப்]] பார்த்து, நீங்கள் விரும்பியதைச் செய்யும் செயல்பாடுகள் ஏதேனும்
+    உள்ளதா எனச் சரிபார்க்க வேண்டும்.
 
 ** நிரல்மொழிமாற்றுதல் (Compilation)
-<h2 id='compilation'>Compilation</h2> <hr/>
 
-<p>You can compile this with the same command as was used in the second chapter.</p>
+இரண்டாவது அத்தியாயத்தில் பயன்படுத்தப்பட்ட அதே கட்டளையுடன் இதை நீங்கள்
+நிரல்மொழிமாற்றலாம்.
 
-<pre><code>cc -std=c99 -Wall prompt.c -o prompt</code></pre>
+#+begin_src shell
+  cc -std=c99 -Wall prompt.c -o prompt
+#+end_src
 
-<p>After compiling this you should try to run it. You can use <code>Ctrl+c</code> to quit the program when you are done. If everything is correct your program should run something like this.</p>
+இதை நிரல்மொழிமாற்றிய பிறகு நீங்கள் இதை இயக்க முயற்சிக்க வேண்டும். முடித்ததும்
+நிரலிலிருந்து வெளியேற Ctrl+c ஐப் பயன்படுத்தலாம். எல்லாம் சரியாக இருந்தால், உங்கள்
+நிரல் கீழே உள்ளதைப் போல இருக்க வேண்டும்.
 
-<pre><code data-language='lispy'>Lispy Version 0.0.0.0.1
+#+begin_example
+Lispy Version 0.0.0.0.1
 Press Ctrl+c to Exit
 
-lispy&gt; hello
+lispy> hello
 No you're a hello
-lispy&gt; my name is Dan
+lispy> my name is Dan
 No you're a my name is Dan
-lispy&gt; Stop being so rude!
+lispy> Stop being so rude!
 No you're a Stop being so rude!
-lispy&gt;</code></pre>
+lispy>
+#+end_example
 
 ** உள்ளீடு திருத்துதல் (Editing Input)
 <h2 id='editing_input'>Editing input</h2> <hr/>
