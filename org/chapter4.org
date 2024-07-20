@@ -172,6 +172,51 @@ lispy> hel^[[D^[[C
 என்பதால், இந்த அத்தியாயத்தின் இறுதிக்கு செல்லவும்.
 
 *** Editline பயன்படுத்துதல்
+
+Editline நூலகம் readline மற்றும் add_history எனப்படும் இரண்டு செயல்பாடுகளை
+வழங்குகிறது. இதில் முதல் செயல்பாடு, readline சில துண்டில் இருந்து உள்ளீட்டை
+படிக்க பயன்படுத்தப்படுகிறது, அதே நேரத்தில் அந்த உள்ளீட்டைத் திருத்த
+அனுமதிக்கிறது. இரண்டாவது செயல்பாடு add_history உள்ளீடுகளின் வரலாற்றைப்
+பதிவுசெய்ய உதவுகிறது, இதனால் அவை மேல் மற்றும் கீழ் அம்புக்குறி விசைகளை வைத்து
+மீட்டெடுக்கப்படும்.
+
+மேலே உள்ள அம்சத்தைப் பெற, fputs மற்றும் fgetகளை இந்த செயல்பாடுகளுக்கான
+அழைப்புகளுடன் மாற்றுவோம்.
+
+#+begin_src c
+  #include <stdio.h>
+  #include <stdlib.h>
+  
+  #include <editline/readline.h>
+  #include <editline/history.h>
+  
+  int main(int argc, char** argv) {
+  
+    /* Print Version and Exit Information */
+    puts("Lispy Version 0.0.0.0.1");
+    puts("Press Ctrl+c to Exit\n");
+  
+    /* In a never ending loop */
+    while (1) {
+  
+      /* Output our prompt and get input */
+      char* input = readline("lispy> ");
+  
+      /* Add input to history */
+      add_history(input);
+  
+      /* Echo input back to user */
+      printf("No you're a %s\n", input);
+  
+      /* Free retrieved input */
+      free(input);
+  
+    }
+  
+    return 0;
+  }
+#+end_src
+
 <h3>Using Editline</h3>
 
 <p>The library <code>editline</code> provides two functions we are going to use called <code>readline</code> and <code>add_history</code>. This first function, <code>readline</code> is used to read input from some prompt, while allowing for editing of that input. The second function <code>add_history</code> lets us record the history of inputs so that they can be retrieved with the up and down arrows.</p>
