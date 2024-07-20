@@ -146,23 +146,32 @@ lispy>
 #+end_example
 
 ** உள்ளீடு திருத்துதல் (Editing Input)
-<h2 id='editing_input'>Editing input</h2> <hr/>
+நீங்கள் லினக்ஸ்(Linux) அல்லது மேக்(Mac) இல் பயன்படுத்துகிறீர்கள் என்றால், உங்கள்
+உள்ளீட்டைத் திருத்துவதற்கு அம்புக்குறி விசைகளைப்(Arrow Keys) பயன்படுத்தும்போது சில
+வித்தியாசமான நடத்தைகளைக் காண்பீர்கள்.
 
-<p>If you're working on Linux or Mac you'll notice some weird behaviour when you use the arrow keys to attempt to edit your input.</p>
-
-<pre><code data-language='lispy'>Lispy Version 0.0.0.0.3
+#+begin_example
+Lispy Version 0.0.0.0.3
 Press Ctrl+c to Exit
 
 lispy> hel^[[D^[[C
-</code></pre>
+#+end_example
 
-<p>Using the arrow keys is creating these weird characters <code>^[[D</code> or <code>^[[C</code>, rather than moving the cursor around in the input. What we really want is to be able to move around on the line, deleting and editing the input in case we make a mistake.</p>
+அம்புக்குறி விசைகளைப் பயன்படுத்தும்போது, உள்ளீட்டில் காட்டியை(Cursor)
+நகர்த்துவதற்குப் பதிலாக, இந்த வித்தியாசமான எழுத்துக்களை ^[[D அல்லது ^[[C
+உருவாக்குகிறது. நாம் உண்மையில் விரும்புவது என்னவென்றால், வரியில் சுற்றிச்
+நகர(Move around the line), நாம் தவறு செய்தால் உள்ளீட்டை நீக்குதல் மற்றும்
+திருத்துதல்.
 
-<p>On Windows this behaviour is the default. On Linux and Mac it is provided by a library called <code>editline</code>. On Linux and Mac we need to replace our calls to <code>fputs</code> and <code>fgets</code> with calls to functions this library provides.</p>
+விண்டோஸில் இந்த நடத்தை இயல்புநிலையாகும். லினக்ஸ் மற்றும் மேக்கில் இது Editline
+எனப்படும் நூலகத்தால் வழங்கப்படுகிறது. லினக்ஸ் மற்றும் மேக்கில், இந்த நூலகம் வழங்கும்
+செயல்பாடுகளுக்கான அழைப்புகளை fputs மற்றும் fgetsக்கு மாற்றாக பயன்படுத்துத
+வேண்டும்.
 
-<p>If you're developing on Windows and just want to get going, feel free to skip to the end of this chapter as the next few sections may not be relevant.</p>
+நீங்கள் விண்டோஸில் உருவாக்கினால், அடுத்த சில பகுதிகள் பொருத்தமானதாக இருக்காது
+என்பதால், இந்த அத்தியாயத்தின் இறுதிக்கு செல்லவும்.
 
-*** Using Editline (Change to tamil)
+*** Editline பயன்படுத்துதல்
 <h3>Using Editline</h3>
 
 <p>The library <code>editline</code> provides two functions we are going to use called <code>readline</code> and <code>add_history</code>. This first function, <code>readline</code> is used to read input from some prompt, while allowing for editing of that input. The second function <code>add_history</code> lets us record the history of inputs so that they can be retrieved with the up and down arrows.</p>
