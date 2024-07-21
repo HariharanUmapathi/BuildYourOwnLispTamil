@@ -217,51 +217,51 @@ Editline நூலகம் readline மற்றும் add_history எனப
   }
 #+end_src
 
-<h3>Using Editline</h3>
+சில புதிய தலைப்புகளைச்(Headers) சேர்த்துள்ளோம். #include <stdlib.h> உள்ளது,
+இது குறியீட்டில் பின்னர் பயன்படுத்தப்படும் free செயல்பாட்டிற்கான அணுகலை(access)
+வழங்குகிறது. நாங்கள் #include <editline/readline.h> மற்றும் #include
+<editline/history.h> ஆகியவற்றையும் சேர்த்துள்ளோம், இது Editline செயல்பாடுகள்,
+readline மற்றும் add_history ஆகியவற்றிற்கான அணுகலை வழங்குகிறது.
 
-<p>The library <code>editline</code> provides two functions we are going to use called <code>readline</code> and <code>add_history</code>. This first function, <code>readline</code> is used to read input from some prompt, while allowing for editing of that input. The second function <code>add_history</code> lets us record the history of inputs so that they can be retrieved with the up and down arrows.</p>
+தூண்டி(Prompt) அச்சிட்டு, fgets மூலம் உள்ளீடு பெறுவதற்குப் பதிலாக, readline
+பயன்படுத்தி ஒரே நேரத்தில் அதைச் செய்கிறோம். இதன் விளைவாக, அதை பதிவு(record)
+செய்ய add_history க்கு செல்கிறோம். இறுதியாக நாம் printf ஐப் பயன்படுத்தி அதை
+அச்சிடுகிறோம்.
 
-<p>We replace <code>fputs</code> and <code>fgets</code> with calls to these functions to get the following.</p>
+fgets போலல்லாமல், readline செயல்பாடு உள்ளீடிலிருந்து புதிய வரி எழுத்தை
+நீக்குகிறது, எனவே இதை நாம் நமது printf செயல்பாட்டில் சேர்க்க வேண்டும். free
+பயன்படுத்தி readline செயல்பாடு மூலம் நமக்கு வழங்கப்பட்ட உள்ளீட்டையும் நீக்க
+வேண்டும். ஏனென்றால், ஏற்கனவே உள்ள சில இடையகங்களுக்கு(Buffer) எழுதும் fgets
+போலல்லாமல், readline செயல்பாடு அழைக்கும் பொது புதிய நினைவகத்தை(Memory)
+ஒதுக்குகிறது. நினைவகத்தை எப்போது விடுவிப்பது என்பதை பற்றி அடுத்த அத்தியாயங்களில்
+நாம் ஆழமாகப் பேசுவோம்.
 
-<pre><code data-language='c'>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
+*** Editline வைத்து நிரல்மொழிமாற்றுதல்
 
-#include &lt;editline/readline.h&gt;
-#include &lt;editline/history.h&gt;
+முந்தைய கட்டளையுடன் இதை நிரல்மொழிமாற்றினால் உங்களுக்கு ஒரு பிழையைப்
+வரும். ஏனென்றால் முதலில் உங்கள் கணினியில் Editline நூலகத்தை நிறுவ வேண்டும்.
 
-int main(int argc, char** argv) {
+#+begin_example
+fatal error: editline/readline.h: No such file or directory #include <editline/readline.h>
+#+end_example
 
-  /* Print Version and Exit Information */
-  puts("Lispy Version 0.0.0.0.1");
-  puts("Press Ctrl+c to Exit\n");
+மேக் இல் Editline நூலகம் கட்டளை வரி கருவிகளுடன் வருகிறது. இவற்றை
+நிறுவுவதற்கான வழிமுறைகளை அத்தியாயம் 2 இல் காணலாம். history தலைப்பு
+கண்டறியப்படவில்லை என்பது குறித்த பிழையைப் பெறலாம். அப்படி வந்தால் #include
+<editline/history.h> என்ற வரியை அகற்றவும், ஏனெனில் இந்த தலைப்பு தேவையில்லை.
 
-  /* In a never ending loop */
-  while (1) {
+லினக்ஸ் இல் நீங்கள் sudo apt-get install libedit-dev உடன் Editline
+நிறுவலாம். Fedora வில் நீங்கள் su -c "yum install libedit-dev*" என்ற
+கட்டளையைப் பயன்படுத்தலாம்.
 
-    /* Output our prompt and get input */
-    char* input = readline("lispy&gt; ");
+நீங்கள் Editline நிறுவியவுடன் அதை மீண்டும் நிரல்மொழிமாற்ற முயற்சி செய்யலாம். இந்த
+முறை உங்களுக்கு வேறு பிழையைப் வரும்.
 
-    /* Add input to history */
-    add_history(input);
+#+begin_example
+undefined reference to `readline'
+undefined reference to `add_history'
+#+end_example
 
-    /* Echo input back to user */
-    printf("No you're a %s\n", input);
-
-    /* Free retrieved input */
-    free(input);
-
-  }
-
-  return 0;
-}</code></pre>
-
-<p>We have <em>included</em> a few new <em>headers</em>. There is <code>#include &lt;stdlib.h&gt;</code>, which gives us access to the <code>free</code> function used later on in the code. We have also added <code>#include &lt;editline/readline.h&gt;</code> and <code>#include &lt;editline/history.h&gt;</code> which give us access to the <code>editline</code> functions, <code>readline</code> and <code>add_history</code>.</p>
-
-<p>Instead of prompting, and getting input with <code>fgets</code>, we do it in one go using <code>readline</code>. The result of this we pass to <code>add_history</code> to record it. Finally we print it out as before using <code>printf</code>.</p>
-
-<p>Unlike <code>fgets</code>, the <code>readline</code> function strips the trailing newline character from the input, so we need to add this to our <code>printf</code> function. We also need to delete the input given to us by the <code>readline</code> function using <code>free</code>. This is because unlike <code>fgets</code>, which writes to some existing buffer, the <code>readline</code> function allocates new memory when it is called. When to free memory is something we cover in depth in later chapters.</p>
-
-*** Compiling with Editline (translate to tamil)
 <h3>Compiling with Editline</h3>
 
 <p>If you try to compile this right away with the previous command you'll get an error. This is because you first need to install the <code>editline</code> library on your computer.</p>
