@@ -192,23 +192,23 @@ Editline நூலகம் readline மற்றும் add_history எனப
   
   int main(int argc, char** argv) {
   
-    /* Print Version and Exit Information */
+    /* பதிப்பை(version) அச்சிட்டு(print) வெளியேறவும் */
     puts("Lispy Version 0.0.0.0.1");
     puts("Press Ctrl+c to Exit\n");
   
-    /* In a never ending loop */
+    /* முடிவில்லாத சுழற்சியில் */
     while (1) {
   
-      /* Output our prompt and get input */
+      /* வெளியீட்டு தூண்டு (Output prompt) மற்றும் உள்ளீடு வாங்குதல் */
       char* input = readline("lispy> ");
   
-      /* Add input to history */
+      /* வரலாற்றில் உள்ளீட்டைச் சேர்க்கவும் */
       add_history(input);
   
-      /* Echo input back to user */
+      /* பயனருக்கு உள்ளீட்டை மீண்டும் அச்சிடவும் */
       printf("No you're a %s\n", input);
   
-      /* Free retrieved input */
+      /* வாங்கப்பட்ட உள்ளீடை விடுக்க */
       free(input);
   
     }
