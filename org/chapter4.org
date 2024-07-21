@@ -281,71 +281,90 @@ MacPorts ஐப் பயன்படுத்தி நிறுவலாம்
 
 ** சி முன்செயலி (The C Preprocessor)
 
-<h2 id='the_c_preprocessor'>The C Preprocessor</h2> <hr/>
+இது போன்ற ஒரு சிறிய திட்டத்திற்கு நாம் எந்த இயக்கு தளத்தை பயன்படுத்துகிறோம்
+என்பதைப் பொறுத்து வித்தியாசமாக நிரல் எழுத வேண்டும். ஆனால் எனது மூலக்
+குறியீட்டை(Source code) வேறொரு இயக்குதளத்தில் உள்ள நண்பருக்கு அனுப்ப
+விரும்பினால், நிரலாக்கத்தில் அது சிக்கலை ஏற்படுத்தும். ஒரு சிறந்த உலகில் எனது
+மூலக் குறியீடு இங்கு, அல்லது எந்த கணினியில் நிரல்மொழிமாற்றினாலும் நிரல்மொழிமாற்ற
+முடியும் என்று நான் விரும்புகிறேன். இது சி இல் உள்ள பொதுவான பிரச்சனையாகும்,
+மேலும் இது பெயர்வுத்திறன் என்று அழைக்கப்படுகிறது. இதற்கு எளிதான அல்லது சரியான
+தீர்வு இல்லை.
 
-<p>For such a small project it might be okay that we have to program differently depending on what operating system we are using, but if I want to send my source code to a friend on a different operating system to give me a hand with the programming, it is going to cause problems. In an ideal world I'd wish for my source code to be able to compile no matter where, or on what computer, it is being compiled. This is a general problem in C, and it is called <em>portability</em>. There is not always an easy or correct solution.</p>
+ஆனால் சி யில் உதவ ஒரு பொறிமுறையை(Mechanism) வழங்குகிறது, இது
+முன்செயலி(Preprocessor) என்று அழைக்கப்படுகிறது. முன்செயலி என்பது
+நிரல்மொழிமாற்றி முன் இயங்கும் ஒரு நிரலாகும். இது பல நோக்கங்களைக்(Purpose)
+கொண்டுள்ளது, மேலும் நாம் அதை அறியாமலேயே ஏற்கனவே பயன்படுத்தி வருகிறோம். பவுண்டு
+(விசை) octothorpe # எழுத்துடன் தொடங்கும் எந்த வரியும் (# ஹாஷ், Hash என்றும்
+அழைப்பர்) ஒரு முன்செயலி கட்டளை. தலைப்புக் கோப்புகளைச் சேர்க்க இதைப்
+பயன்படுத்துகிறோம், தரநிலை(Standard) நூலகம் மற்றும் பிறவற்றிலிருந்து
+செயல்பாடுகளுக்கான அணுகலை நம்மக்கு வழங்குகிறது.
 
-<div class='pull-right alert alert-warning' style="margin: 15px; text-align: center;">
-  <img src="/static/img/octopus.png" alt="octopus" class="img-responsive" width="266px" height="268px"/>
-  <p><small>Octopus &bull; Sort of like Octothorpe</small></p>
-</div>
+முன்செயலியின் மற்றொரு பயன் என்னவென்றால், குறியீடு எந்த இயக்கு தளத்தில்
+நிரல்மொழிமாற்றுகிறது என்பதைக் கண்டறிந்து, வெவ்வேறு குறியீட்டை வெளியிட இதைப்
+பயன்படுத்தப்படுகிறது.
 
-<p>But C does provide a mechanism to help, called <em>the preprocessor</em>.</p>
+இதைத்தான் நாம் பயன்படுத்தப் போகிறோம். நாம் விண்டோஸ் இயக்கினால், நான் தயாரித்த சில
+போலியான readline மற்றும் add_history செயல்பாடுகளுடன் கூடிய குறியீட்டை
+முன்செயலி வெளியிட அனுமதிக்கப் போகிறோம், இல்லையெனில் Editline நூலகத்தில் இருந்து
+தலைப்புகளைச் சேர்த்து அவற்றைப் பயன்படுத்துவோம்.
 
-<p>The preprocessor is a program that runs before the compiler. It has a number of purposes, and we've been actually using it already without knowing. Any line that starts with a octothorpe <code>#</code> character (hash to you and me) is a preprocessor command. We've been using it to <em>include</em> header files, giving us access to functions from the standard library and others.</p>
+நிரல்மொழிமாற்றி எந்த குறியீட்டை வெளியிட வேண்டும் என்பதை அறிவிக்க, அதை #ifdef,
+#else மற்றும் #endif முன்செயலி அறிக்கைகளில் மடிக்கலாம். குறியீடு
+நிரல்மொழிமாற்றிக்கு முன் நடக்கும் if செயல்பாடு போன்றது. நிபந்தனை உண்மையாக
+இருந்தால், கோப்பின் முதல் #ifdef முதல் அடுத்த #else வரையிலான அனைத்து
+உள்ளடக்கங்களும் பயன்படுத்தப்படும், இல்லையெனில் #else முதல் இறுதி #endif வரை உள்ள
+அனைத்து உள்ளடக்கங்களும் அதற்குப் பதிலாகப் பயன்படுத்தப்படும். எங்கள் போலி செயல்பாடுகள்,
+editline தலைப்புகளைச் சுற்றி இவற்றை வைப்பதன் மூலம், உமிழப்படும்(Emitted)
+குறியீடு விண்டோஸ், லின்க்ஸ் அல்லது மேக் இல் நிரல்மொழிமாற்ற முடியும்.
 
-<p>Another use of the preprocessor is to detect which operating system the code is being compiled on, and to use this to emit different code.</p>
-
-<p>This is exactly how we are going to use it. If we are running Windows we're going to let the preprocessor emit code with some fake <code>readline</code> and <code>add_history</code> functions I've prepared, otherwise we are going to include the headers from <code>editline</code> and use these.</p>
-
-<p>To declare what code the compiler should emit we can wrap it in <code>#ifdef</code>, <code>#else</code>, and <code>#endif</code> preprocessor statements. These are like an <code>if</code> function that happens before the code is compiled. All the contents of the file from the first <code>#ifdef</code> to the next <code>#else</code> are used if the condition is true, otherwise all the contents from the <code>#else</code> to the final <code>#endif</code> are used instead. By putting these around our fake functions, and our editline headers, the code that is emitted should compile on Windows, Linux or Mac.</p>
-
-<pre><code data-language='c'>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-
-/* If we are compiling on Windows compile these functions */
-#ifdef _WIN32
-#include &lt;string.h&gt;
-
-static char buffer[2048];
-
-/* Fake readline function */
-char* readline(char* prompt) {
-  fputs(prompt, stdout);
-  fgets(buffer, 2048, stdin);
-  char* cpy = malloc(strlen(buffer)+1);
-  strcpy(cpy, buffer);
-  cpy[strlen(cpy)-1] = '\0';
-  return cpy;
-}
-
-/* Fake add_history function */
-void add_history(char* unused) {}
-
-/* Otherwise include the editline headers */
-#else
-#include &lt;editline/readline.h&gt;
-#include &lt;editline/history.h&gt;
-#endif
-
-int main(int argc, char** argv) {
-
-  puts("Lispy Version 0.0.0.0.1");
-  puts("Press Ctrl+c to Exit\n");
-
-  while (1) {
-
-    /* Now in either case readline will be correctly defined */
-    char* input = readline("lispy&gt; ");
-    add_history(input);
-
-    printf("No you're a %s\n", input);
-    free(input);
-
+#+begin_src c
+  #include <stdio.h>
+  #include <stdlib.h>
+  
+  /* If we are compiling on Windows compile these functions */
+  #ifdef _WIN32
+  #include <string.h>
+  
+  static char buffer[2048];
+  
+  /* Fake readline function */
+  char* readline(char* prompt) {
+    fputs(prompt, stdout);
+    fgets(buffer, 2048, stdin);
+    char* cpy = malloc(strlen(buffer)+1);
+    strcpy(cpy, buffer);
+    cpy[strlen(cpy)-1] = '\0';
+    return cpy;
   }
-
-  return 0;
-}</code></pre>
+  
+  /* Fake add_history function */
+  void add_history(char* unused) {}
+  
+  /* Otherwise include the editline headers */
+  #else
+  #include <editline/readline.h>
+  #include <editline/history.h>
+  #endif
+  
+  int main(int argc, char** argv) {
+  
+    puts("Lispy Version 0.0.0.0.1");
+    puts("Press Ctrl+c to Exit\n");
+  
+    while (1) {
+  
+      /* Now in either case readline will be correctly defined */
+      char* input = readline("lispy> ");
+      add_history(input);
+  
+      printf("No you're a %s\n", input);
+      free(input);
+  
+    }
+  
+    return 0;
+  }
+#+end_src
 
 ** குறிப்பு (Reference)
 <h2>Reference</h2> <hr/>
