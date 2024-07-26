@@ -17,14 +17,14 @@
 இதற்கு உதாரணமாக, இந்த சொற்றொடரை நாம் ஆராயலாம்.
 
 #+begin_example
-The cat walked on the carpet.
+The `cat` walked on the carpet.
 #+end_example
 
 ஆங்கில விதிகளைப் பயன்படுத்தி, பூனை என்ற பெயர்ச்சொல்லைப் (Noun) பிரிக்கப்பட்ட இரண்டு
 பெயர்ச்சொற்களால் மாற்றலாம்.
 
 #+begin_example
-The cat and dog walked on the carpet.
+The `cat and dog` walked on the carpet.
 #+end_example
 
 இந்த புதிய பெயர்ச்சொற்கள் ஒவ்வொன்றும் மீண்டும் மாற்றப்படலாம். நாம் முன்பு இருந்த அதே
@@ -34,11 +34,11 @@ The cat and dog walked on the carpet.
 அவற்றுடன் விளக்கத்தைச் சேர்க்கலாம்.
 
 #+begin_example
-The cat and mouse and dog walked on the carpet.
+The `cat and mouse and dog` walked on the carpet.
 #+end_example
 
 #+begin_example
-The white cat and black dog walked on the carpet.
+The `white cat and black dog` walked on the carpet.
 #+end_example
 
 இவை இரண்டு எடுத்துக்காட்டுகள் மட்டுமே, ஆனால் ஆங்கிலத்தில் சொற்களின் வகைகள் எவ்வாறு
