@@ -88,11 +88,19 @@ if (x > 5) { if (x > 10) { return x; } }
 இங்குதான் mpc என்ற நூலகம் வருகிறது.
 
 ** பாகுபடுத்தி இணைப்பான்கள் (Parser Combinators)
-<h2 id='parser_combinators'>Parser Combinators</h2> <hr/>
+mpc என்பது நான் எழுதிய ஒரு பாகுபடுத்தி இணைப்பான்கள் நூலகம். அதாவது, குறிப்பிட்ட
+மொழிகளைப் புரிந்துகொள்ளும் மற்றும் செயலாக்கும்(process) நிரல்களை உருவாக்க உங்களை
+அனுமதிக்கும் நூலகம் இது. இவை பாகுபடுத்திகள் எனப்படும். பாகுபடுத்திகளை உருவாக்க
+பல்வேறு வழிகள் உள்ளன, ஆனால் பாகுபடுத்தி இணைப்பான்கள் நூலகம் பயன்படுத்துவதில் சிறந்த
+விஷயம் என்னவென்றால், இலக்கணத்தைக் குறிப்பிடுவதன் மூலம் பாகுபடுத்திகளை எளிதாக
+உருவாக்க இது உங்களை அனுமதிக்கிறது.
 
-<p><code>mpc</code> is a <em>Parser Combinator</em> library I have written. This means it is a library that allows you to build programs that understand and process particular languages. These are known as <em>parsers</em>. There are many different ways of building parsers, but the cool thing about using a <em>Parser Combinator</em> library is that it lets you build <em>parsers</em> easily, just by specifying the <em>grammar</em> ... sort of.</p>
-
-<p>Many Parser Combinator libraries actually work by letting you write normal code that <em>looks a bit like</em> a grammar, not by actually specifying a grammar directly. In many situations this is fine, but sometimes it can get clunky and complicated. Luckily for us <code>mpc</code> allows us to write normal code that just looks like a grammar, <em>or</em> we can use special notation to write a grammar directly!</p>
+பல பாகுபடுத்தி இணைப்பான் நூலகங்கள் உண்மையில் ஒரு இலக்கணத்தைப் போலவே தோற்றமளிக்கும்
+சாதாரண குறியீட்டை எழுத அனுமதிப்பதன் மூலம் செயல்படுகின்றன, உண்மையில் இலக்கணத்தை
+நேரடியாகக் குறிப்பிடுவதில்லை. பல சூழ்நிலைகளில் இது நன்றாக இருக்கிறது, ஆனால்
+சில நேரங்களில் அது குழப்பமாகவும் சிக்கலாகவும் இருக்கலாம். அதிர்ஷ்டவசமாக mpc ஆனது
+ஒரு இலக்கணத்தைப் போன்று தோற்றமளிக்கும் சாதாரண குறியீட்டை எழுத அனுமதிக்கிறது
+அல்லது இலக்கணத்தை நேரடியாக எழுத சிறப்பு குறியீட்டைப் பயன்படுத்துகிறது!
 
 ** குறியீட்டு இலக்கணங்கள் (Coding Grammers)
 <h2 id='coding_grammars'>Coding Grammars</h2> <hr/>
