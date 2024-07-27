@@ -156,60 +156,55 @@ mpc_parser_t* Noun = mpc_or(5,
     கோட்பாட்டைப் புரிந்துகொள்வதில் கவனம் செலுத்துங்கள். அடுத்த அத்தியாயத்தில், mpc
     உடன் எப்படி அமைத்து, லிஸ்ப் போன்ற ஒரு மொழியை உருவாக்க இதைப் பயன்படுத்தவும்.
 
-<h2 id='coding_grammars'>Coding Grammars</h2> <hr/>
+Phrase வரையறுக்க, நாம் ஏற்கனவே உள்ள பாகுபடுத்திகளைக் குறிப்பிடலாம். நாம்
+mpc_and செயல்பாட்டைப் பயன்படுத்தி, அது ஒரு விஷயம் தேவை பிறகு மற்றொன்று என்பதை
+குறிப்பிடுகிறது. நாம் Adjective மற்றும் Noun னை உள்ளீடாக(input) mpc_and கு
+அனுப்புகிறோம், முன்னர் வரையறுக்கப்பட்ட பகுபடுத்தி. mpc_and செயல்பாடு
+mpcf_strfold மற்றும் free வாதங்களையும்(Argument) எடுக்கும், இது இந்த
+பாகுபடுத்திகளின் முடிவுகளை(results) எவ்வாறு சேர்ப்பது அல்லது நீக்குவது என்று
+கூறுகிறது. இப்போதைக்கு mpcf_strfold மற்றும் free என்ற வாதங்களை புறக்கணிக்கவும்.
 
-<p>So what does code that looks like a grammar...<em>look like</em>? Let us take a look at <code>mpc</code> by trying to write code for a grammar that recognizes <a href="http://knowyourmeme.com/memes/doge">the language of Shiba Inu</a>. More colloquially known as <em>Doge</em>. This language we are going to define as follows.</p>
+#+begin_src c
+  mpc_parser_t* Phrase = mpc_and(2, mpcf_strfold, Adjective, Noun, free);
+#+end_src
 
-<p>&rsaquo; An <em>Adjective</em> is either <em>"wow"</em>, <em>"many"</em>, <em>"so"</em> or <em>"such"</em>.</p>
-<p>&rsaquo; A <em>Noun</em> is either <em>"lisp"</em>, <em>"language"</em>, <em>"c"</em>, <em>"book"</em> or <em>"build"</em>.</p>
-<p>&rsaquo; A <em>Phrase</em> is an <em>Adjective</em> followed by a <em>Noun</em>.</p>
-<p>&rsaquo; A <em>Doge</em> is zero or more <em>Phrases</em>.</p>
+Doge ஐ வரையறுக்க, சில பாகுபடுத்திகளில் பூஜ்ஜியம் அல்லது அதற்கு மேற்பட்டவை தேவை
+என்பதைக் குறிப்பிட வேண்டும். இதற்கு நாம் mpc_many என்ற செயல்பாட்டைப் பயன்படுத்த
+வேண்டும். முன்பு போலவே, இந்தச் செயல்பாட்டிற்கு mpcf_strfold என்ற சிறப்பு மாறி,
+முடிவுகள் எவ்வாறு ஒன்றாக இணைக்கப்படுகின்றன என்பதைக் கூறகிறது, mpcf_strfold நாம்
+இப்போதைக்கு புறக்கணிக்கலாம்.
 
-<p>We can start by trying to define <em>Adjective</em> and <em>Noun</em>. To do this we create two new parsers, represented by the type <code>mpc_parser_t*</code>, and we store them in the variables <code>Adjective</code> and <code>Noun</code>. We use the function <code>mpc_or</code> to create a parser where one of several options should be used, and the function <code>mpc_sym</code> to wrap our initial strings.</p>
+#+begin_src c
+  mpc_parser_t* Doge = mpc_many(mpcf_strfold, Phrase);
+#+end_src
 
-<p>If you squint you could attempt to read the code as if it were the
-rules we specified above.</p>
+ஒரு பாகுபடுத்தியை உருவாக்கி அது பூஜ்ஜியம் அல்லது அதற்கு மேற்பட்ட நிகழ்வுகளைத்
+தேடும் மற்றொரு பாகுபடுத்தியை உருவாக்குவதன் மூலம் ஒரு சுவாரஸ்யமான விஷயம்
+ஏற்படும். நாம் Doge பாகுபடுத்தி எந்த (any) நீள (length) உள்ளீடுகளையும்
+ஏற்றுக்கொள்கிறது. இதன் பொருள் இந்த மொழி(Doge) எல்லையற்றது (Infinite). Doge
+ஏற்றுக்கொள்ளக்கூடிய சாத்தியமான சரங்களின் சில எடுத்துக்காட்டுகள் இங்கே உள்ளன. இந்த
+அத்தியாயத்தின் முதல் பகுதியில் நாம் கண்டுபிடித்தது போலவே, எல்லையற்ற மொழியை
+உருவாக்க, வரையறுக்கப்பட்ட எண்ணிக்கையிலான மறு எழுதும் விதிகளைப்
+பயன்படுத்தியுள்ளோம்.
 
-<pre><code data-language='c'>/* Build a parser 'Adjective' to recognize descriptions */
-mpc_parser_t* Adjective = mpc_or(4,
-  mpc_sym("wow"), mpc_sym("many"),
-  mpc_sym("so"),  mpc_sym("such")
-);
-
-/* Build a parser 'Noun' to recognize things */
-mpc_parser_t* Noun = mpc_or(5,
-  mpc_sym("lisp"), mpc_sym("language"),
-  mpc_sym("book"),mpc_sym("build"),
-  mpc_sym("c")
-);
-</code></pre>
-
-<div class="alert alert-warning">
-  <p><strong>How can I access these <code>mpc</code> functions?</strong></p>
-
-  <p>For now don't worry about compiling or running any of the sample code in this chapter. Just focus on understanding the theory behind grammars. In the next chapter we'll get set up with <code>mpc</code> and use it for a language closer to our Lisp.</p>
-</div>
-
-<p>To define <code>Phrase</code> we can reference our existing parsers. We need to use the function <code>mpc_and</code>, that specifies one thing is required then another. As input we pass it <code>Adjective</code> and <code>Noun</code>, our previously defined parsers. This function also takes the arguments <code>mpcf_strfold</code> and <code>free</code>, which say how to join or delete the results of these parsers. Ignore these arguments for now.</p>
-
-<pre><code data-language='c'>mpc_parser_t* Phrase = mpc_and(2, mpcf_strfold,
-  Adjective, Noun, free);</code></pre>
-
-<p>To define <em>Doge</em> we must specify that <em>zero or more</em> of some parser is required. For this we need to use the function <code>mpc_many</code>. As before, this function requires the special variable <code>mpcf_strfold</code> to say how the results are joined together, which we can ignore.</p>
-
-<pre><code data-language='c'>mpc_parser_t* Doge = mpc_many(mpcf_strfold, Phrase);</code></pre>
-
-<p>By creating a parser that looks for <em>zero or more</em> occurrences of another parser an interesting thing has happened. Our <code>Doge</code> parser accepts inputs of any length. This means its language is <em>infinite</em>. Here are just some examples of possible strings <code>Doge</code> could accept. Just as we discovered in the first section of this chapter we have used a finite number of re-write rules to create an infinite language.</p>
-
-<pre><code data-language='c'>"wow book such language many lisp"
+#+begin_example
+"wow book such language many lisp"
 "so c such build such language"
 "many build wow c"
 ""
 "wow lisp wow c many language"
 "so c"
-</code></pre>
+#+end_example
 
-<p>If we use more <code>mpc</code> functions, we can slowly build up parsers that parse more and more complicated languages. The code we use <em>sort of</em> reads like a grammar, but becomes much more messy with added complexity. Due to this, taking this approach isn't always an easy task. A whole set of helper functions that build on simple constructs to make frequent tasks easy are all documented on the <a href="http://github.com/orangeduck/mpc">mpc repository</a>. This is a good approach for complicated languages, as it allows for fine-grained control, but won't be required for our needs.</p>
+நாம் அதிக mpc செயல்பாடுகளைப் பயன்படுத்தினால், மேலும் மேலும் சிக்கலான மொழிகளைப்
+பாகுபடுத்தும் பாகுபடுத்திகளை மெதுவாக உருவாக்கலாம்.நாம் பயன்படுத்தும் குறியீடானது
+ஒரு இலக்கணத்தைப் போன்றது, ஆனால் கூடுதல் சிக்கலுடன்(complexity) மிகவும்
+குழப்பமாகிறது. இதன் காரணமாக, இந்த அணுகுமுறையை எடுத்துக்கொள்வது எப்போதும்
+எளிதான காரியம் அல்ல. அடிக்கடி செய்யும் பணிகளை எளிதாக்குவதற்கு எளிய
+கட்டுமானங்களில் உருவாக்கப்படும் Helper செயல்பாடுகளின் முழு தொகுப்பும் [[https://github.com/orangeduck/mpc][mpc
+களஞ்சியத்தில்]] ஆவணப்படுத்தப்பட்டுள்ளது. சிக்கலான மொழிகளுக்கு இது ஒரு நல்ல
+அணுகுமுறையாகும், ஏனெனில் இது நுணுக்கமான கட்டுப்பாட்டை அனுமதிக்கிறது, ஆனால்
+நமது தேவைகளுக்கு இது தேவையில்லை.
 
 ** இயற்கை இலக்கணங்கள் (Natural Grammers)
 <h2 id='natural_grammars'>Natural Grammars</h2> <hr/>
