@@ -103,6 +103,59 @@ mpc என்பது நான் எழுதிய ஒரு பாகுப
 அல்லது இலக்கணத்தை நேரடியாக எழுத சிறப்பு குறியீட்டைப் பயன்படுத்துகிறது!
 
 ** குறியீட்டு இலக்கணங்கள் (Coding Grammers)
+
+அப்படியென்றால் இலக்கணம் போல இருக்கும் குறியீடு... எப்படி இருக்கும்? [[https://knowyourmeme.com/memes/doge][ஷிபா இனுவின்]]
+(Shiba Inu) மொழியை அங்கீகரிக்கும் இலக்கணத்திற்கான குறியீட்டை எழுத முயற்சிப்பதன்
+மூலம் mpc ஐப் பார்ப்போம். மேலும் பேச்சுவழக்கில் டோஜ் (Doge) என்று
+அழைக்கப்படுகிறது. இந்த மொழியை நாம் பின்வருமாறு வரையறுக்கப் போகிறோம்.
+
+#+begin_quote
+ஒரு பெயரடை(Adjective) என்பது "wow", "many", "so" அல்லது "such".
+#+end_quote
+
+#+begin_quote
+ஒரு பெயர்ச்சொல்(Noun) என்பது "lisp", "language", "c", "book" அல்லது "build".
+#+end_quote
+
+#+begin_quote
+ஒரு சொற்றொடர் என்பது ஒரு பெயரடை தொடர்ந்து பெயர்சொல்.
+#+end_quote
+
+#+begin_quote
+ஒரு Doge என்பது பூஜ்ஜியம் அல்லது அதற்கு மேற்பட்ட சொற்றொடர்கள்
+#+end_quote
+
+பெயரடை மற்றும் பெயர்ச்சொல்லை வரையறுக்க(define) முயற்சிப்பதன் மூலம்
+தொடங்கலாம். இதைச் செய்ய, mpc_parser_t* வகையால் குறிப்பிடப்படும் இரண்டு புதிய
+பாகுபடுத்திகளை உருவாக்கி, அவற்றை மாறிகளில் Adjective மற்றும் Noun என்று
+சேமித்து வைக்கிறோம். mpc_or செயல்பாட்டைப் பயன்படுத்தி, பல விருப்பங்களில் ஒன்றைப்
+பயன்படுத்த வேண்டிய ஒரு பாகுபடுத்தியை உருவாக்குவோம், மேலும் mpc_sym செயல்பாட்டை
+நாம் ஆரம்ப சரங்களை(String) மடி(wrap) செய்ய பயன்படுத்துகிறோம்.
+
+நீங்கள் முன்பு குறிப்பிட்ட விதிகளைப் போலவே குறியீட்டைப் படிக்க முயற்சி செய்யலாம்.
+
+#+begin_src c
+/* விளக்கங்களை அடையாளம் காண ஒரு பாகுபடுத்தி 'Adjective' உருவாக்கவும் */
+mpc_parser_t* Adjective = mpc_or(4,
+  mpc_sym("wow"), mpc_sym("many"),
+  mpc_sym("so"),  mpc_sym("such")
+);
+
+/* விளக்கங்களை அடையாளம் காண ஒரு பாகுபடுத்தி 'Noun' உருவாக்கவும் */
+mpc_parser_t* Noun = mpc_or(5,
+  mpc_sym("lisp"), mpc_sym("language"),
+  mpc_sym("book"),mpc_sym("build"),
+  mpc_sym("c")
+);
+
+#+end_src
+
+- இந்த mpc செயல்பாடுகளை நான் எவ்வாறு அணுகுவது?
+  - இப்போதைக்கு இந்த அத்தியாயத்தில் உள்ள மாதிரிக் குறியீட்டை நிரல்மொழிமாற்றுவது
+    அல்லது இயக்குவது பற்றி கவலைப்பட வேண்டாம். இலக்கணங்களுக்குப் பின்னால் உள்ள
+    கோட்பாட்டைப் புரிந்துகொள்வதில் கவனம் செலுத்துங்கள். அடுத்த அத்தியாயத்தில், mpc
+    உடன் எப்படி அமைத்து, லிஸ்ப் போன்ற ஒரு மொழியை உருவாக்க இதைப் பயன்படுத்தவும்.
+
 <h2 id='coding_grammars'>Coding Grammars</h2> <hr/>
 
 <p>So what does code that looks like a grammar...<em>look like</em>? Let us take a look at <code>mpc</code> by trying to write code for a grammar that recognizes <a href="http://knowyourmeme.com/memes/doge">the language of Shiba Inu</a>. More colloquially known as <em>Doge</em>. This language we are going to define as follows.</p>
@@ -114,7 +167,8 @@ mpc என்பது நான் எழுதிய ஒரு பாகுப
 
 <p>We can start by trying to define <em>Adjective</em> and <em>Noun</em>. To do this we create two new parsers, represented by the type <code>mpc_parser_t*</code>, and we store them in the variables <code>Adjective</code> and <code>Noun</code>. We use the function <code>mpc_or</code> to create a parser where one of several options should be used, and the function <code>mpc_sym</code> to wrap our initial strings.</p>
 
-<p>If you squint you could attempt to read the code as if it were the rules we specified above.</p>
+<p>If you squint you could attempt to read the code as if it were the
+rules we specified above.</p>
 
 <pre><code data-language='c'>/* Build a parser 'Adjective' to recognize descriptions */
 mpc_parser_t* Adjective = mpc_or(4,
