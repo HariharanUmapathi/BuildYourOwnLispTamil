@@ -240,6 +240,13 @@ mpc இலக்கணங்களை மிகவும் இயற்கை�
   mpc_cleanup(4, Adjective, Noun, Phrase, Doge);
 #+end_src
 
+Without having an exact understanding of the syntax for that long string, it should be obvious how much clearer the grammar is in this format. 
+If we learn what all the special symbols mean we barely need to squint.
+
+கவனிக்க வேண்டிய மற்றொரு விஷயம் என்னவென்றால், செயல்முறை (process) இப்போது இரண்டு
+படிகளில் உள்ளது. முதலில் mpc_new ஐப் பயன்படுத்தி பல விதிகளை உருவாக்கி
+பெயரிடுவோம், பின்னர் அவற்றை mpca_lang ஐப் பயன்படுத்தி வரையறுக்கிறோம் (define).
+
 <h2 id='natural_grammars'>Natural Grammars</h2> <hr/>
 
 <p><code>mpc</code> lets us write grammars in a more natural form too. Rather than using C functions that look less like a grammar, we can specify the whole thing in one long string. When using this method we don't have to worry about how to join or discard inputs, with functions such as <code>mpcf_strfold</code>, or <code>free</code>. All of that is done automatically for us.</p>
