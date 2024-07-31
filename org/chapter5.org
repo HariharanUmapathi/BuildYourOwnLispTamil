@@ -268,64 +268,29 @@ colon), மற்றும் வலதுபுறத்தில் (right) �
 | 'a'+    | ஒன்று அல்லது அதற்கு மேற்பட்ட 'a' தேவை.  |
 | <abba>  | <abba> என்ற விதி தேவை.                  |
 
-<h2 id='natural_grammars'>Natural Grammars</h2> <hr/>
 
-<p><code>mpc</code> lets us write grammars in a more natural form too. Rather than using C functions that look less like a grammar, we can specify the whole thing in one long string. When using this method we don't have to worry about how to join or discard inputs, with functions such as <code>mpcf_strfold</code>, or <code>free</code>. All of that is done automatically for us.</p>
+- பரிச்சியமாக இருக்கிறதா...
+  - mpca_langக்கான உள்ளீட்டு சரம் எப்படி இருக்க வேண்டும் என்பதற்கான விளக்கம் நாம்
+    இலக்கணத்தைக் குறிப்பிடுவது போல் இருப்பதை நீங்கள் கவனித்தீர்களா? ஏனென்றால் அது
+    இலக்கணம் தான். mpca_langக்கு நீங்கள் கொடுக்கும் உள்ளீட்டை பாகுபடுத்த mpc தான்
+    உள்ளே பயன்படுத்துகிறது. முந்தைய முறையைப் பயன்படுத்தி குறியீட்டில் இலக்கணத்தைக்
+    குறிப்பிடுவதன் மூலம் இது செய்கிறது. அது எவ்வளவு நேர்த்தியானது?
 
-<p>Here is how we would recreate the previous examples using this method.</p>
+மேலே விவரிக்கப்பட்ட அட்டவணையைப் பயன்படுத்தி, நான் மேலே எழுதியது குறியீட்டில் நாம்
+குறிப்பிட்டதற்குச் சமம் (equal) என்பதைச் சரிபார்க்கவும்.
 
-<pre><code data-language='c'>mpc_parser_t* Adjective = mpc_new("adjective");
-mpc_parser_t* Noun      = mpc_new("noun");
-mpc_parser_t* Phrase    = mpc_new("phrase");
-mpc_parser_t* Doge      = mpc_new("doge");
+இலக்கணத்தைக் குறிப்பிடும் இந்த முறையைத்தான் பின்வரும் அத்தியாயங்களில் பயன்படுத்தப்
+போகிறோம். இது முதலில் பெரியதாக தோன்றலாம். இலக்கணங்களைப் புரிந்துகொள்வது
+கடினம். ஆனால் நாம் தொடரும்போது (continue), ​​அவற்றை எவ்வாறு உருவாக்குவது மற்றும்
+திருத்துவது என்பதை நாம் நன்கு அறிந்துகொள்வோம்.
 
-mpca_lang(MPCA_LANG_DEFAULT,
-  "                                           \
-    adjective : \"wow\" | \"many\"            \
-              |  \"so\" | \"such\";           \
-    noun      : \"lisp\" | \"language\"       \
-              | \"book\" | \"build\" | \"c\"; \
-    phrase    : &lt;adjective&gt; &lt;noun&gt;;           \
-    doge      : &lt;phrase&gt;*;                    \
-  ",
-  Adjective, Noun, Phrase, Doge);
-
-/* Do some parsing here... */
-
-mpc_cleanup(4, Adjective, Noun, Phrase, Doge);
-</code></pre>
-
-<p>Without having an exact understanding of the syntax for that long string, it should be obvious how much <em>clearer</em> the grammar is in this format. If we learn what all the special symbols mean we barely need to squint.</p>
-
-<p>Another thing to notice is that the process is now in two steps. First we create and name several rules using <code>mpc_new</code> and then we define them using <code>mpca_lang</code>.</p>
-
-<p>The first argument to <code>mpca_lang</code> are the options flags. For this we just use the defaults. The second is a long multi-line string in C. This is the <em>grammar</em> specification. It consists of a number of <em>re-write rules</em>. Each rule has the name of the rule on the left, a colon <code>:</code>, and on the right its definition terminated with a semicolon <code>;</code>.</p>
-
-<p>The special symbols used to define the rules on the right hand side work as follows.</p>
-
-<table class='table'>
-  <tr><td><code>"ab"</code></td><td>The string <code>ab</code> is required.</td></tr>
-  <tr><td><code>'a'</code></td><td>The character <code>a</code> is required.</td></tr>
-  <tr><td><code>'a' 'b'</code></td><td>First <code>'a'</code> is required, then <code>'b'</code> is required.</td></tr>
-  <tr><td><code>'a' | 'b'</code></td><td>Either <code>'a'</code> is required, or <code>'b'</code> is required.</td></tr>
-  <tr><td><code>'a'*</code></td><td>Zero or more <code>'a'</code> are required.</td></tr>
-  <tr><td><code>'a'+</code></td><td>One or more <code>'a'</code> are required.</td></tr>
-  <tr><td><code>&lt;abba&gt;</code></td><td>The rule called <code>abba</code> is required.</td></tr>
-</table>
-
-<div class="alert alert-warning">
-  <p><strong>Sounds familiar...</strong></p>
-
-  <p>Did you notice that the description of what the input string to <code>mpca_lang</code> should look like sounded like I was specifying a grammar? That's because it was. <code>mpc</code> uses itself internally to parse the input you give it to <code>mpca_lang</code>. It does it by specifying a <em>grammar</em> in code using the previous method. How neat is that?</p>
-</div>
-
-<p>Using the table described above verify that what I've written above is equal to what we specified in code.</p>
-
-<p>This method of specifying a grammar is what we are going to use in the following chapters. It might seem overwhelming at first. Grammars can be difficult to understand. But as we continue you will become much more familiar with how to create and edit them.</p>
-
-<p>This chapter is about theory, so if you are going to try some of the bonus tasks, don't worry too much about correctness. Thinking in the right mindset is more important. Feel free to invent symbols and notation for certain concepts to make them simpler to write down. Some of the bonus task also might require cyclic or recursive grammar structures, so don't worry if you have to use these!</p>
-
-
+இந்த அத்தியாயம் கோட்பாட்டைப் பற்றியது, எனவே நீங்கள் வெகுமதி பணிகளை முயற்சிக்கப்
+போகிறீர்கள் என்றால், சரியானதைப் பற்றி அதிகம் கவலைப்பட வேண்டாம். சரியான மனநிலையில்
+சிந்திப்பது மிகவும் முக்கியம். தயங்காமல், சில கருத்துக்களுக்கான குறியீடுகளையும்
+குறிப்பையும் கண்டுபிடித்து அவற்றை எளிதாக எழுதலாம். வெகுமதி பணிகளில்
+சிலவற்றிற்கு வட்டமான (cyclic) அல்லது மீள்சுருள் (recursive) இலக்கண கட்டமைப்புகள்
+தேவைப்படலாம், எனவே நீங்கள் இவற்றைப் பயன்படுத்தினால் அதை பற்றி அதிகம் கவலைப்பட
+வேண்டாம்!
 
 ** வெகுமதி மதிப்பெண் (Bonus Marks)
 <h2>Bonus Marks</h2> <hr/>
