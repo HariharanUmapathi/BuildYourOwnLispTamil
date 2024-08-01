@@ -235,7 +235,7 @@ mpc இலக்கணங்களை மிகவும் இயற்கை�
     ",
     Adjective, Noun, Phrase, Doge);
   
-  /* Do some parsing here... */
+  /* இங்கே கொஞ்சம் பாகுபடுத்துதல்(parsing) செய்யவும்... */
   
   mpc_cleanup(4, Adjective, Noun, Phrase, Doge);
 #+end_src
@@ -293,19 +293,11 @@ colon), மற்றும் வலதுபுறத்தில் (right) �
 வேண்டாம்!
 
 ** வெகுமதி மதிப்பெண் (Bonus Marks)
-<h2>Bonus Marks</h2> <hr/>
-
-<div class="alert alert-warning">
-  <ul class="list-group">
-    <li class="list-group-item">&rsaquo; Write down some more examples of strings the <code>Doge</code> language contains.</li>
-    <li class="list-group-item">&rsaquo; Why are there back slashes <code>\</code> in front of the quote marks <code>"</code> in the grammar?</li>
-    <li class="list-group-item">&rsaquo; Why are there back slashes <code>\</code> at the end of the line in the grammar?</li>
-    <li class="list-group-item">&rsaquo; Describe textually a grammar for decimal numbers such as <code>0.01</code> or <code>52.221</code>.</li>
-    <li class="list-group-item">&rsaquo; Describe textually a grammar for web URLs such as <code>http://www.buildyourownlisp.com</code>.</li>
-    <li class="list-group-item">&rsaquo; Describe textually a grammar for simple English sentences such as <code>the cat sat on the mat</code>.</li>
-    <li class="list-group-item">&rsaquo; Describe more formally the above grammars. Use <code>|</code>, <code>*</code>, or any symbols of your own invention.</li>
-    <li class="list-group-item">&rsaquo; If you are familiar with JSON, textually describe a grammar for it.</li>
-  </ul>
-</div>
-
-
+- Doge மொழி கொண்டிருக்கும் சரங்களின் இன்னும் சில உதாரணங்களை எழுதுங்கள்.
+- இலக்கணத்தில் மேற்கோள் குறிகளுக்கு (" quote marks) முன்னால் \ பின்சாய்வுகள் (black quotes) ஏன் உள்ளன?
+- இலக்கணத்தில் வரியின் முடிவில் பின் சாய்வுகள் \ ஏன் உள்ளன?
+- 0.01 அல்லது 52.221 போன்ற தசம (Decimal) எண்களுக்கான இலக்கணத்தை உரையாக(text) விவரிக்கவும்.
+- http://www.buildyourownlisp.com போன்ற இணைய URLகளுக்கான இலக்கணத்தை உரையாக விவரிக்கவும்.
+- 'the cat sat on the mat' போன்ற எளிய ஆங்கில வாக்கியங்களுக்கான இலக்கணத்தை உரையாக விவரிக்கவும்.
+- மேலே உள்ள இலக்கணங்களை இன்னும் முறையாக விவரிக்கவும். உங்கள் சொந்த கண்டுபிடிப்பின் |, *, அல்லது ஏதேனும் சின்னங்களைப் (Symbol) பயன்படுத்தவும்.
+- JSON பற்றி உங்களுக்குத் தெரிந்திருந்தால், அதற்கான இலக்கணத்தை உரையாக விவரிக்கவும்.
