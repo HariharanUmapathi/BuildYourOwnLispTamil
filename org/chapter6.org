@@ -9,6 +9,23 @@
 </div>
 
 ** போலிஷ் குறிப்பு (Polish Notation)
+
+mpc முயற்சிக்க, நாம் லிஸ்ப்பின் கணித துணைக்குழுவை (subset) ஒத்திருந்த எளிய
+இலக்கணத்தை செயல்படுத்தப் போகிறோம். இது போலிஷ் குறிப்பு என்று அழைக்கப்படுகிறது,
+மேலும் இது இயக்கி (operator) செயல்பாட்டிற்கு (operands) முன் வரும்
+எண்கணிதத்திற்கான குறிப்பு.
+
+உதாரணத்திற்கு...
+
+| 1 + 2 + 6          | is | + 1 2 6            |
+| 6 + (2 * 9)        | is | + 6 (* 2 9)        |
+| (10 * 2) / (4 + 2) | is | / (* 10 2) (+ 4 2) |
+
+இந்த குறிப்பை விவரிக்கும் இலக்கணத்தை நாம் உருவாக்க வேண்டும். நாம் அதை உரையாக
+(text) விவரிப்பதன் மூலம் தொடங்கலாம், பின்னர் நம் எண்ணங்களை முறைப்படுத்தலாம்.
+
+
+
 <h2 id='polish_notation'>Polish Notation</h2> <hr/>
 
 <p>To try out <code>mpc</code> we're going to implement a simple grammar that resembles a mathematical subset of our Lisp. It's called <a href="http://en.wikipedia.org/wiki/Polish_notation">Polish Notation</a> and is a notation for arithmetic where the operator comes before the operands.</p>
