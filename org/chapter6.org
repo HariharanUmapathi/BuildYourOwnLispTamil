@@ -1,13 +1,5 @@
 * அத்தியாயம் 6 - பாகுபடுத்துதல் (Parsing)
 
-<h1>Parsing <small>&bull; Chapter 6</small></h1>
-
-
-<div class='pull-right alert alert-warning' style="margin: 15px; text-align: center;">
-  <img src="/static/img/polish_man.png" alt="polish man" class="img-responsive" width="252px" height="375px"/>
-  <p><small>A Polish Nobleman &bull; A typical Polish Notation user</small></p>
-</div>
-
 ** போலிஷ் குறிப்பு (Polish Notation)
 
 mpc முயற்சிக்க, நாம் லிஸ்ப்பின் கணித துணைக்குழுவை (subset) ஒத்திருந்த எளிய
@@ -41,56 +33,41 @@ mpc முயற்சிக்க, நாம் லிஸ்ப்பின் 
 | Number     -  எண்   | ஒரு விருப்பத்தேர்வு -, மற்றும் ஒன்று அல்லது அதற்கு மேற்பட்ட 0 மற்றும் 9 க்கு இடையில் உள்ள மதிப்புகள்                          |
 
 
-
-<h2 id='polish_notation'>Polish Notation</h2> <hr/>
-
-<p>To try out <code>mpc</code> we're going to implement a simple grammar that resembles a mathematical subset of our Lisp. It's called <a href="http://en.wikipedia.org/wiki/Polish_notation">Polish Notation</a> and is a notation for arithmetic where the operator comes before the operands.</p>
-
-<p>For example...</p>
-
-<table class='table' style='display: inline'>
-  <tr><td><code>1 + 2 + 6</code></td><td><em>is</em></td><td><code>+ 1 2 6</code></td></tr>
-  <tr><td><code>6 + (2 * 9)</code></td><td><em>is</em></td><td><code>+ 6 (* 2 9)</code></td></tr>
-  <tr><td><code>(10 * 2) / (4 + 2)</code></td><td><em>is</em></td><td><code>/ (* 10 2) (+ 4 2)</code></td></tr>
-  <tr><td></td><td></td><td></td></tr>
-</table>
-
-<p>We need to work out a grammar which describes this notation. We can begin by describing it <em>textually</em> and then later formalise our thoughts.</p>
-
-<p>To start, we observe that in polish notation the operator always comes first in an expression, followed by either numbers or other expressions in parentheses. This means we can say "a <em>program</em> is an <em>operator</em> followed by one or more <em>expressions</em>," where "an <em>expression</em> is either a <em>number</em>, or, in parentheses, an <em>operator</em> followed by one or more <em>expressions</em>".</p>
-
-<p>More formally...</p>
-
-<table class='table'>
-  <tr><td><code>Program</code></td><td><em>the start of input</em>, an <code>Operator</code>, one or more <code>Expression</code>, and <em>the end of input</em>.</td></tr>
-  <tr><td><code>Expression</code></td><td>either a <code>Number</code> <em>or</em> <code>'('</code>, an <code>Operator</code>, one or more <code>Expression</code>, and an <code>')'</code>.</td></tr>
-  <tr><td><code>Operator</code></td><td><code>'+'</code>, <code>'-'</code>, <code>'*'</code>, or <code>'/'</code>.</td></tr>
-  <tr><td><code>Number</code></td><td>an optional <code>-</code>, and one or more characters between <code>0</code> and <code>9</code></td></tr>
-</table>
-
-
 ** சுருங்குறித்தொடர் (Regular Expression)
-<h2 id='regular_expressions'>Regular Expressions</h2> <hr/>
+ஏற்கனவே தெரிந்த விஷயங்களைப் பயன்படுத்தி மேலே உள்ள பெரும்பாலான விதிகளை
+குறியாக்கம் செய்ய முடியும், ஆனால் எண் (Number) மற்றும் நிரல் (Program) சில
+சிக்கலை ஏற்படுத்தக்கூடும். இந்த இரன்டையும் எப்படி வெளிப்படுத்துவது என்று இன்னும் நாம்
+கற்றுக் கொள்ளவில்லை. உள்ளீட்டின் தொடக்கம் அல்லது எழுத்துகளின் வரம்பை எவ்வாறு
+வெளிப்படுத்துவது என்பது நமக்கு தெரியாது.
 
-<p>We should be able to encode most of the above rules using things we know already, but <em>Number</em> and <em>Program</em> might pose some trouble. They contain a couple of constructs we've not learnt how to express yet. We don't know how to express the start or the end of input, optional characters, or range of characters.</p>
+இவற்றை வெளிப்படுத்தலாம், ஆனால் அவற்றுக்கு சுருங்குறித்தொடர் என்று ஒன்று
+தேவைப்படுகிறது. சுருங்குறித்தொடர் என்பது சொற்கள் அல்லது எண்கள் போன்ற சிறிய
+பகுதிகளுக்கு இலக்கணங்களை எழுதும் ஒரு வழியாகும். சுருங்குறித்தொடர்களைப்
+பயன்படுத்தி எழுதப்பட்ட இலக்கணங்கள் பல விதிகளைக் கொண்டிருக்க முடியாது, ஆனால் அவை
+பொருந்தக்கூடியவை மற்றும் பொருந்தாதவை பற்றிய துல்லியமான மற்றும் சுருக்கமான
+கட்டுப்பாட்டைக் கொடுக்கின்றன. சுருங்குறித்தொடர் எழுதுவதற்கு சில அடிப்படை விதிகள்.
 
-<p>These can be expressed, but they require something called a <em>Regular Expression</em>. Regular expressions are a way of writing grammars for small sections of text such as words or numbers. Grammars written using regular expressions can't consist of multiple rules, but they do give precise and concise control over what is matched and what isn't. Here are some basic rules for writing regular expressions.</p>
+| .        | எதாவுது எழுத்து வேண்டும்.                        |
+| a        | அ என்ற எழுத்து வேண்டும்.                       |
+| [abcdef] | abcdef தொகுப்பில் எந்த எழுத்தும் வேண்டும்.        |
+| [a-f]    | a முதல் f வரை உள்ள எந்த எழுத்தும் வேண்டும்       |
+| a?       | a எழுத்து விருப்பமானது (optional).               |
+| a*       | பூஜ்ஜியம் அல்லது அதற்கு மேற்பட்ட a எழுத்து தேவை. |
+| a+       | ஒன்று அல்லது அதற்கு மேற்பட்ட a எழுத்துகள் தேவை. |
+| \^       | உள்ளீட்டின் தொடக்கம் தேவை.                     |
+| \$       | உள்ளீட்டின் முடிவு தேவை.                         |
 
-<table class='table'>
-  <tr><td><code>.</code></td><td>Any character is required.</td></tr>
-  <tr><td><code>a</code></td><td>The character <code>a</code> is required.</td></tr>
-  <tr><td><code>[abcdef]</code></td><td>Any character in the set <code>abcdef</code> is required.</td></tr>
-  <tr><td><code>[a-f]</code></td><td>Any character in the range <code>a</code> to <code>f</code> is required.</td></tr>
-  <tr><td><code>a?</code></td><td>The character <code>a</code> is optional.</td></tr>
-  <tr><td><code>a*</code></td><td>Zero or more of the character <code>a</code> are required.</td></tr>
-  <tr><td><code>a+</code></td><td>One or more of the character <code>a</code> are required.</td></tr>
-  <tr><td><code>^</code></td><td>The start of input is required.</td></tr>
-  <tr><td><code>$</code></td><td>The end of input is required.</td></tr>
-</table>
 
-<p>These are all the regular expression rules we need for now. <a href="http://regex.learncodethehardway.org/">Whole books</a> have been written on learning regular expressions. For the curious much more information can be found online or from these sources. We will be using them in later chapters, so some basic knowledge will be required, but you won't need to master them for now.</p>
+இவையெல்லாம் இப்போது நமக்குத் தேவையான சுருங்குறித்தொடர்
+விதிகள். சுருங்குறித்தொடர்கள் கற்றல் குறித்து முழு நூல்களும்
+எழுதப்பட்டுள்ளன. ஆர்வமுள்ளவர்களுக்கு மேலும் தகவல்களை இணையத்தில் அல்லது இந்த
+'ஆதாரங்களில்' காணலாம். அடுத்த அத்தியாயங்களில் அவற்றைப் பயன்படுத்துவோம், எனவே சில
+அடிப்படை அறிமுகம் தேவைப்படும், ஆனால் நீங்கள் தற்போதைக்கு அதில் குருவாக மாற
+வேண்டியதில்லை.
 
-<p>In an <code>mpc</code> grammar we write regular expressions by putting them between forward slashes <code>/</code>. Using the above guide our <em>Number</em> rule can be expressed as a regular expression using the string <code>/-?[0-9]+/</code>.</p>
+mpc இலக்கணத்தில் சுருங்குறித்தொடர்களை முன்னோக்கி சாய்வுகளுக்கு (forward slashes)
+இடையில் வைத்து எழுதுகிறோம். மேலே உள்ள வழிகாட்டியைப் பயன்படுத்தி நாம் எண் விதியை
+/-?[0-9]+/ என்ற சரத்தைப் பயன்படுத்தி சுருங்குறித்தொடர் என வெளிப்படுத்தலாம்.
 
 ** MPC ஐ நிறுவுதல் (Installing mpc)
 <h2 id='installing_mpc'>Installing mpc</h2> <hr/>
