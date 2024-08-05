@@ -70,27 +70,42 @@ mpc இலக்கணத்தில் சுருங்குறித்த
 /-?[0-9]+/ என்ற சரத்தைப் பயன்படுத்தி சுருங்குறித்தொடர் என வெளிப்படுத்தலாம்.
 
 ** MPC ஐ நிறுவுதல் (Installing mpc)
-<h2 id='installing_mpc'>Installing mpc</h2> <hr/>
 
-<p>Before we work on writing this grammar we first need to <em>include</em> the <code>mpc</code> headers, and then <em>link</em> to the <code>mpc</code> library, just as we did for <code>editline</code> on Linux and Mac. Starting with your code from chapter 4, you can rename the file to <code>parsing.c</code> and download <code>mpc.h</code> and <code>mpc.c</code> from the <a href="http://github.com/orangeduck/mpc">mpc repo</a>. Put these in the same directory as your source file.</p>
+இந்த இலக்கணத்தை எழுதுவதற்கு முன், நாம் முதலில் mpc தலைப்புகளைச் சேர்க்க வேண்டும்,
+பின்னர் லினக்ஸ் மற்றும் மேக் இல் Editline போலவே mpc நூலகத்துடன் இணைக்க (link)
+வேண்டும். அத்தியாயம் 4 இலிருந்து உங்கள் குறியீட்டில் தொடங்கி, நீங்கள் கோப்பை (file)
+parsing.c என மறுபெயரிடலாம் (rename) மற்றும் mpc repo இலிருந்து mpc.h மற்றும்
+mpc.c ஐப் பதிவிறக்கலாம். உங்கள் மூல கோப்பின் (source file) அதே கோப்பகத்தில்
+(folder) இவற்றை வைக்கவும்.
 
-<p>To <em>include</em> <code>mpc</code> put <code>#include "mpc.h"</code> at the top of the file. To <em>link</em> to <code>mpc</code> put <code>mpc.c</code> directly into the compile command. On Linux you will also have to link to the maths library by adding the flag <code>-lm</code>.</p>
+mpc ஐ சேர்க்க கோப்பின் மேலே #include "mpc.h" ஐ வைக்கவும். mpc உடன் இணைக்க
+mpc.c ஐ நேரடியாக நிரல்மொழிமாற்ற கட்டளையில் வைக்கவும். லினக்ஸில் நீங்கள் -lm ஐ
+கொடி சேர்ப்பதன் மூலம் கணித நூலகத்துடன் (math library) இணைக்க வேண்டும்.
 
-<p>On <strong>Linux</strong> and <strong>Mac</strong></p>
+லினக்ஸ் மற்றும் மேக்கில்
 
-<pre><code>cc -std=c99 -Wall parsing.c mpc.c -ledit -lm -o parsing</code></pre>
+#+begin_src shell
+  cc -std=c99 -Wall parsing.c mpc.c -ledit -lm -o parsing
+#+end_src
 
-<p>On <strong>Windows</strong></p>
+விண்டோஸில்
 
-<pre><code>cc -std=c99 -Wall parsing.c mpc.c -o parsing</code></pre>
+#+begin_src shell
+  cc -std=c99 -Wall parsing.c mpc.c -o parsing
+#+end_src
 
-<div class="alert alert-warning">
-  <p><strong>Hold on, don't you mean <code>#include &lt;mpc.h&gt;</code>?</strong></p>
+ஒரு நிமிடம், #include <mpc.h> என்று நீங்கள் எழுதவில்லையா ?
 
-  <p>There are actually two ways to include files in C. One is using angular brackets <code>&lt;&gt;</code> as we've seen so far, and the other is with quotation marks <code>""</code>.</p>
+C இல் கோப்புகளைச் (file) சேர்க்க உண்மையில் இரண்டு வழிகள் உள்ளன. ஒன்று நாம் இதுவரை
+பார்த்தபடி <> கோண அடைப்புக்குறிகளைப் (angular brackets) பயன்படுத்துகிறது,
+மற்றொன்று மேற்கோள் குறிகளுடன் (quotation marks) "".
 
-  <p>The only difference between the two is that using angular brackets searches the system locations for headers first, while quotation marks searches the current directory first. Because of this system headers such as <code>&lt;stdio.h&gt;</code> are typically put in angular brackets, while local headers such as <code>"mpc.h"</code> are typically put in quotation marks.</p>
-</div>
+இரண்டிற்கும் இடையே உள்ள ஒரே வித்தியாசம் என்னவென்றால், கோண அடைப்புக்குறிகளைப்
+பயன்படுத்தி முதலில் தலைப்புகளுக்கான அமைப்பு இருப்பிடங்களைத் (system location)
+தேடுகிறது, அதே சமயம் மேற்கோள் குறிகள் தற்போதைய கோப்பகத்தை (current directory)
+முதலில் தேடும். இந்த அமைப்பின் காரணமாக, <stdio.h> போன்ற தலைப்புகள் பொதுவாக கோண
+அடைப்புக்குறிக்குள் வைக்கப்படுகின்றன, அதே நேரத்தில் "mpc.h" போன்ற உள்ளூர் தலைப்புகள்
+பொதுவாக மேற்கோள் குறிகளில் வைக்கப்படுகின்றன.
 
 ** போலிஷ் குறியீட்டுமுறை இலக்கணம் (Polish Notation Grammar)
 <h2 id='polish_notation_grammar'>Polish Notation Grammar</h2> <hr/>
