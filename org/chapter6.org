@@ -108,37 +108,46 @@ C இல் கோப்புகளைச் (file) சேர்க்க உ�
 பொதுவாக மேற்கோள் குறிகளில் வைக்கப்படுகின்றன.
 
 ** போலிஷ் குறியீட்டுமுறை இலக்கணம் (Polish Notation Grammar)
-<h2 id='polish_notation_grammar'>Polish Notation Grammar</h2> <hr/>
 
-<p>Formalising the above rules further, and using some regular expressions, we can write a final grammar for the language of polish notation as follows. Read the below code and verify that it matches what we had written textually, and our ideas of polish notation.</p>
+மேற்கூறிய விதிகளை மேலும் முறைப்படுத்தி, சில சுருங்குறித்தொடர்களைப் பயன்படுத்தி,
+போலிஷ் குறியீட்டுமுறை மொழிக்கான இறுதி இலக்கணத்தை பின்வருமாறு எழுதலாம். கீழே உள்ள
+குறியீட்டைப் படித்து, அது நாம் உரையாக எழுதியதற்கும், போலிஷ் குறியீட்டுமுறை பற்றிய
+நம் யோசனைகளுக்கும் பொருந்துகிறதா என்பதைச் சரிபார்க்கவும்.
 
-<pre><code data-language='c'>/* Create Some Parsers */
-mpc_parser_t* Number   = mpc_new("number");
-mpc_parser_t* Operator = mpc_new("operator");
-mpc_parser_t* Expr     = mpc_new("expr");
-mpc_parser_t* Lispy    = mpc_new("lispy");
+#+begin_src c
+  /* சில பாகுபடுத்திகளை (parsers) உருவாக்க */
+  mpc_parser_t* Number   = mpc_new("number");
+  mpc_parser_t* Operator = mpc_new("operator");
+  mpc_parser_t* Expr     = mpc_new("expr");
+  mpc_parser_t* Lispy    = mpc_new("lispy");
+  
+  /* பின்வரும் மொழி மூலம் அவற்றை வரையறுக்கவும் */
+  mpca_lang(MPCA_LANG_DEFAULT,
+    "                                                     \
+      number   : /-?[0-9]+/ ;                             \
+      operator : '+' | '-' | '*' | '/' ;                  \
+      expr     : <number> | '(' <operator> <expr>+ ')' ;  \
+      lispy    : /^/ <operator> <expr>+ /$/ ;             \
+    ",
+    Number, Operator, Expr, Lispy);
+  
+#+end_src
 
-/* Define them with the following Language */
-mpca_lang(MPCA_LANG_DEFAULT,
-  "                                                     \
-    number   : /-?[0-9]+/ ;                             \
-    operator : '+' | '-' | '*' | '/' ;                  \
-    expr     : &lt;number&gt; | '(' &lt;operator&gt; &lt;expr&gt;+ ')' ;  \
-    lispy    : /^/ &lt;operator&gt; &lt;expr&gt;+ /$/ ;             \
-  ",
-  Number, Operator, Expr, Lispy);
-</code></pre>
 
-<p>We need to add this to the interactive prompt we started on in chapter 4. Put this code right at the beginning of the <code>main</code> function before we print the <em>Version</em> and <em>Exit</em> information. At the end of our program we also need to delete the parsers when we are done with them. Right before <code>main</code> returns we should place the following clean-up code.</p>
+இதை நாம் அத்தியாயம் 4ல் தொடங்கிய கலந்துரையாடல் தூண்டியில் (Interactive prompt)
+சேர்க்க வேண்டும். இந்த குறியீட்டை முதன்மை (main) செயல்பாட்டின் (function)
+தொடக்கத்தில் வைக்கவும், ~print the Version and Exit information~ முன்
+வைக்கவும். நம் நிரலின் முடிவில், பாகுபடுத்திகளை பயன்படுத்தி முடித்ததும் அவற்றை
+நீக்க வேண்டும். முதன்மை திரும்புவதற்கு (return) முன், பின்வரும் தூய்மைப்படுத்தல்
+(clean up) குறியீட்டை வைக்க வேண்டும்.
 
-<pre><code data-language='c'>/* Undefine and Delete our Parsers */
-mpc_cleanup(4, Number, Operator, Expr, Lispy);</code></pre>
+#+begin_src c
+  /* பாகுபடுத்திகளை வரையறுக்கப்படாதாக (undefine) மற்றி நீக்கவும் */
+  mpc_cleanup(4, Number, Operator, Expr, Lispy);
+#+end_src
 
-<div class="alert alert-warning">
-  <p><strong>I'm getting an error <code>undefined reference to `mpc_lang'</code></strong></p>
-
-  <p>That should be <code>mpca_lang</code>, with an <code>a</code> at the end!</p>
-</div>
+- `mpc_lang' க்கு வரையறுக்கப்படவில்லை என்று ஒரு பிழையைப் பெறுகிறேன் ?
+  - அது mpca_lang ஆக இருக்க வேண்டும், mpc இறுதியில் ஒரு ~a~
 
 ** பயனர் உள்ளீட்டைப் பாகுபடுத்துதல் (Parsing User Input)
 <h2 id='parsing_user_input'>Parsing User Input</h2> <hr/>
