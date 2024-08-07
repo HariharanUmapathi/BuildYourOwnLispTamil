@@ -150,84 +150,85 @@ C இல் கோப்புகளைச் (file) சேர்க்க உ�
   - அது mpca_lang ஆக இருக்க வேண்டும், mpc இறுதியில் ஒரு ~a~
 
 ** பயனர் உள்ளீட்டைப் பாகுபடுத்துதல் (Parsing User Input)
-<h2 id='parsing_user_input'>Parsing User Input</h2> <hr/>
 
-<p>Our new code creates a <code>mpc</code> parser for our <em>Polish Notation</em> language, but we still need to actually <em>use</em> it on the user input supplied each time from the prompt. We need to edit our <code>while</code> loop so that rather than just echoing user input back, it actually attempts to parse the input using our parser. We can do this by replacing the call to <code>printf</code> with the following <code>mpc</code> code, that makes use of our program parser <code>Lispy</code>.</p>
+நம்முடைய புதிய குறியீடு நமக்கு போலிஷ் குறியீட்டுமுறை மொழிக்கான mpc
+பாகுபடுத்தியை உருவாக்குகிறது, ஆனால் தூண்டி (prompt) இருந்து ஒவ்வொரு முறையும்
+வழங்கப்படும் பயனர் உள்ளீட்டில் அதை கண்டிப்பாக பயன்படுத்த வேண்டும். பயனர் உள்ளீட்டை மீண்டும்
+எதிரொலிப்பதற்குப் பதிலாக, நம் பாகுபடுத்தியைப் பயன்படுத்தி உள்ளீட்டைப் பாகுபடுத்த
+முயற்சிக்கும் வகையில், நமது வரை சுழற்சியை (while loop) திருத்த
+வேண்டும். பின்வரும் mpc குறியீட்டைக் கொண்டு printf க்கு அழைப்பை மாற்றுவதன் மூலம்
+இதைச் செய்யலாம், இது நமது நிரல் பாகுபடுத்தி Lispy ஐப் பயன்படுத்துகிறது.
 
-<pre><code data-language='c'>/* Attempt to Parse the user Input */
-mpc_result_t r;
-if (mpc_parse("&lt;stdin&gt;", input, Lispy, &amp;r)) {
-  /* On Success Print the AST */
-  mpc_ast_print(r.output);
-  mpc_ast_delete(r.output);
-} else {
-  /* Otherwise Print the Error */
-  mpc_err_print(r.error);
-  mpc_err_delete(r.error);
-}</code></pre>
+#+begin_src c
+  /* பயனர் உள்ளீட்டைப் பாகுபடுத்த முயற்சி */
+  mpc_result_t r;
+  if (mpc_parse("<stdin>", input, Lispy, &r)) {
+    /* வெற்றியில் AST ஐ அச்சிடவும் */
+    mpc_ast_print(r.output);
+    mpc_ast_delete(r.output);
+  } else {
+    /* இல்லையெனில் பிழையை அச்சிடுக */
+    mpc_err_print(r.error);
+    mpc_err_delete(r.error);
+  }
+#+end_src
 
-<p>This code calls the <code>mpc_parse</code> function with our parser <code>Lispy</code>, and the input string <code>input</code>. It copies the result of the parse into <code>r</code> and returns <code>1</code> on success and <code>0</code> on failure. We use the address of operator <code>&amp;</code> on <code>r</code> when we pass it to the function. This operator will be explained in more detail in later chapters.</p>
+இந்தக் குறியீடு mpc_parse செயல்பாட்டை அழைக்கிறது அதில் பாகுபடுத்தி Lispy மற்றும்
+உள்ளீடு சரம் ~input~ சேர்ந்து செல்கிறது. அது பாகுபாட்டின் முடிவை r ஆக
+நகலெடுக்கிறது மற்றும் வெற்றியில் 1 மற்றும் தோல்வியில் 0 ஐ
+வழங்குகிறது. செயல்பாட்டிற்கு அனுப்பும்போது செயலி (Operator) & மூலம் r இன்
+முகவரியைப் பயன்படுத்துகிறோம். இந்த செயலி (Operator) அடுத்த அத்தியாயங்களில்
+இன்னும் விரிவாக விளக்கப்படும்.
 
-<p>On success an internal structure is copied into <code>r</code>, in the field <code>output</code>. We can print out this structure using <code>mpc_ast_print</code> and delete it using <code>mpc_ast_delete</code>.</p>
+வெற்றியின் போது புல வெளியீட்டின் (field output) உள் கட்டமைப்பு (internal
+structure) ~r~ இல் நகலெடுக்கப்படுகிறது. அந்த கட்டமைப்பை mpc_ast_print ஐப்
+பயன்படுத்தி அச்சிடலாம் மற்றும் mpc_ast_delete ஐப் பயன்படுத்தி அதை நீக்கலாம்.
 
-<p>Otherwise there has been an error, which is copied into <code>r</code> in the field <code>error</code>. We can print it out using <code>mpc_err_print</code> and delete it using <code>mpc_err_delete</code>.</p>
+இல்லையெனில் ஒரு பிழை உள்ளது என்றால் இது புலப் பிழையில் (field error) r இல்
+நகலெடுக்கப்படுகிறது. நாம் அதை mpc_err_print ஐப் பயன்படுத்தி அச்சிடலாம் மற்றும்
+mpc_err_delete ஐப் பயன்படுத்தி நீக்கலாம்.
 
-<p>Compile these updates, and take this program for a spin. Try out different inputs and see how the system reacts. Correct behaviour should look like the following.</p>
+இந்த புதுப்பிப்புகளைத் நிரல்மொழிமாற்றி, இந்த நிரலை இயக்க பார்க்கவும். வெவ்வேறு
+உள்ளீடுகளை முயற்சி செய்து, கணினி எவ்வாறு செயல்படுகிறது என்பதைப்
+பார்க்கவும். சரியான நடத்தை பின்வருமாறு இருக்க வேண்டும்.
 
-<pre><code data-language='lispy'>Lispy Version 0.0.0.0.2
-Press Ctrl+c to Exit
+#+begin_example
+  Lispy Version 0.0.0.0.2
+  Press Ctrl+c to Exit
+  
+  lispy> + 5 (* 2 2)
+  >
+    regex
+    operator|char:1:1 '+'
+    expr|number|regex:1:3 '5'
+    expr|>
+      char:1:5 '('
+      operator|char:1:6 '*'
+      expr|number|regex:1:8 '2'
+      expr|number|regex:1:10 '2'
+      char:1:11 ')'
+    regex
+  lispy> hello
+  <stdin>:1:1: error: expected whitespace, '+', '-', '*' or '/' at 'h'
+  lispy> / 1dog
+  <stdin>:1:4: error: expected one of '0123456789', whitespace, '-', one or more of one of '0123456789', '(' or end of input at 'd'
+  lispy>
+#+end_example
 
-lispy&gt; + 5 (* 2 2)
-&gt;
-  regex
-  operator|char:1:1 '+'
-  expr|number|regex:1:3 '5'
-  expr|&gt;
-    char:1:5 '('
-    operator|char:1:6 '*'
-    expr|number|regex:1:8 '2'
-    expr|number|regex:1:10 '2'
-    char:1:11 ')'
-  regex
-lispy&gt; hello
-&lt;stdin&gt;:1:1: error: expected whitespace, '+', '-', '*' or '/' at 'h'
-lispy&gt; / 1dog
-&lt;stdin&gt;:1:4: error: expected one of '0123456789', whitespace, '-', one or more of one of '0123456789', '(' or end of input at 'd'
-lispy&gt;</code></pre>
-
-<div class="alert alert-warning">
-  <p><strong>I'm getting an error <code>&lt;stdin&gt;:1:1: error: Parser Undefined!</code>.</strong></p>
-
-  <p>This error is due to the syntax for your grammar supplied to <code>mpca_lang</code> being incorrect. See if you can work out what part of the grammar is incorrect. You can use the reference code for this chapter to help you find this, and verify how the grammar should look.</p>
-</div>
-
-
-<h2>Reference</h2> <hr/>
-
-<references />
+- நான் ஒரு பிழையைப் சந்திக்கிறேன் <stdin>:1:1: error: Parser Undefined!.
+  - mpca_lang க்கு வழங்கப்பட்ட உங்கள் இலக்கணத்திற்கான தொடரியல் (syntax) தவறாக
+    இருப்பதால் இந்தப் பிழை ஏற்பட்டது. இலக்கணத்தின் எந்தப் பகுதி தவறானது என்பதை
+    உங்களால் கண்டுபிடிக்க முடியுமா என்று பார்க்கவும். இதைக் கண்டறியவும், இலக்கணம்
+    எப்படி இருக்க வேண்டும் என்பதைச் சரிபார்க்கவும் இந்த அத்தியாயத்திற்கான குறிப்புக்
+    (reference) குறியீட்டைப் பார்க்கலாம்.
 
 ** வெகுமதி மதிப்பெண் (Bonus Marks)
-<h2>Bonus Marks</h2> <hr/>
+- aababa அல்லது bbaa போன்ற அனைத்து a அல்லது b இன் சுருங்குறித்தொடர் பொருந்தும் சரங்களை எழுதவும்.
+- ababab அல்லது aba போன்ற தொடர்ச்சியான a மற்றும் b ஆகியவற்றின் சுருங்குறித்தொடர் பொருந்தும் சரங்களை எழுதவும்.
+- சுருங்குறித்தொடர் பொருந்தும் pit, pot and respite ஆனால் peat, spit, அல்லது part வேண்டாம்.
+- % போன்ற புதிய செயலி (Operator) சேர்க்க இலக்கணத்தை மாற்றவும்.
+- உரை வடிவத்தில் எழுதப்பட்ட add, sub, mul, div செயலி(Operator) அடையாளம் காண இலக்கணத்தை மாற்றவும்.
+- 0.01, 5.21 அல்லது 10.2 போன்ற தசம (Decimal) எண்களை அடையாளம் காண இலக்கணத்தை மாற்றவும்.
+- செயலி(Operator) இரண்டு வெளிப்பாடுகளுக்கு (expressions) இடையில் வழக்கமாக எழுதுவதற்கு இலக்கணத்தை மாற்றவும்.
+- Doge ஐ பகுபடுத்துவதற்கு முந்தைய அத்தியாயத்தின் இலக்கணத்தைப் பயன்படுத்தவும். உள்ளீட்டின் தொடக்கத்தையும் முடிவையும் நீங்கள் சேர்க்க வேண்டும்.
 
-<div class="alert alert-warning">
-  <ul class="list-group">
-    <li class="list-group-item">&rsaquo; Write a regular expression matching strings of all <code>a</code> or <code>b</code> such as <code>aababa</code> or <code>bbaa</code>.</li>
-    <li class="list-group-item">&rsaquo; Write a regular expression matching strings of consecutive <code>a</code> and <code>b</code> such as <code>ababab</code> or <code>aba</code>.</li>
-    <li class="list-group-item">&rsaquo; Write a regular expression matching <code>pit</code>, <code>pot</code> and <code>respite</code> but <em>not</em> <code>peat</code>, <code>spit</code>, or <code>part</code>.</li>
-    <li class="list-group-item">&rsaquo; Change the grammar to add a new operator such as <code>%</code>.</li>
-    <li class="list-group-item">&rsaquo; Change the grammar to recognise operators written in textual format <code>add</code>, <code>sub</code>, <code>mul</code>, <code>div</code>.</li>
-    <li class="list-group-item">&rsaquo; Change the grammar to recognize decimal numbers such as <code>0.01</code>, <code>5.21</code>, or <code>10.2</code>.</li>
-    <li class="list-group-item">&rsaquo; Change the grammar to make the operators written conventionally, between two expressions.</li>
-    <li class="list-group-item">&rsaquo; Use the grammar from the previous chapter to parse <code>Doge</code>. You must add <em>start</em> and <em>end</em> of input.</li>
-  </ul>
-</div>
-
-<h2>Navigation</h2>
-
-<table class="table" style='table-layout: fixed;'>
-  <tr>
-    <td class="text-left"><a href="chapter5_languages"><h4>&lsaquo; Languages</h4></a></td>
-    <td class="text-center"><a href="contents"><h4>&bull; Contents &bull;</h4></a></td>
-    <td class="text-right"><a href="chapter7_evaluation"><h4>Evaluation &rsaquo;</h4></a></td>
-  </tr>
-</table>
