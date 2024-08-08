@@ -1,8 +1,36 @@
 * அத்தியாயம் 7 - மதிப்பீடு (Evaluation)
 
-<h1>Evaluation <small>&bull; Chapter 7</small></h1>
-
 ** மரங்கள் (Trees)
+
+இப்போது நாம் உள்ளீட்டைப் (input) படித்து, அதை உள் கட்டமைத்துள்ளோம் (structured
+internally), ஆனால் அதை இன்னும் மதிப்பீடு செய்ய முடியவில்லை. இந்த அத்தியாயத்தில்
+அந்த கட்டமைப்பை மதிப்பிடும் குறியீடு சேர்ப்போம் மற்றும் கணக்கீடுகளை (computation)
+நிகழ்த்துவோம்.
+
+இந்த உள் கட்டமைப்புதான் முந்தைய அத்தியாயத்தில் நிரல் மூலம் அச்சிடப்பட்டதைப்
+பார்த்தோம். இது ஒரு கருத்தியல் தொடரமைப்பு மரவுரு (Abstract Syntax Tree) என்று
+அழைக்கப்படுகிறது, மேலும் இது பயனர் உள்ளீட்டின் அடிப்படையில் நிரலின் கட்டமைப்பைக்
+குறிக்கிறது. இந்த மரத்தின் இலைகளில் எண்கள் மற்றும் செயலி (Operator) உள்ளன -
+செயலாக்கப்பட வேண்டிய தரவு. கிளைகளில் மரத்தின் இந்தப் பகுதியை உற்பத்தி செய்யப்
+பயன்படுத்தப்படும் விதிகள் உள்ளன - அதை எவ்வாறு கடந்து செல்வது (Traverse) மற்றும்
+மதிப்பிடுவது (Evaluate) என்பது பற்றிய தகவல்கள்.
+
+இதை எப்படி கடந்து செல்ல போகிறோம் என்பதைச் சரியாகச் செய்வதற்கு முன், இந்த அமைப்பு
+எவ்வாறு உள் வரையறுக்கப்படுகிறது (internally defined) என்பதைப் பார்ப்போம். நாம்
+mpc.h இன் உள்ளே எட்டிப்பார்த்தால், mpc_ast_t இன் வரையறையைப் (definition)
+பார்க்கலாம், இது பாகுபாட்டிலிருந்து நமக்குக் கிடைத்த தரவுக் கட்டமைப்பாகும் (Data
+structure).
+
+#+begin_src c
+  typedef struct mpc_ast_t {
+    char* tag;
+    char* contents;
+    mpc_state_t state;
+    int children_num;
+    struct mpc_ast_t** children;
+  } mpc_ast_t;
+#+end_src
+
 <h2 id='trees'>Trees</h2> <hr/>
 
 <p>Now we can read input, and we have it structured internally, but we are still unable to evaluate it. In this chapter we add the code that evaluates this structure and actually performs the computations encoded within.</p>
