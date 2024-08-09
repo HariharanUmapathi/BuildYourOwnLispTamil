@@ -31,6 +31,22 @@ structure).
   } mpc_ast_t;
 #+end_src
 
+இந்த கட்டமைப்பில் நாம் அணுகக்கூடிய பல புலங்கள் (fields) உள்ளன. அவற்றை ஒவ்வொன்றாகப்
+பார்ப்போம்.
+
+முதல் புலம் (field) ~tag~. நாம் மரவுருவை (tree) அச்சிட்டபோது அது முனையின்
+உள்ளடக்கத்திற்கு (contents) முந்தைய தகவல். அது குறிப்பிட்ட உருப்படியை (item)
+பாகுபடுத்த பயன்படுத்தப்படும் அனைத்து விதிகளின் பட்டியலைக் கொண்ட ஒரு
+சரம். உதாரணமாக expr|number|regex.
+
+முனையை உருவாக்க என்ன பாகுபடுத்தும் விதிகள் பயன்படுத்தப்பட்டுள்ளன என்பதை அறிய,
+இந்தக் ~tag~ புலம் முக்கியமானதாக இருக்கும்.
+
+இரண்டாவது புலம் ~contents~. இது '*', '(' அல்லது '5' போன்ற முனையின் உள்ளபடி
+உள்ளடக்கங்களைக் கொண்டிருக்கும். கிளைகளில் (branch) இது காலியாக இருப்பதை நீங்கள்
+கவனிப்பீர்கள், ஆனால் இலைகளுக்குப் (leaf) பயன்படுத்துவதற்கான செயலி (operator)
+அல்லது எண்ணைக் கண்டறிய இதைப் பயன்படுத்தலாம்.
+
 <h2 id='trees'>Trees</h2> <hr/>
 
 <p>Now we can read input, and we have it structured internally, but we are still unable to evaluate it. In this chapter we add the code that evaluates this structure and actually performs the computations encoded within.</p>
