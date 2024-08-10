@@ -47,6 +47,14 @@ structure).
 கவனிப்பீர்கள், ஆனால் இலைகளுக்குப் (leaf) பயன்படுத்துவதற்கான செயலி (operator)
 அல்லது எண்ணைக் கண்டறிய இதைப் பயன்படுத்தலாம்.
 
+அடுத்த புலம் ~state~. வரி மற்றும் நெடுவரிசை (column) எண் போன்ற இந்தக் கணுவைக்
+(node) கண்டறிந்த போது பாகுபடுத்தி எந்த நிலையில் இருந்தது என்பது பற்றிய தகவல்
+இதில் உள்ளது. நமது திட்டத்தில் (project) இதைப் பயன்படுத்த மாட்டோம்.
+
+இறுதியாக மரவுருவில் கடந்து செல்ல உதவும் இரண்டு புலம்களைப் பார்க்கிறோம். இவை
+~children_num~ மற்றும் ~children~. முதல் புலம் ஒரு கணுவுக்கு (node) எத்தனை
+குழந்தைகள் என்று சொல்கிறது, இரண்டாவது இந்த குழந்தைகளின் அணி (Array).
+
 <h2 id='trees'>Trees</h2> <hr/>
 
 <p>Now we can read input, and we have it structured internally, but we are still unable to evaluate it. In this chapter we add the code that evaluates this structure and actually performs the computations encoded within.</p>
