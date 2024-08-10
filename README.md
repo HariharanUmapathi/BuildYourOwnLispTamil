@@ -8,6 +8,23 @@ Tamil translation
 
 The tamil translation are available under **org** folder
 
+### Contributing - Tamil
+
+If you find any grammatical issues, please report it using Github Issues. Or, if
+some sentence or paragraph is difficult to understand, feel free to open an
+issue with the following title format: `[page number][type] Descriptive Title`.
+
+For example: `[pg.9][grammar] Incorrect verb usage`.
+
+`type` can be one of the following:
+
+- `Typo`: indicates typing mistake.
+- `Grammar`: indicates incorrect grammar usage.
+- `Style`: indicates a style improvement.
+- `Content`: indicates problems with the content.
+
+This idea is taken from https://github.com/ThangaAyyanar/os01_tamil/blob/master/README.md#contributing, this open source book
+
 
 About
 -----
