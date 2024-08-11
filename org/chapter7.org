@@ -55,6 +55,19 @@ structure).
 ~children_num~ மற்றும் ~children~. முதல் புலம் ஒரு கணுவுக்கு (node) எத்தனை
 குழந்தைகள் என்று சொல்கிறது, இரண்டாவது இந்த குழந்தைகளின் அணி (Array).
 
+~children~ புலத்தின் வகை mpc_ast_t**. இது இரட்டை சுட்டி வகை ஆகும். இது
+தோற்றமளிப்பது போல் பயமாக இருக்காது மற்றும் அடுத்த அத்தியாயங்களில் இன்னும் விரிவாக
+விளக்கப்படும். இப்போதைக்கு இதை இந்த மரவுருவின் குழந்தை கணுகளின் (node) பட்டியல்
+(list) என்று நினைக்கலாம்.
+
+அணி குறிமான முறையைப் (notation) பயன்படுத்தி இந்த புலத்தை அணுகுவதன் மூலம் நாம்
+குழந்தை கணுவை (node) அணுகலாம். children என்ற புலப் பெயரை எழுதி, அதை
+அணுகுவதற்கு குழந்தையின் சுட்டெண் (index) கொண்ட சதுர அடைப்புக்குறிகளுடன் (square
+brackets) பின்னொட்டு (suffix) இடுவதன் மூலம் இது செய்யப்படுகிறது. உதாரணமாக
+கணுவின் முதல் குழந்தையை அணுக நாம் children[0] என்று பயன்படுத்தலாம். சி அதன் அணி
+சுட்டெண்களை (indices) 0 இலிருந்து கணக்கிடுகிறது என்பதைக் கவனியுங்கள்.
+
+
 <h2 id='trees'>Trees</h2> <hr/>
 
 <p>Now we can read input, and we have it structured internally, but we are still unable to evaluate it. In this chapter we add the code that evaluates this structure and actually performs the computations encoded within.</p>
