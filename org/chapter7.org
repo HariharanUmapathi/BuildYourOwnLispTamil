@@ -67,59 +67,22 @@ brackets) பின்னொட்டு (suffix) இடுவதன் மூ�
 கணுவின் முதல் குழந்தையை அணுக நாம் children[0] என்று பயன்படுத்தலாம். சி அதன் அணி
 சுட்டெண்களை (indices) 0 இலிருந்து கணக்கிடுகிறது என்பதைக் கவனியுங்கள்.
 
+mpc_ast_t* வகை ஒரு structக்கான சுட்டிக்காட்டி என்பதால், அதன் புலங்களை (fields) அணுகுவதற்கு சற்று வித்தியாசமான தொடரியல் (syntax) உள்ளது. நாம் ஒரு புள்ளிக்குப் (dot .) பதிலாக ஒரு அம்புக்குறியைப் (arrow ->) பயன்படுத்த வேண்டும் இந்த செயலி (operator) மாறுதலுக்கு அடிப்படைக் காரணம் எதுவும் இல்லை, எனவே இப்போது சுட்டிக்காட்டி வகைகளின் புல (field) அணுகல் அம்புக்குறியைப் பயன்படுத்துகிறது என்பதை நினைவில் கொள்ளுங்கள்.
 
-<h2 id='trees'>Trees</h2> <hr/>
-
-<p>Now we can read input, and we have it structured internally, but we are still unable to evaluate it. In this chapter we add the code that evaluates this structure and actually performs the computations encoded within.</p>
-
-<p>This internal structure is what we saw printed out by the program in the previous chapter. It is called an <em>Abstract Syntax Tree</em>, and it represents the structure of the program based on the input entered by the user. At the leaves of this tree are numbers and operators - the actual data to be processed. At the branches are the rules used to produce this part of the tree - the information on how to traverse and evaluate it.</p>
-
-<div class='pull-left alert alert-warning' style="margin: 15px; text-align: center;">
-  <img src="/static/img/tree.png" alt="tree" class="img-responsive" width="303px" height="512px"/>
-  <p><small>Abstract Christmas Tree &bull; A seasonal variation</small></p>
-</div>
-
-<p>Before working out exactly how we are going to do this traversal, let's see exactly how this structure is defined internally. If we peek inside <code>mpc.h</code> we can have a look at the definition of <code>mpc_ast_t</code>, which is the data structure we got from the parse.</p>
-
-<pre style='margin-left: 375px;'><code data-language='c'>typedef struct mpc_ast_t {
-  char* tag;
-  char* contents;
-  mpc_state_t state;
-  int children_num;
-  struct mpc_ast_t** children;
-} mpc_ast_t;</code></pre>
-
-<p>This struct has a number of fields we can access. Let's take a look at them one by one.</p>
-
-<p>The first field is <code>tag</code>. When we printed out the tree this was the information that preceded the contents of the node. It was a string containing a list of all the rules used to parse that particular item. For example <code>expr|number|regex</code>.</p>
-
-<p>This <code>tag</code> field is going to be important as it lets us see what parse rules have been used to create the node.</p>
-
-<p>The second field is <code>contents</code>. This will contain the actual contents of the node such as <code>'*'</code>, <code>'('</code> or <code>'5'</code>. You'll notice for branches this is empty, but for leaves we can use it to find the operator or number to use.</p>
-
-<p>The next field is <code>state</code>. This contains information about what state the parser was in when it found this node, such as the line and column number. We won't make use of this in our program.</p>
-
-<p>Finally we see two fields that are going to help us traverse the tree. These are <code>children_num</code> and <code>children</code>. The first field tells us how many children a node has, and the second is an array of these children.</p>
-
-<p>The type of the <code>children</code> field is <code>mpc_ast_t**</code>. This is a double pointer type. It isn't as scary as it looks and will be explained in greater detail in later chapters. For now you can think of it as a list of the child nodes of this tree.</p>
-
-<p>We can access a child node by accessing this field using array notation. This is done by writing the field name <code>children</code> and suffixing it with square brackets containing the index of the child to access. For example to access the first child of the node we can use <code>children[0]</code>. Notice that C counts its array indices from <code>0</code>.</p>
-
-<p>Because the type <code>mpc_ast_t*</code> is a <em>pointer</em> to a struct, there is a slightly different syntax to access its fields. We need to use an arrow <code>-></code> instead of a dot <code>.</code>. There is no fundamental reason for this switch in operators, so for now just remember that field access of pointer types uses an arrow.</p>
-
-<pre><code data-language='c'>/* Load AST from output */
+#+begin_src c
+  /* வெளியீட்டிலிருந்து AST ஐ ஏற்றவும் */
 mpc_ast_t* a = r.output;
-printf("Tag: %s\n", a-&gt;tag);
-printf("Contents: %s\n", a-&gt;contents);
-printf("Number of children: %i\n", a-&gt;children_num);
+printf("Tag: %s\n", a->tag);
+printf("Contents: %s\n", a->contents);
+printf("Number of children: %i\n", a->children_num);
 
-/* Get First Child */
-mpc_ast_t* c0 = a-&gt;children[0];
-printf("First Child Tag: %s\n", c0-&gt;tag);
-printf("First Child Contents: %s\n", c0-&gt;contents);
+/* முதல் குழந்தையைப் எடுங்கள் */
+mpc_ast_t* c0 = a->children[0];
+printf("First Child Tag: %s\n", c0->tag);
+printf("First Child Contents: %s\n", c0->contents);
 printf("First Child Number of children: %i\n",
-  c0-&gt;children_num);
-</code></pre>
+  c0->children_num);
+#+end_src
 
 ** தானழைப்பு (Recursion)
 
