@@ -88,6 +88,8 @@ printf("First Child Number of children: %i\n",
 
 இந்த மரவுரு அமைப்பில் ஒரு வித்தியாசமான விஷயம் உள்ளது. அது தன்னையே குறிக்கிறது. அதன் ஒவ்வொரு குழந்தைகளும் மீண்டும் மரவுருக்களை குறிக்கும், அந்த குழந்தைகளின் குழந்தைகள் மீண்டும் மரவுருக்களை குறிக்கின்றது. நம் மொழிகள் மற்றும் மீண்டும் எழுதும் விதிகளைப் (re-write rules) போலவே, இந்தக் கட்டமைப்பில் (structure) உள்ள தரவு (data), அவர்களின் பெற்றோரை ஒத்த துணையமைப்புகளை (substructure) மீண்டும் கொண்டுள்ளது.
 
+இந்த அமைப்பு (pattern) மீண்டும் மீண்டும் துணையமைப்புகளில் தொடரலாம். சாத்தியமான அனைத்து மரவுருக்களிலும் வேலை செய்யக்கூடிய ஒரு செயல்பாட்டை நாம் விரும்பினால், நாம் ஒரு ஜோடி கணுக்களை (nodes) மட்டும் கீழே பார்க்க முடியாது. மரவுருக்கள் எந்த ஆழத்திலும் வேலை செய்ய நாம் அதை வரையறுக்க (define) வேண்டும்.
+
 <h2 id='recursion'>Recursion</h2> <hr/>
 
 <p>There is an odd thing about this tree structure. It refers to itself. Each of its children are themselves trees again, and the children of those children are trees yet again. Just like our languages and re-write rules, data in this structure contains repeated substructures that resemble their parents.</p>
