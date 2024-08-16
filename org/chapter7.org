@@ -98,6 +98,24 @@ printf("First Child Number of children: %i\n",
 
 தொடங்குவதற்கு முன், இது மிகவும் எளிமையான வழக்கில் எவ்வாறு செயல்படும் என்பதை நாம் கண்டுபிடிப்போம் - உள்ளீடு (input) மரவுருக்கு குழந்தைகள் இல்லை என்றால். இந்த விஷயத்தில் முடிவு ஒன்றுதான் என்பதை நாம் அறிவோம். இப்போது நாம் மிகவும் சிக்கலான வழக்கை வரையறுக்கலாம் - மரவுருவுக்கு ஒன்று அல்லது அதற்கு மேற்பட்ட குழந்தைகள் இருந்தால். இந்த வழக்கில் முடிவு ஒன்றாக இருக்கும் (கணுக்காகவே), அதனுடன் சேர்த்து அந்தக் குழந்தைகளில் உள்ள கணுக்களின் எண்ணிக்கை.
 
+ஆனால் எல்லா குழந்தைகளிலும் உள்ள கணுக்களின் எண்ணிக்கையை எப்படி கண்டுபிடிப்பது? சரி நாம் வரையறுக்கும் செயல்பாட்டில் இருக்கும் செயல்பாட்டைப் பயன்படுத்தலாம்! ஆமாம், தானழைப்பு.
+
+சி இல் நாம் இதை இப்படி எழுதலாம்.
+
+#+begin_src c
+int number_of_nodes(mpc_ast_t* t) {
+  if (t->children_num == 0) { return 1; }
+  if (t->children_num >= 1) {
+    int total = 1;
+    for (int i = 0; i < t->children_num; i++) {
+      total = total + number_of_nodes(t->children[i]);
+    }
+    return total;
+  }
+  return 0;
+}
+#+end_src
+
 <h2 id='recursion'>Recursion</h2> <hr/>
 
 <p>There is an odd thing about this tree structure. It refers to itself. Each of its children are themselves trees again, and the children of those children are trees yet again. Just like our languages and re-write rules, data in this structure contains repeated substructures that resemble their parents.</p>
