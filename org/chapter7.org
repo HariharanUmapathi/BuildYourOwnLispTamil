@@ -90,6 +90,10 @@ printf("First Child Number of children: %i\n",
 
 இந்த அமைப்பு (pattern) மீண்டும் மீண்டும் துணையமைப்புகளில் தொடரலாம். சாத்தியமான அனைத்து மரவுருக்களிலும் வேலை செய்யக்கூடிய ஒரு செயல்பாட்டை நாம் விரும்பினால், நாம் ஒரு ஜோடி கணுக்களை (nodes) மட்டும் கீழே பார்க்க முடியாது. மரவுருக்கள் எந்த ஆழத்திலும் வேலை செய்ய நாம் அதை வரையறுக்க (define) வேண்டும்.
 
+அதிர்ஷ்டவசமாக, இந்த துணையமைப்புகள் எவ்வாறு மீண்டும் மீண்டும் வருகின்றன என்பதன் இயல்புகளைப் பயன்படுத்தி, தானழைப்பு (recursion) எனப்படும் வழிமுறையைப் பயன்படுத்துவதன் மூலம் இதைச் செய்யலாம்.
+
+எளிமையாகச் சொன்னால், தானழைப்பு செயல்பாடு என்பது அதன் கணக்கீட்டின் (calculation) ஒரு பகுதியாக தன்னை அழைக்கும் ஒன்றாகும்.
+
 <h2 id='recursion'>Recursion</h2> <hr/>
 
 <p>There is an odd thing about this tree structure. It refers to itself. Each of its children are themselves trees again, and the children of those children are trees yet again. Just like our languages and re-write rules, data in this structure contains repeated substructures that resemble their parents.</p>
