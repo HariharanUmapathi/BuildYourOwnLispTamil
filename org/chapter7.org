@@ -94,6 +94,8 @@ printf("First Child Number of children: %i\n",
 
 எளிமையாகச் சொன்னால், தானழைப்பு செயல்பாடு என்பது அதன் கணக்கீட்டின் (calculation) ஒரு பகுதியாக தன்னை அழைக்கும் ஒன்றாகும்.
 
+ஒரு செயல்பாடு அதன் அடிப்படையில் வரையறுக்கப்படுவது விசித்திரமாகத் தெரிகிறது. ஆனால் செயல்பாடுகள் வெவ்வேறு உள்ளீடுகளுடன் வழங்கும்போது வெவ்வேறு வெளியீடுகளைக் கொடுக்க முடியும் என்பதைக் கவனியுங்கள். தானழைப்புக்கு மாற்றப்பட்ட அல்லது வெவ்வேறு உள்ளீடுகளை அதே செயல்பாட்டிற்கு வழங்கினால், மேலும் சில நிபந்தனைகளின் (conditions) கீழ் இந்தச் செயல்பாடு தன்னை மீண்டும் அழைக்காமல் இருப்பதற்கான வழியை வழங்கினால், இந்த தானழைப்பு செயல்பாடு பயனுள்ள ஒன்றைச் செய்கிறது என்பதில் நாம் அதிக நம்பிக்கையுடன் இருக்கலாம்.
+
 <h2 id='recursion'>Recursion</h2> <hr/>
 
 <p>There is an odd thing about this tree structure. It refers to itself. Each of its children are themselves trees again, and the children of those children are trees yet again. Just like our languages and re-write rules, data in this structure contains repeated substructures that resemble their parents.</p>
