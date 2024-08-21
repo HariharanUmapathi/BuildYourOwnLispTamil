@@ -116,48 +116,26 @@ int number_of_nodes(mpc_ast_t* t) {
 }
 #+end_src
 
-<h2 id='recursion'>Recursion</h2> <hr/>
+தானழைப்பு செயல்பாடுகள் வித்தியாசமானவை, ஏனென்றால் அவற்றுக்கு கொஞ்சம் முரணான
+நம்பிக்கை தேவை. முதலில் நாம் யூகிக்க வேண்டும் நம்மிடம் ஒரு செயல்பாடு உள்ளது, அது
+ஏற்கனவே எதையாவது சரியாகச் செய்கிறது. பின்னர் இந்த செயல்பாட்டைப் பயன்படுத்தி, நாம்
+நினைத்த ஆரம்ப (initial) செயல்பாட்டை எழுத வேண்டும்!
 
-<p>There is an odd thing about this tree structure. It refers to itself. Each of its children are themselves trees again, and the children of those children are trees yet again. Just like our languages and re-write rules, data in this structure contains repeated substructures that resemble their parents.</p>
+பெரும்பாலான விஷயங்களைப் போலவே, தானழைப்பு செயல்பாடுகளும் எப்போதும் ஒரே
+மாதிரியான முறையைப் பின்பற்றுகின்றன. முதலில் ஒரு அடிப்படை நிலை (Base case)
+வரையறுக்கப்படுகிறது. நமது முந்தைய எடுத்துக்காட்டில் t->children_num == 0 என்ற
+நிலை (case) தானழைப்பை முடிவடைய செய்யும். இதற்குப் பிறகு, தானழைப்பு நிலை
+(recursive case) வரையறுக்கப்படுகிறது, t->children_num >= 1 போன்று நமது
+முந்தைய எடுத்துக்காட்டில், இது ஒரு கணக்கீட்டை சிறிய பகுதிகளாக உடைத்து, அவற்றை
+ஒன்றாக இணைக்கும் முன், அந்த பகுதிகளை கணக்கிடுவதற்கு தன்னைத்தானே திரும்பத் திரும்ப
+அழைக்கிறது.
 
-<div class='pull-right alert alert-warning' style="margin: 15px; text-align: center;">
-  <img src="/static/img/recursion.png" alt="recursion" class="img-responsive" width="302px" height="371px"/>
-  <p><small>Recursion &bull; Dangerous in a fire.</small></p>
-</div>
-
-<p>This pattern of repeated substructures could go on and on. Clearly if we want a function which can work on all possible trees we can't look just a couple of nodes down, we have to define it to work on trees of any depth.</p>
-
-<p>Luckily we can do this, by exploiting the nature of how these substructures repeat and using a technique called <em>recursion</em>.</p>
-
-<p>Put simply a <em>recursive function</em> is one that calls itself as some part of its calculation.</p>
-
-<p>It sounds weird for a function to be defined in terms of itself. But consider that functions can give different outputs when supplied with different inputs. If we give changed, or different inputs to a recursive call to the same function, and provide a way for this function to not call itself again under certain conditions, we can be more confident this <em>recursive function</em> is doing something useful.</p>
-
-<p>As an example we can write a recursive function which will count the number of nodes in our tree structure.</p>
-
-<p>To begin we work out how it will act in the most simple case - if the input tree has no children. In this case we know the result is simply one. Now we can go on to define the more complex case - if the tree has one or more children. In this case the result will be one (for the node itself), plus the number of nodes in all of those children.</p>
-
-<p>But how do we find the number of nodes in all of the children? Well we can use the function we are in the process of defining! <em>Yeah, Recursion.</em></p>
-
-<p>In C we might write it something like this.</p>
-
-<pre><code data-language='C'>int number_of_nodes(mpc_ast_t* t) {
-  if (t-&gt;children_num == 0) { return 1; }
-  if (t-&gt;children_num &gt;= 1) {
-    int total = 1;
-    for (int i = 0; i < t->children_num; i++) {
-      total = total + number_of_nodes(t-&gt;children[i]);
-    }
-    return total;
-  }
-  return 0;
-}</code></pre>
-
-<p>Recursive functions are weird because they require an odd leap of faith. First we have to assume we have a function which does something correctly already, and then we have to go about using this function, to write the initial function we assumed we had!</p>
-
-<p>Like most things, recursive functions almost always end up following a similar pattern. First a <em>base case</em> is defined. This is the case that ends the recursion, such as <code>t->children_num == 0</code> in our previous example. After this the <em>recursive case</em> is defined, such as <code>t->children_num >= 1</code> in our previous example, which breaks down a computation into smaller parts, and calls itself recursively to compute those parts, before combining them together.</p>
-
-<p>Recursive functions can take some thought, so pause now and ensure you understand them before continuing onto other chapters because we'll be making good use of them in the rest of the book. If you are still uncertain, you can attempt some of the bonus marks for this chapter.</p>
+தானழைப்பு செயல்பாடு புரிந்து கொள்வதற்கு சிறிது கணம் அகலம், எனவே இப்போது
+இடைநிறுத்தப்பட்டு (pause), மற்ற அத்தியாயங்களில் தொடர்வதற்கு முன் அவற்றைப்
+புரிந்துகொள்வதை உறுதிசெய்து கொள்ளுங்கள், ஏனென்றால் புத்தகத்தின் மற்ற பகுதிகளில்
+அவற்றை நாம் அதிகமாக பயன்படுத்துவோம். நீங்கள் இன்னும் தானழைப்பில் உறுதியில்லாதவராக
+இருந்தால், இந்த அத்தியாயத்திற்கான வெகுமதி மதிப்பெண்களில் (Bonus mark section)
+சிலவற்றை முயற்சிக்கலாம்.
 
 ** மதிப்பீடு (Evaluation)
 <h2 id='evaluation'>Evaluation</h2> <hr/>
