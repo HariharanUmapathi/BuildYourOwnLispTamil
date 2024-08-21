@@ -138,6 +138,27 @@ int number_of_nodes(mpc_ast_t* t) {
 சிலவற்றை முயற்சிக்கலாம்.
 
 ** மதிப்பீடு (Evaluation)
+பகுப்பாய்வு மரவுருவை (Parse tree) மதிப்பிடுவதற்கு நாம் ஒரு தானழைப்பு
+செயல்பாட்டை எழுதப் போகிறோம். ஆனால் நாம் தொடங்குவதற்கு முன், உள்ளீடாகப் பெறும்
+மரவுருவின் கட்டமைப்பைப் பற்றி நாம் என்ன கவனிக்கலாம் என்பதைப் பார்ப்போம். முந்தைய
+அத்தியாயத்திலிருந்து உங்கள் நிரலைப் பயன்படுத்தி சில வெளிப்பாடுகளை (expressions)
+அச்சிட முயற்சிக்கவும். நீங்கள் என்ன கவனிக்கிறீர்கள்?
+
+#+begin_example
+lispy> * 10 (+ 1 51)
+>
+  regex
+  operator|char:1:1 '*'
+  expr|number|regex:1:3 '10'
+  expr|>
+    char:1:6 '('
+    operator|char:1:7 '+'
+    expr|number|regex:1:9 '1'
+    expr|number|regex:1:11 '51'
+    char:1:13 ')'
+  regex
+#+end_example
+
 <h2 id='evaluation'>Evaluation</h2> <hr/>
 
 <p>To evaluate the parse tree we are going to write a recursive function. But before we get started, let us try and see what observations we can make about the structure of the tree we get as input. Try printing out some expressions using your program from the previous chapter. What do you notice?</p>
