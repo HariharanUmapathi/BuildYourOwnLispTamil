@@ -159,6 +159,20 @@ lispy> * 10 (+ 1 51)
   regex
 #+end_example
 
+ஒரு கவனிப்பு என்னவென்றால், கணு (node) எண்ணுடன் குறியிடப்பட்டால் (tagged) அது
+எப்போதும் எண்ணாகவே இருக்கும், குழந்தைகள் இல்லை, மேலும் உள்ளடக்கங்களை முழு எண்ணாக
+(integer) மாற்றலாம். இது நமது தானழைப்பில் அடிப்படை வழக்காக (base case)
+செயல்படும்.
+
+ஒரு கணு expr உடன் குறியிடப்பட்டு, அது எண்ணாக இல்லாமல் இருந்தால், நாம் அதன்
+இரண்டாவது குழந்தையைப் பார்க்க வேண்டும் (முதல் குழந்தை எப்போதும் '(') மற்றும் அது
+எந்த செயலி என்று பார்க்கவும். மீதமுள்ள குழந்தைகளின் மதிப்பீட்டிற்கு இந்த செயலியைப்
+பயன்படுத்த வேண்டும். இறுதிக் குழந்தையைத் தவிர இது எப்பொழுதும் ')' என்று இருக்கும்
+. இது நம் தானழைப்பு வழக்கு (recursive case). வேர் கணுக்காகவும் (root node)
+இதை செய்ய வேண்டும்.
+
+
+
 <h2 id='evaluation'>Evaluation</h2> <hr/>
 
 <p>To evaluate the parse tree we are going to write a recursive function. But before we get started, let us try and see what observations we can make about the structure of the tree we get as input. Try printing out some expressions using your program from the previous chapter. What do you notice?</p>
