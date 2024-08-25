@@ -230,30 +230,33 @@ eval_op செயல்பாட்டை நாம் பின்வரும�
 #+end_src
 
 ** அச்சிடுதல் (Printing)
-<h2 id='printing'>Printing</h2> <hr/>
 
-<p>Instead of printing the tree, we now want to print the result of the evaluation. Therefore we need to pass the tree into our <code>eval</code> function, and print the result we get using <code>printf</code> and the specifier <code>%li</code>, which is used for <code>long</code> type.</p>
+மரவுருவை அச்சிடுவதற்கு பதிலாக, மதிப்பீட்டின் முடிவை அச்சிட
+விரும்புகிறோம். எனவே, மரவுருவை நமது eval செயல்பாட்டிற்குள் அனுப்ப வேண்டும்,
+மேலும் printf மற்றும் long வகைக்கு பயன்படுத்தப்படும் குறிப்பிட்ட %li ஐப்
+பயன்படுத்தி நாம் பெறும் முடிவை அச்சிட வேண்டும்.
 
-<p>We also need to remember to delete the output tree after we are done evaluating it.</p>
+வெளியீடு மரவுரு (output tree) மதிப்பீடு செய்த பிறகு அதை நீக்க நினைவில் கொள்ள
+வேண்டும்.
 
-<pre><code data-language='c'>long result = eval(r.output);
-printf("%li\n", result);
-mpc_ast_delete(r.output);</code></pre>
+#+begin_src c
+  long result = eval(r.output);
+  printf("%li\n", result);
+  mpc_ast_delete(r.output);
+#+end_src
 
-<p>If all of this is successful we should be able to do some basic maths with our new programming language!</p>
+இவை அனைத்தும் வெற்றியடைந்தால், நமது புதிய நிரலாக்க மொழியில் சில அடிப்படைக்
+கணிதங்களைச் செய்ய முடியும்!
 
-<pre><code data-language='lispy'>Lispy Version 0.0.0.0.3
+#+begin_example
+Lispy Version 0.0.0.0.3
 Press Ctrl+c to Exit
 
-lispy&gt; + 5 6
+lispy> + 5 6
 11
-lispy&gt; - (* 10 10) (+ 1 1 1)
-97</code></pre>
-
-
-<h2>Reference</h2> <hr/>
-
-<references />
+lispy> - (* 10 10) (+ 1 1 1)
+97
+#+end_example
 
 ** வெகுமதி மதிப்பெண் (Bonus Marks)
 <h2>Bonus Marks</h2> <hr/>
