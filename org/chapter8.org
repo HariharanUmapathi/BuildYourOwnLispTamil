@@ -3,6 +3,7 @@
 <h1>Error Handling <small>&bull; Chapter 8</small></h1>
 
 
+** முறிவுகள் (Crashes)
 <h2 id='crashes'>Crashes</h2> <hr/>
 
 <p>Some of you may have noticed a problem with the previous chapter's program. Try entering this into the prompt and see what happens.</p>
@@ -25,6 +26,7 @@ lispy&gt; / 10 0</code></pre>
 
 <p>But there is no magic in how C programs work. If you face a really troublesome bug don't give up or sit and stare at the screen till your eyes bleed. Take this chance to properly learn how to use <code>gdb</code> and <code>valgrind</code>. These will be more weapons in your tool-kit, and after the initial investment, save you a lot of time and pain.</p>
 
+** லிஸ்ப் மதிப்பு (Lisp Value)
 <h2 id='lisp_value'>Lisp Value</h2> <hr/>
 
 <p>There are several ways to deal with errors in C, but in this context my preferred method is to make errors a possible result of evaluating an expression. Then we can say that, in Lispy, an expression will evaluate to <em>either</em> a <em>number</em>, or an <em>error</em>. For example <code>+ 1 2</code> will evaluate to a number, but <code>/ 10 0</code> will evaluate to an error.</p>
@@ -41,6 +43,7 @@ typedef struct {
 } lval;</code></pre>
 
 
+** கணக்கீடுகள் (Enumerations)
 <h2 id='enumerations'>Enumerations</h2> <hr/>
 
 <p>You'll notice the type of the fields <code>type</code>, and <code>err</code>, is <code>int</code>. This means they are represented by a single integer number.</p>
@@ -62,6 +65,7 @@ enum { LVAL_NUM, LVAL_ERR };</code></pre>
 enum { LERR_DIV_ZERO, LERR_BAD_OP, LERR_BAD_NUM };</code></pre>
 
 
+** லிஸ்ப் மதிப்பு செயல்பாடுகள் (Lisp Value Functions)
 <h2 id='lisp_value_functions'>Lisp Value Functions</h2> <hr/>
 
 <p>Our <code>lval</code> type is almost ready to go. Unlike the previous <code>long</code> type we have no current method for creating new instances of it. To do this we can declare two functions that construct an <code>lval</code> of either an <em>error</em> type or a <em>number</em> type.</p>
@@ -115,6 +119,7 @@ void lval_print(lval v) {
 void lval_println(lval v) { lval_print(v); putchar('\n'); }</code></pre>
 
 
+** பிழைகளை மதிப்பிடுதல் (Evaluating Errors)
 <h2 id='evaluating_errors'>Evaluating Errors</h2> <hr/>
 
 <p>Now that we know how to work with the <code>lval</code> type, we need to change our evaluation functions to use it instead of <code>long</code>.</p>
@@ -192,6 +197,7 @@ lispy&gt; / 10 2
 5</code></pre>
 
 
+** குழாய்வேைல (Plumbing)
 <h2 id='plumbing'>Plumbing</h2> <hr/>
 
 <div class='pull-right alert alert-warning' style="margin: 15px; text-align: center;">
@@ -216,6 +222,7 @@ lispy&gt; / 10 2
 
 <references />
 
+** வெகுமதி மதிப்பெண் (Bonus Marks)
 <h2>Bonus Marks</h2> <hr/>
 
 <div class="alert alert-warning">
