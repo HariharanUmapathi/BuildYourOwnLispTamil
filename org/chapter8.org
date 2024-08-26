@@ -3,7 +3,25 @@
 <h1>Error Handling <small>&bull; Chapter 8</small></h1>
 
 
-** முறிவுகள் (Crashes)
+** செயல் இழந்தல் (Crashes)
+
+உங்களில் சிலர் முந்தைய அத்தியாயத்தின் திட்டத்தில் சிக்கலைக்
+கவனித்திருக்கலாம். தூண்டியில் (prompt) இதை உள்ளிட்டு செய்தால் என்ன நடக்கிறது என்று
+பார்க்கவும்.
+
+#+begin_example
+Lispy Version 0.0.0.0.3
+Press Ctrl+c to Exit
+
+lispy> / 10 0
+#+end_example
+
+ஐயோ. பூஜ்ஜியத்தால் வகுக்க முயன்றபோது நிரல் செயலிழந்தது. உருவாக்கத்தின்
+(development) போது ஒரு நிரல் செயலிழந்தால் பரவாயில்லை, ஆனால் இறுதி நிரல்
+ஒருபோதும் செயலிழக்காது என்று நம்புவோம், மேலும் என்ன தவறு நடந்தது என்பதை எப்போதும்
+பயனருக்கு விளக்க வேண்டும்.
+
+
 <h2 id='crashes'>Crashes</h2> <hr/>
 
 <p>Some of you may have noticed a problem with the previous chapter's program. Try entering this into the prompt and see what happens.</p>
