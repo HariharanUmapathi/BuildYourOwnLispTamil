@@ -38,21 +38,29 @@ lispy> / 10 0
 மிச்சப்படுத்தும்.
 
 ** லிஸ்ப் மதிப்பு (Lisp Value)
-<h2 id='lisp_value'>Lisp Value</h2> <hr/>
 
-<p>There are several ways to deal with errors in C, but in this context my preferred method is to make errors a possible result of evaluating an expression. Then we can say that, in Lispy, an expression will evaluate to <em>either</em> a <em>number</em>, or an <em>error</em>. For example <code>+ 1 2</code> will evaluate to a number, but <code>/ 10 0</code> will evaluate to an error.</p>
+சி இல் உள்ள பிழைகளைச் சமாளிக்க பல வழிகள் உள்ளன, ஆனால் இந்தச் சூழலில் எனது
+விருப்பமான முறையானது ஒரு வெளிப்பாட்டின் (expression) மதிப்பீட்டின் விளைவாக
+பிழைகளை உருவாக்குவதாகும். லிஸ்பியில், ஒரு வெளிப்பாடு ஒரு எண்ணை அல்லது பிழையை
+மதிப்பிடும் என்று நாம் கூறலாம். எடுத்துக்காட்டாக + 1 2 ஒரு எண்ணை மதிப்பிடும்,
+ஆனால் / 10 0 பிழையை மதிப்பிடும்.
 
-<p>For this we need a data structure that can act as either one thing or anything. For simplicity sake we are just going to use a <code>struct</code> with fields specific to each thing that can be represented, and a special field <code>type</code> to tell us exactly what fields are meaningful to access.</p>
+இதற்கு நமக்கு ஒரு தரவு அமைப்பு (Data structure) தேவை, அது ஒன்று அல்லது
+எதுவாக இருந்தாலும் செயல்பட முடியும். எளிமைக்காக, பிரதிநிதித்துவப்படுத்தக்கூடிய
+(Re presentable) ஒவ்வொரு விஷயத்திற்கும் குறிப்பிட்ட புலங்களைக் (fields) கொண்ட
+ஒரு கட்டமைப்பையும் (structure), அணுகுவதற்கு அர்த்தமுள்ள புலங்களைச் சரியாகச் சொல்ல
+ஒரு சிறப்பு புல (special field) வகையையும் பயன்படுத்தப் போகிறோம்.
 
-<p>This we are going to call an <code>lval</code>, which stands for <em>Lisp Value</em>.</p>
+இதை நாம் ஒரு lval என்று அழைக்கப் போகிறோம், இது லிஸ்ப் மதிப்பைக் குறிக்கிறது.
 
-<pre><code data-language='c'>/* Declare New lval Struct */
-typedef struct {
-  int type;
-  long num;
-  int err;
-} lval;</code></pre>
-
+#+begin_src c
+  /* புதிய lval கட்டமைப்பை அறிவிக்கவும் */
+  typedef struct {
+    int type;
+    long num;
+    int err;
+  } lval;
+#+end_src
 
 ** கணக்கீடுகள் (Enumerations)
 <h2 id='enumerations'>Enumerations</h2> <hr/>
