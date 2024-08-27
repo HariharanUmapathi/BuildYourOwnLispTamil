@@ -1,8 +1,5 @@
 * அத்தியாயம் 8 - பிழை கையாளுதல் (Error Handling)
 
-<h1>Error Handling <small>&bull; Chapter 8</small></h1>
-
-
 ** செயல் இழந்தல் (Crashes)
 
 உங்களில் சிலர் முந்தைய அத்தியாயத்தின் திட்டத்தில் சிக்கலைக்
@@ -21,28 +18,24 @@ lispy> / 10 0
 ஒருபோதும் செயலிழக்காது என்று நம்புவோம், மேலும் என்ன தவறு நடந்தது என்பதை எப்போதும்
 பயனருக்கு விளக்க வேண்டும்.
 
+இந்த நேரத்தில், நம் நிரல் தொடரியல் பிழைகளை (syntax errors) உருவாக்க முடியும்,
+ஆனால் வெளிப்பாடுகளின் (expression) மதிப்பீட்டில் பிழைகளைப் புகாரளிப்பதற்கான
+செயல்பாடு இன்னும் இல்லை. இதைச் செய்ய, சில வகையான பிழை கையாளுதல் செயல்பாட்டை நாம்
+உருவாக்க வேண்டும். இது சி இல் எழுத மோசமானதாக இருக்கலாம், ஆனால் நாம் சரியான
+பாதையில் தொடங்கினால், நமது நிரல் மிகவும் சிக்கலானதாக இருக்கும் போது அது
+பலனளிக்கும்.
 
-<h2 id='crashes'>Crashes</h2> <hr/>
+சி நிரல்கள் செயலிழப்பது fact of life என்பார்கள். ஏதேனும் தவறு நடந்தால்
+இயங்கு தளம் அவர்களை வெளியேற்றிவிடும். நிரல்கள் பல்வேறு காரணங்களுக்காக மற்றும்
+பல்வேறு வழிகளில் செயலிழக்கக்கூடும்.
 
-<p>Some of you may have noticed a problem with the previous chapter's program. Try entering this into the prompt and see what happens.</p>
-
-<pre><code data-language='lispy'>Lispy Version 0.0.0.0.3
-Press Ctrl+c to Exit
-
-lispy&gt; / 10 0</code></pre>
-
-<p>Ouch. The program crashed upon trying to divide by zero. It's okay if a program crashes during development, but our final program would hopefully never crash, and should always explain to the user what went wrong.</p>
-
-<div class='pull-left alert alert-warning' style="margin: 15px; text-align: center;">
-  <img src="/static/img/walterwhite.png" alt="walterwhite" class="img-responsive" width="166px" height="219px"/>
-  <p><small>Walter White &bull; Heisenberg</small></p>
-</div>
-
-<p>At the moment our program can produce syntax errors but it still has no functionality for reporting errors in the evaluation of expressions. We need to build in some kind of error handling functionality to do this. It can be awkward in C, but if we start off on the right track, it will pay off later on when our system gets more complicated.</p>
-
-<p>C programs crashing is a fact of life. If anything goes wrong the operating system kicks them out. Programs can crash for many different reasons, and in many different ways. You will see at least one <a href="http://en.wikipedia.org/wiki/Heisenbug">Heisenbug</a>.</p>
-
-<p>But there is no magic in how C programs work. If you face a really troublesome bug don't give up or sit and stare at the screen till your eyes bleed. Take this chance to properly learn how to use <code>gdb</code> and <code>valgrind</code>. These will be more weapons in your tool-kit, and after the initial investment, save you a lot of time and pain.</p>
+ஆனால் சி நிரல்கள் எவ்வாறு செயல்படுகின்றன என்பதில் எந்த மந்திரமும் இல்லை. நீங்கள்
+மிகவும் தொந்தரவான பிழையை எதிர்கொண்டால், கைவிடாதீர்கள் அல்லது உங்கள் கண்களில் இரத்தம்
+வரும் வரை உட்கார்ந்து திரையை வெறித்துப் பார்க்காதீர்கள். gdb மற்றும் valgrind ஐ
+எவ்வாறு பயன்படுத்துவது என்பதை சரியாக அறிய இந்த வாய்ப்பைப் பயன்படுத்தவும். இவை
+உங்கள் கருவிப் பெட்டியில் ஒரு மதிப்புமிக்க ஆயுதங்களாக இருக்கும், மேலும் இந்த
+கருவிகள் ஆரம்ப கற்றலுக்குப் பிறகு, உங்களுக்கு நிறைய நேரத்தையும் வலியையும்
+மிச்சப்படுத்தும்.
 
 ** லிஸ்ப் மதிப்பு (Lisp Value)
 <h2 id='lisp_value'>Lisp Value</h2> <hr/>
