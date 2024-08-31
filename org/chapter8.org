@@ -128,58 +128,45 @@ values) எவ்வாறு அறிவிப்போம் என்பத�
 இந்தச் செயல்பாடுகள் முதலில் v எனப்படும் ஒரு lval ஐ உருவாக்குகின்றன, அதைத்
 திரும்பப் பெறுவதற்கு முன் புலங்களை நியமனம் செய்யவும்.
 
-<h2 id='lisp_value_functions'>Lisp Value Functions</h2> <hr/>
+நம் lval செயல்பாடு இப்போது இரண்டு விஷயங்கள் செய்ய கூடும் என்பதால், அதை
+வெளியிடுவதற்கு நாம் இனி printf ஐப் பயன்படுத்த முடியாது. கொடுக்கப்பட்ட lval
+வகையைப் பொறுத்து நாம் வித்தியாசமான குறியீட்டை செயல்படுத்த
+விரும்புகிறோம். தேர்ந்தெடு அறிக்கையைப் (Switch statement) பயன்படுத்தி சி இல்
+இதைச் செய்ய ஒரு சுருக்கமான வழி உள்ளது. இது சில மதிப்பை உள்ளீடாக எடுத்து,
+நிலைகள் (cases) எனப்படும் மற்ற அறியப்பட்ட மதிப்புகளுடன் ஒப்பிடுகிறது. மதிப்புகள்
+சமமாக இருக்கும்போது அடுத்த நிறுத்து அறிக்கை (break statement) வரை பின்தொடரும்
+குறியீட்டை இயக்குகிறது.
 
-<p>Our <code>lval</code> type is almost ready to go. Unlike the previous <code>long</code> type we have no current method for creating new instances of it. To do this we can declare two functions that construct an <code>lval</code> of either an <em>error</em> type or a <em>number</em> type.</p>
+இதைப் பயன்படுத்தி, இதுபோன்ற எந்த வகையிலும் lval ஐ அச்சிடக்கூடிய செயல்பாட்டை
+உருவாக்கலாம்.
 
-<pre><code data-language='c'>/* Create a new number type lval */
-lval lval_num(long x) {
-  lval v;
-  v.type = LVAL_NUM;
-  v.num = x;
-  return v;
-}
+#+begin_src c
+  /* ஒரு "lval" அச்சிட */
+  void lval_print(lval v) {
+    switch (v.type) {
+      /* வகை எண்ணாக இருந்தால், அதை அச்சிடவும் */
+      /* பிறகு தேர்ந்தெடுவை (switch) 'நிறுத்து (break)'. */
+      case LVAL_NUM: printf("%li", v.num); break;
 
-/* Create a new error type lval */
-lval lval_err(int x) {
-  lval v;
-  v.type = LVAL_ERR;
-  v.err = x;
-  return v;
-}</code></pre>
-
-<p>These functions first create an <code>lval</code> called <code>v</code>, and assign the fields before returning it.</p>
-
-<p>Because our <code>lval</code> function can now be one of two things we can no longer just use <code>printf</code> to output it. We will want to behave differently depending upon the type of the <code>lval</code> that is given. There is a concise way to do this in C using the <code>switch</code> statement. This takes some value as input and compares it to other known values, known as <em>cases</em>. When the values are equal it executes the code that follows up until the next <code>break</code> statement.</p>
-
-<p>Using this we can build a function that can print an <code>lval</code> of any type like this.</p>
-
-<pre><code data-language='c'>/* Print an "lval" */
-void lval_print(lval v) {
-  switch (v.type) {
-    /* In the case the type is a number print it */
-    /* Then 'break' out of the switch. */
-    case LVAL_NUM: printf("%li", v.num); break;
-
-    /* In the case the type is an error */
-    case LVAL_ERR:
-      /* Check what type of error it is and print it */
-      if (v.err == LERR_DIV_ZERO) {
-        printf("Error: Division By Zero!");
-      }
-      if (v.err == LERR_BAD_OP)   {
-        printf("Error: Invalid Operator!");
-      }
-      if (v.err == LERR_BAD_NUM)  {
-        printf("Error: Invalid Number!");
-      }
-    break;
+      /* வழக்கில் பிழை வகை */
+      case LVAL_ERR:
+	 /* இது எந்த வகையான பிழை என்பதை சரிபார்த்து அதை அச்சிடவும் */
+	if (v.err == LERR_DIV_ZERO) {
+	  printf("Error: Division By Zero!");
+	}
+	if (v.err == LERR_BAD_OP)   {
+	  printf("Error: Invalid Operator!");
+	}
+	if (v.err == LERR_BAD_NUM)  {
+	  printf("Error: Invalid Number!");
+	}
+      break;
+    }
   }
-}
 
-/* Print an "lval" followed by a newline */
-void lval_println(lval v) { lval_print(v); putchar('\n'); }</code></pre>
-
+  /* ஒரு "lval" ஐத் தொடர்ந்து ஒரு புதிய வரியை அச்சிடுக */
+  void lval_println(lval v) { lval_print(v); putchar('\n'); }
+#+end_src
 
 ** பிழைகளை மதிப்பிடுதல் (Evaluating Errors)
 <h2 id='evaluating_errors'>Evaluating Errors</h2> <hr/>
