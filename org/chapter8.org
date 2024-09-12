@@ -220,85 +220,60 @@ values) எவ்வாறு அறிவிப்போம் என்பத�
     உங்களுக்கு சங்கடமாக இருக்கும்; ஆனால் நீங்கள் அதை அறிந்தவுடன் அரிதாகவே சிக்கல்கள்
     வரும்.
 
+நமது eval செயல்பாட்டிற்கு இதே போன்ற செய்கைமுறையை அளிக்க வேண்டும். இந்த நிலையில்,
+பிழைகளை வலுவாகக் கையாள eval_op ஐ வரையறுத்துள்ளதால், நம் எண் (number) மாற்றும்
+செயல்பாட்டில் பிழை நிபந்தனைகளைச் (condition) சேர்க்க வேண்டும்.
 
-<h2 id='evaluating_errors'>Evaluating Errors</h2> <hr/>
+இந்த நிலையில் நாம் strtol செயல்பாட்டை சரத்தில் இருந்து long ஆக மாற்ற
+பயன்படுத்துகிறோம். மாற்றம் சரியாக நடக்கிறதா என்பதை உறுதிப்படுத்த, ஒரு சிறப்பு
+மாறி (special variable) errno பயன்படுத்தி பிழையைச் சரிபார்க்க இது
+அனுமதிக்கிறது. atoi ஐப் பயன்படுத்தி நம் முந்தைய முறையை விட எண்களை மாற்ற மிகவும்
+வலுவான வழியாகும்.
 
-<p>Now that we know how to work with the <code>lval</code> type, we need to change our evaluation functions to use it instead of <code>long</code>.</p>
+#+begin_src c
+  lval eval(mpc_ast_t* t) {
 
-<p>As well as changing the type signatures we need to change the functions such that they work correctly upon encountering either an <em>error</em> as input, or a <em>number</em> as input.</p>
-
-<p>In our <code>eval_op</code> function, if we encounter an error we should return it right away, and only do computation if both the arguments are numbers. We should modify our code to return an error rather than attempt to divide by zero. This will fix the crash described at the beginning of this chapter.</p>
-
-<pre><code data-language='c'>lval eval_op(lval x, char* op, lval y) {
-
-  /* If either value is an error return it */
-  if (x.type == LVAL_ERR) { return x; }
-  if (y.type == LVAL_ERR) { return y; }
-
-  /* Otherwise do maths on the number values */
-  if (strcmp(op, "+") == 0) { return lval_num(x.num + y.num); }
-  if (strcmp(op, "-") == 0) { return lval_num(x.num - y.num); }
-  if (strcmp(op, "*") == 0) { return lval_num(x.num * y.num); }
-  if (strcmp(op, "/") == 0) {
-    /* If second operand is zero return error */
-    return y.num == 0
-      ? lval_err(LERR_DIV_ZERO)
-      : lval_num(x.num / y.num);
+    if (strstr(t->tag, "number")) {
+      /* மாற்றுவதில் (conversion) ஏதேனும் பிழை இருக்கிறதா என்று சரிபார்க்க */
+      errno = 0;
+      long x = strtol(t->contents, NULL, 10);
+      return errno != ERANGE ? lval_num(x) : lval_err(LERR_BAD_NUM);
+    }
+  
+    char* op = t->children[1]->contents;
+    lval x = eval(t->children[2]);
+  
+    int i = 3;
+    while (strstr(t->children[i]->tag, "expr")) {
+      x = eval_op(x, op, eval(t->children[i]));
+      i++;
+    }
+  
+    return x;
   }
+#+end_src
 
-  return lval_err(LERR_BAD_OP);
-}</code></pre>
+கடைசி சிறிய படி, நமது மதிப்பீட்டின் மூலம் கண்டறியப்பட்ட முடிவை எவ்வாறு
+அச்சிடுகிறோம் என்பதை மாற்றுவதற்கு நம்மளுடைய புதிதாக வரையறுக்கப்பட்ட அச்சிடும்
+செயல்பாட்டைப் பயன்படுத்த, எந்த வகை lval ஐயும் அச்சிட முடியும்.
 
-<div class="alert alert-warning">
-  <p><strong>What is that <code>?</code> doing there?</strong></p>
+#+begin_src c
+  lval result = eval(r.output);
+  lval_println(result);
+  mpc_ast_delete(r.output);
+#+end_src
 
-  <p>You'll notice that for division to check if the second argument is zero we use a question mark symbol <code>?</code>, followed by a colon <code>:</code>. This is called the <em>ternary operator</em>, and it allows you to write conditional expressions on one line.</p>
+நாங்கள் முடித்துவிட்டோம்! இந்த புதிய நிரலை இயக்க முயற்சிக்கவும் மற்றும் பூஜ்ஜியத்தால்
+வகுக்கும் போது செயலிழப்புகள் இல்லை என்பதை உறுதிப்படுத்தவும்.
 
-  <p>It works something like this. <code>&lt;condition&gt; ? &lt;then&gt; : &lt;else&gt;</code>. In other words, if the condition is true it returns what follows the <code>?</code>, otherwise it returns what follows <code>:</code>.</p>
-
-  <p>Some people dislike this operator because they believe it makes code unclear. If you are unfamiliar with the ternary operator, you may initially find it awkward to use; but once you get to know it there are rarely problems.</p>
-</div>
-
-<p>We need to give a similar treatment to our <code>eval</code> function. In this case because we've defined <code>eval_op</code> to robustly handle errors we just need to add the error conditions to our number conversion function.</p>
-
-<p>In this case we use the <code>strtol</code> function to convert from string to <code>long</code>. This allows us to check a special variable <code>errno</code> to ensure the conversion goes correctly. This is a more robust way to convert numbers than our previous method using <code>atoi</code>.</p>
-
-<pre><code data-language='c'>lval eval(mpc_ast_t* t) {
-
-  if (strstr(t-&gt;tag, "number")) {
-    /* Check if there is some error in conversion */
-    errno = 0;
-    long x = strtol(t-&gt;contents, NULL, 10);
-    return errno != ERANGE ? lval_num(x) : lval_err(LERR_BAD_NUM);
-  }
-
-  char* op = t-&gt;children[1]-&gt;contents;
-  lval x = eval(t-&gt;children[2]);
-
-  int i = 3;
-  while (strstr(t-&gt;children[i]-&gt;tag, "expr")) {
-    x = eval_op(x, op, eval(t-&gt;children[i]));
-    i++;
-  }
-
-  return x;
-}</code></pre>
-
-<p>The final small step is to change how we print the result found by our evaluation to use our newly defined printing function which can print any type of <code>lval</code>.</p>
-
-<pre><code data-language='c'>lval result = eval(r.output);
-lval_println(result);
-mpc_ast_delete(r.output);</code></pre>
-
-<p>And we are done! Try running this new program and make sure there are no crashes when dividing by zero.</p>
-
-<pre><code data-language='lispy'>lispy&gt; / 10 0
+#+begin_example
+lispy> / 10 0
 Error: Division By Zero!
-lispy&gt; / 10 2
-5</code></pre>
+lispy> / 10 2
+5
+#+end_example
 
-
-** குழாய்வேைல (Plumbing)
+** பிளம்பிங் (Plumbing)
 <h2 id='plumbing'>Plumbing</h2> <hr/>
 
 <div class='pull-right alert alert-warning' style="margin: 15px; text-align: center;">
